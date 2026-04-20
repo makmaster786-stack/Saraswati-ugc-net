@@ -1,0 +1,102 @@
+<% /* --- FILE: views/partials/footer-professional.ejs (REVISED) --- */ %>
+<footer class="footer-pro">
+    <div class="container">
+        <div class="footer-content">
+            
+            <div class="footer-section footer-brand-info"> <%# 1. Branding Column %>
+                <a href="/" class="footer-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Saraswati UGC NET</span>
+                </a>
+                <p class="footer-description">
+                    India's most trusted UGC NET coaching platform with expert mentorship and comprehensive test series.
+                </p>
+                
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook" class="social-icon-pro"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter" class="social-icon-pro"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram" class="social-icon-pro"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube" class="social-icon-pro"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section footer-links-group"> <%# 2. Quick Links Column %>
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/courses">Courses</a></li>
+                    <li><a href="/available-tests">Mock Tests</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-links-group"> <%# 3. Resources Column %>
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/knowledge-base">Study Materials</a></li>
+                    <li><a href="/knowledge-base">Blog & Articles</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/sitemap">Sitemap</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-contact-info"> <%# 4. Contact Column %>
+                <h4>Contact Info</h4>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 9667889491</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>saraswatiugcnet@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>A- 20, 102, Indraprasth Tower, Mukherjee nagar, New Delhi, India</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom"> <%# Bottom Copyright/Legal Row %>
+            <p>&copy; 2025 Saraswati UGC NET. All Rights Reserved.</p>
+            <div class="footer-legal">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script>
+    // Global configuration passed from the server to the client-side JavaScript
+    window.AppConfig = {
+        // @ts-ignore
+        API_BASE_URL: '<%= process.env.API_BASE_URL || "/api" %>',
+        // @ts-ignore
+        ENVIRONMENT: '<%= process.env.NODE_ENV || "development" %>',
+        
+        // These lines are read by your client-side JS and are now EJS-compatible
+        // @ts-ignore
+        RAZORPAY_KEY_ID: '<%= process.env.RAZORPAY_KEY_ID %>',
+        // @ts-ignore
+        USER: <%- JSON.stringify(locals.user || null) %>
+    };
+</script>
+
+<script src="/js/professional.js"></script>
+
+<%# Load page-specific script (passed via locals.script from the server route) %>
+<% if (locals.script && locals.script !== '/js/test-interface.js') { %>
+  <script src="<%= locals.script %>"></script>
+<% } %>
+
+<%# Test interface gets the upgrade patch loaded right after it %>
+<% if (locals.script === '/js/test-interface.js') { %>
+  <script src="/js/test-interface.js"></script>
+  <script src="/js/test-interface-upgrade.js"></script>
+<% } %>
+
+</body>
+</html>

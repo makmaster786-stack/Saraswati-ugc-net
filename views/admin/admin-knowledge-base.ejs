@@ -1,0 +1,99 @@
+<%- include('partials/admin-header', { title: 'Manage Knowledge Base', page: 'knowledge' }) %>
+
+<main class="main-content">
+    <header class="main-header">
+        <h1>Manage Knowledge Base</h1>
+    </header>
+    <section class="content-area">
+        <div class="content-grid">
+            
+            <div class="list-container content-block full-width-block">
+                <h2><i class="fas fa-list"></i> Published Articles</h2>
+                <div style="overflow-x: auto;">
+                    <table id="articlesTable">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Published On</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-container content-block full-width-block" style="margin-top: 20px;">
+                <h2><i class="fas fa-pen-fancy"></i> Publish New Article</h2>
+
+                <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; border: 1px solid #bae6fd; margin-bottom: 25px;">
+                    <h3 style="margin-top:0; color: #0284c7; font-size: 1.1rem;">
+                        <i class="fas fa-robot"></i> AI Article Assistant
+                    </h3>
+                    <div class="input-group" style="margin-bottom: 10px;">
+                        <label for="aiArticleTopic">Enter Topic (e.g., "Research Aptitude: Types of Research")</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="aiArticleTopic" placeholder="What should the AI write about?" style="flex: 1; padding: 10px;">
+                            <button type="button" id="generateArticleBtn" class="btn" style="background: #0284c7; color: white; white-space: nowrap; padding: 0 20px;">
+                                <i class="fas fa-magic"></i> Generate Draft
+                            </button>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: #666; margin: 0;">* The AI will generate a structured draft. You can review it below.</p>
+                </div>
+
+                <form id="addArticleForm">
+    <div style="display: flex; gap: 20px; margin-bottom: 15px;">
+        <div class="input-group" style="flex: 1;">
+            <label for="articleTitle" style="font-size: 1.1em; font-weight: 600;">Article Title</label>
+            <input type="text" id="articleTitle" required placeholder="Enter the main title" style="padding: 12px; font-size: 1.1em; width: 100%;">
+        </div>
+        
+        <div class="input-group" style="flex: 1;">
+            <label for="articleSlug" style="font-size: 1.1em; font-weight: 600;">URL Slug (SEO)</label>
+            <input type="text" id="articleSlug" placeholder="auto-generated-slug" style="padding: 12px; width: 100%; background: #f9f9f9;">
+            <small style="color: #666;">Leave blank to auto-generate from title</small>
+        </div>
+    </div>
+
+    <div class="input-group" style="margin-bottom: 15px;">
+        <label for="metaDescription" style="font-size: 1.1em; font-weight: 600;">Meta Description (SEO)</label>
+        <textarea id="metaDescription" rows="2" placeholder="Summarize the article in 160 characters for Google..." style="padding: 12px; width: 100%;"></textarea>
+    </div>
+
+    <div class="input-group" style="margin-bottom: 15px;">
+        <label for="articleKeywords" style="font-size: 1.1em; font-weight: 600;">SEO Keywords</label>
+        <input type="text" id="articleKeywords" placeholder="UGC NET, Political Science, Research Aptitude" style="padding: 12px; width: 100%;">
+        <small style="color: #666;">Comma separated (AI will auto-fill this)</small>
+    </div>
+
+    <div class="input-group" style="margin-bottom: 20px;">
+        <label for="articleContent" style="font-size: 1.1em; font-weight: 600;">Content</label>
+        <textarea id="articleContent"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="padding: 12px 30px; font-size: 1.1em; width: 100%;">
+        <i class="fas fa-paper-plane"></i> Publish Article
+    </button>
+</form>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script src="https://cdn.tiny.cloud/1/c1pzppo66j4eomef1luao5fnhrq9nmtpee1trlvnkjwvzv10/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        tinymce.init({
+            selector: '#articleContent',
+            height: 700, 
+            menubar: true,
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount fullscreen preview',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | fullscreen preview',
+        });
+    });
+</script>
+
+<%- include('partials/admin-footer', { script: 'admin.js' }) %>

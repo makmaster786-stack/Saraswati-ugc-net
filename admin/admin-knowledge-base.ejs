@@ -1,0 +1,32 @@
+<%- include('partials/admin-header', { title: 'Knowledge Base', page: 'knowledge' }) %>
+
+<main class="main-content">
+    <header class="main-header"><h1>Manage Knowledge Base</h1></header>
+    <section class="content-area">
+        <div class="content-grid">
+            <div class="form-container content-block">
+                <h2>Publish New Article</h2>
+                <form id="addArticleForm">
+                    <div class="input-group">
+                        <label for="articleTitle">Article Title</label>
+                        <input type="text" id="articleTitle" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="articleContent">Content</label>
+                        <textarea id="articleContent" rows="15" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Publish Article</button>
+                </form>
+            </div>
+            <div class="list-container content-block">
+                <h2>Published Articles</h2>
+                <table id="articlesTable">
+                    <thead><tr><th>Title</th><th>Published On</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/admin-footer', { script: null }) %>

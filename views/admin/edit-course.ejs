@@ -1,0 +1,41 @@
+<%- include('partials/admin-header', { title: 'Edit Course', page: 'courses' }) %>
+
+<main class="main-content">
+    <header class="main-header">
+        <h1>Edit Course</h1>
+    </header>
+    <section class="content-area">
+        <div class="content-block">
+            <form id="editCourseForm">
+    <div class="input-group">
+        <label for="courseTitle">Course Title</label>
+        <input type="text" id="courseTitle" name="courseTitle" required>
+    </div>
+    
+    <div class="input-group">
+        <label for="courseDescription">Description</label>
+        <textarea id="courseDescription" name="courseDescription" rows="4" required></textarea>
+    </div>
+
+    <div class="input-group">
+        <label for="courseOriginalPrice">Original Price / MRP (INR)</label>
+        <input type="number" id="courseOriginalPrice" name="courseOriginalPrice">
+    </div>
+    <div class="input-group">
+        <label for="coursePrice">Discounted Price (INR)</label>
+        <input type="number" id="coursePrice" name="coursePrice" required>
+    </div>
+
+    <div class="input-group-checkbox">
+        <input type="checkbox" id="isPublished" name="isPublished">
+        <label for="isPublished">Published</label>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="/admin/courses" class="btn btn-secondary" style="width: auto;">Cancel</a>
+</form>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/admin-footer', { script: null }) %>

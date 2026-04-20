@@ -1,0 +1,52 @@
+<%- include('partials/admin-header', { title: 'Edit Test', page: 'tests' }) %>
+
+<main class="main-content">
+    <header class="main-header">
+        <h1>Edit Test</h1>
+    </header>
+    <section class="content-area">
+        <div class="content-block full-width-block">
+            <h2 id="edit-test-title">Loading test...</h2>
+            
+            <form id="editTestForm">
+                <div class="input-group">
+                    <label for="testTitle">Test Title</label>
+                    <input type="text" id="testTitle" name="testTitle" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="testCourse">Assign to Course</label>
+                    <select id="testCourse" name="testCourse" required>
+                        <option value="">-- Loading Courses... --</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="testDuration">Duration (in minutes)</label>
+                    <input type="number" id="testDuration" name="testDuration" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="unlockDate">Unlock Date</label>
+                    <input type="date" id="unlockDate" name="unlockDate">
+                </div>
+
+                <div class="input-group-checkbox">
+                    <input type="checkbox" id="isFreeTest" name="isFreeTest">
+                    <label for="isFreeTest">Make this test free</label>
+                </div>
+
+                <div class="form-actions" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <a href="/admin/test-details?id=<%= testId %>" class="btn btn-secondary">
+                        <i class="fas fa-question-circle"></i> Manage Questions
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/admin-footer', { script: null }) %>

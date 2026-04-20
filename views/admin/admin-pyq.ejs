@@ -1,0 +1,82 @@
+<%- include('partials/admin-header', { title: 'PYQ Data Bank', page: 'pyq' }) %>
+
+<main class="main-content">
+    <header class="main-header">
+        <h1>PYQ Data Bank</h1>
+    </header>
+
+    <section class="content-area">
+        
+        <div class="content-block" style="max-width: 600px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <div style="background: #e0f2fe; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                    <i class="fas fa-database" style="font-size: 2rem; color: #0284c7;"></i>
+                </div>
+                <h2 style="font-size: 1.25rem; margin-bottom: 5px;">Upload Question Paper</h2>
+                <p class="text-muted">Upload PDF to generate solved questions for the Archives.</p>
+            </div>
+
+            <form id="pyqForm">
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="input-group">
+                        <label>Exam Year</label>
+                        <select name="examYear" class="form-input" required>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Exam Month</label>
+                        <select name="examMonth" class="form-input" required>
+                            <option value="June">June (Summer)</option>
+                            <option value="December">December (Winter)</option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-top: 15px;">
+                    <label>Paper Type</label>
+                    <select name="paperType" class="form-input" required>
+                        <option value="Paper 2">Political Science (Paper 2)</option>
+                        <option value="Paper 1">General (Paper 1)</option>
+                    </select>
+                </div>
+
+                <div class="input-group" style="margin-top: 20px; border: 2px dashed #ccc; padding: 20px; text-align: center; cursor: pointer; background: #f9f9f9; border-radius: 6px;" onclick="document.getElementById('pdfFile').click()">
+                    <i class="fas fa-file-pdf" style="font-size: 24px; color: #666;"></i>
+                    <p style="margin:10px 0 0;">Click to upload PDF Question Paper</p>
+                    <input type="file" name="pdfFile" id="pdfFile" accept=".pdf, .docx" style="display:none;" required onchange="document.querySelector('.file-msg').innerText = this.files[0].name">
+                    <p class="file-msg" style="color: #0284c7; font-weight: bold; margin-top: 5px;"></p>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px; padding: 12px;">
+                    <i class="fas fa-robot"></i> Generate Questions via AI
+                </button>
+            </form>
+            
+            <div id="processingState" style="display:none; margin-top:20px; text-align: center;">
+                <p><strong>AI is analyzing & categorizing...</strong></p>
+                <div style="background:#eee; height:10px; width:100%; border-radius: 5px; overflow: hidden; margin-top: 10px;">
+                    <div id="progressBar" style="background: #0284c7; height:100%; width:0%; transition: width 0.3s;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/admin-footer') %>

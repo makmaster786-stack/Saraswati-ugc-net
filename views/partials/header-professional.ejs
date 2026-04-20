@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= locals.title || 'Saraswati UGC NET' %></title>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6JLV23PQ23"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6JLV23PQ23');
+    </script>
+
+    <!-- SEO Meta Tags -->
+    <% if (locals.seo) { %>
+        <meta name="description" content="<%= seo.description %>">
+        <meta name="keywords" content="<%= seo.keywords %>">
+        <link rel="canonical" href="<%= seo.canonical %>">
+        <% if (seo.jsonLd) { %>
+        <script type="application/ld+json"><%- seo.jsonLd %></script>
+        <% } %>
+    <% } else { %>
+        <meta name="description" content="India's premier UGC NET coaching platform with expert mentorship, bilingual mock tests, and comprehensive study materials for Political Science.">
+        <meta name="keywords" content="UGC NET, JRF, Assistant Professor, NET Exam, Political Science, Paper 1, Mock Tests">
+    <% } %>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="<%= locals.title || 'Saraswati UGC NET' %>">
+    <meta property="og:description" content="<%= locals.seo ? seo.description : 'Expert UGC NET coaching with highest success rates' %>">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://saraswatiugcnet.com/images/logo.jpeg">
+    <meta name="author" content="Saraswati UGC NET">
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/css/professional.css" as="style">
+    <link rel="preload" href="/css/responsive-upgrade.css" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="/css/professional.css">
+    <link rel="stylesheet" href="/css/responsive-upgrade.css">
+
+    <!-- Razorpay -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
+
+    <%# Page-specific scripts are loaded by footer-professional.ejs to ensure correct load order %>
+
+    <!-- App Config (populated server-side) -->
+    <script>
+        window.AppConfig = { USER: null };
+    </script>
+    <% if (typeof user !== 'undefined' && user) { %>
+    <script>
+        window.AppConfig.USER = <%- JSON.stringify(user) %>;
+    </script>
+    <% } %>
+</head>
+<body>
+
+    <!-- Page Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner" style="position:fixed;inset:0;background:white;z-index:9999;display:flex;align-items:center;justify-content:center;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- ── NAVBAR ── -->
+    <nav class="navbar-pro" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="nav-content">
+
+                <!-- Logo -->
+                <a href="/" class="nav-logo" aria-label="Saraswati UGC NET Home">
+                    <img src="/images/logo.jpeg" alt="Saraswati UGC NET Logo" class="brand-logo-img">
+                    <span>Saraswati UGC NET</span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="nav-menu" role="menubar">
+                    <a href="/" class="nav-link <%= (locals.title || '').includes('Home') || (locals.title || '').includes('Dashboard') ? 'active' : '' %>" role="menuitem">Home</a>
+                    <a href="/courses" class="nav-link <%= (locals.title || '').includes('Courses') || (locals.title || '').includes('Course') ? 'active' : '' %>" role="menuitem">Courses</a>
+                    <a href="/articles" class="nav-link <%= (locals.title || '').includes('Articles') ? 'active' : '' %>" role="menuitem">Articles</a>
+                    <a href="/knowledge-base" class="nav-link <%= (locals.title || '').includes('Knowledge') ? 'active' : '' %>" role="menuitem">Knowledge Base</a>
+                    <a href="/about" class="nav-link <%= (locals.title || '').includes('About') ? 'active' : '' %>" role="menuitem">About</a>
+                    <a href="/contact" class="nav-link <%= (locals.title || '').includes('Contact') ? 'active' : '' %>" role="menuitem">Contact</a>
+
+                    <% if (locals.user) { %>
+                        <!-- Logged-in User Menu -->
+                        <div class="user-menu">
+                            <div class="user-avatar" tabindex="0" role="button" aria-haspopup="true" aria-label="User menu">
+                                <img src="<%= locals.user.avatar || '/images/default-avatar.png' %>"
+                                     alt="<%= locals.user.fullname %>"
+                                     onerror="this.src='/images/default-avatar.png'">
+                                <span><%= locals.user.fullname.split(' ')[0] %></span>
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </div>
+                            <div class="dropdown-menu" role="menu">
+                                <a href="/dashboard" class="dropdown-item" role="menuitem">
+                                    <i class="fas fa-tachometer-alt" aria-hidden="true"></i> Dashboard
+                                </a>
+                                <a href="/my-results" class="dropdown-item" role="menuitem">
+                                    <i class="fas fa-chart-bar" aria-hidden="true"></i> My Results
+                                </a>
+                                <a href="/available-tests" class="dropdown-item" role="menuitem">
+                                    <i class="fas fa-file-alt" aria-hidden="true"></i> Mock Tests
+                                </a>
+                                <a href="/my-payments" class="dropdown-item" role="menuitem">
+                                    <i class="fas fa-wallet" aria-hidden="true"></i> My Payments
+                                </a>
+                                <div class="dropdown-divider" role="separator"></div>
+                                <a href="#" id="logout-btn" class="dropdown-item logout" role="menuitem">
+                                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Logout
+                                </a>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div class="auth-buttons">
+                            <a href="/login" class="btn btn-outline">Login</a>
+                            <a href="/signup" class="btn btn-primary">Sign Up Free</a>
+                        </div>
+                    <% } %>
+                </div>
+
+                <!-- Hamburger Button (mobile only) -->
+                <button class="mobile-menu-toggle" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- ── MOBILE DRAWER ── -->
+    <div class="mobile-overlay" id="mobile-overlay" role="presentation"></div>
+
+    <nav class="mobile-menu" id="mobile-drawer" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
+        <!-- Drawer Header -->
+        <div class="mobile-menu-header">
+            <span class="logo-text">Saraswati UGC NET</span>
+            <button class="mobile-menu-close" id="mobile-close-btn" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Nav Links -->
+        <div class="mobile-menu-body">
+            <% if (locals.user) { %>
+                <div style="display:flex;align-items:center;gap:0.75rem;padding:1rem;background:rgba(14,165,233,0.06);border-radius:12px;margin-bottom:1rem;">
+                    <img src="<%= locals.user.avatar || '/images/default-avatar.png' %>"
+                         alt="<%= locals.user.fullname %>"
+                         style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(14,165,233,0.3);"
+                         onerror="this.src='/images/default-avatar.png'">
+                    <div>
+                        <div style="font-weight:700;font-size:0.9rem;color:var(--gray-900);"><%= locals.user.fullname %></div>
+                        <div style="font-size:0.75rem;color:var(--gray-500);"><%= locals.user.email %></div>
+                    </div>
+                </div>
+            <% } %>
+
+            <a href="/" class="mobile-nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="/courses" class="mobile-nav-link"><i class="fas fa-book-open"></i> Courses</a>
+            <a href="/articles" class="mobile-nav-link"><i class="fas fa-newspaper"></i> Articles</a>
+            <a href="/knowledge-base" class="mobile-nav-link"><i class="fas fa-graduation-cap"></i> Knowledge Base</a>
+            <a href="/about" class="mobile-nav-link"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/contact" class="mobile-nav-link"><i class="fas fa-envelope"></i> Contact</a>
+
+            <% if (locals.user) { %>
+                <div class="mobile-menu-divider"></div>
+                <a href="/dashboard" class="mobile-nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="/available-tests" class="mobile-nav-link"><i class="fas fa-file-alt"></i> Mock Tests</a>
+                <a href="/my-results" class="mobile-nav-link"><i class="fas fa-chart-bar"></i> My Results</a>
+                <a href="/my-payments" class="mobile-nav-link"><i class="fas fa-wallet"></i> My Payments</a>
+                <div class="mobile-menu-divider"></div>
+                <a href="#" id="mobile-logout-btn" class="mobile-nav-link logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <% } %>
+        </div>
+
+        <% if (!locals.user) { %>
+        <div class="mobile-menu-auth">
+            <a href="/login" class="btn btn-outline btn-block">Login</a>
+            <a href="/signup" class="btn btn-primary btn-block">Sign Up Free</a>
+        </div>
+        <% } %>
+    </nav>
+
+    <!-- ── MOBILE MENU JS (inline for reliability) ── -->
+    <script>
+    (function() {
+        const hamburger = document.getElementById('hamburger-btn');
+        const drawer    = document.getElementById('mobile-drawer');
+        const overlay   = document.getElementById('mobile-overlay');
+        const closeBtn  = document.getElementById('mobile-close-btn');
+
+        function openMenu() {
+            hamburger.classList.add('active');
+            hamburger.setAttribute('aria-expanded', 'true');
+            drawer.classList.add('active');
+            drawer.setAttribute('aria-hidden', 'false');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            drawer.classList.remove('active');
+            drawer.setAttribute('aria-hidden', 'true');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (hamburger) hamburger.addEventListener('click', () => {
+            hamburger.classList.contains('active') ? closeMenu() : openMenu();
+        });
+        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+        if (overlay)  overlay.addEventListener('click', closeMenu);
+
+        // Close on escape key
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+    })();
+    </script>
+
+</body>
+<!-- NOTE: </body> and </html> are intentionally NOT closed here — footer-professional.ejs closes them -->

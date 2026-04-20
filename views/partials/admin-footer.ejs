@@ -1,0 +1,17 @@
+<div id="toast-container"></div>
+        <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+    </div> <%# --- End of admin-wrapper --- %>
+
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('mobile-open');
+        }
+    </script>
+    <script src="/admin/admin.js"></script>
+
+    <%# Load page-specific JS if it exists %>
+    <% if (locals.script) { %>
+        <script src="/admin/<%= script %>"></script>
+    <% } %>
+</body>
+</html>

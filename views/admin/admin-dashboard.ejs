@@ -1,0 +1,69 @@
+<%- include('partials/admin-header', { title: 'Dashboard', page: 'dashboard' }) %>
+
+<main class="main-content">
+    <header class="main-header">
+        <h1>Dashboard Overview</h1>
+        <p style="color:#666;">Welcome back, Admin</p>
+    </header>
+    <section class="content-area">
+        <div class="stat-cards">
+            <div class="card">
+                <div class="card-icon" style="background:#e0f2fe; color:#0284c7;"><i class="fas fa-users"></i></div>
+                <div class="card-info">
+                    <h4>Total Students</h4>
+                    <p id="stats-students" class="loading-pulse">...</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:#f0fdf4; color:#16a34a;"><i class="fas fa-book-open"></i></div>
+                <div class="card-info">
+                    <h4>Total Courses</h4>
+                    <p id="stats-courses" class="loading-pulse">...</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:#fff7ed; color:#ea580c;"><i class="fas fa-file-alt"></i></div>
+                <div class="card-info">
+                    <h4>Total Tests</h4>
+                    <p id="stats-tests" class="loading-pulse">...</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon" style="background:#f5f3ff; color:#7c3aed;"><i class="fas fa-newspaper"></i></div>
+                <div class="card-info">
+                    <h4>Articles</h4>
+                    <p id="stats-articles" class="loading-pulse">...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h2><i class="fas fa-user-clock"></i> Recent Student Registrations</h2>
+                <a href="/admin/students" class="btn btn-sm btn-outline">View All</a>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Date Registered</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-students-table">
+                        <tr><td colspan="3" style="text-align:center; padding:15px;">Loading recent data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+    .loading-pulse { opacity: 0.6; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 0.3; } 100% { opacity: 0.6; } }
+</style>
+
+<%- include('partials/admin-footer', { script: null }) %>

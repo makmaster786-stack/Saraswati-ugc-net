@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Authenticating...</title>
+</head>
+<body>
+    <p>Please wait while we log you in...</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            const action = params.get('action');
+
+            if (token) {
+                localStorage.setItem('authToken', token);
+                
+                // Decide where to go next based on the action from the server
+                if (action === 'complete-profile') {
+                    window.location.href = '/complete-profile';
+                } else {
+                    window.location.href = '/dashboard';
+                }
+            } else {
+                // If something went wrong, go back to the login page
+                window.location.href = '/login';
+            }
+        });
+    </script>
+</body>
+</html>

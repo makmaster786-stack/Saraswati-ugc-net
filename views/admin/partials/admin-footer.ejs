@@ -1,0 +1,22 @@
+<div id="toast-container"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('sidebarToggleBtn');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            function toggle() {
+                document.body.classList.toggle('sidebar-open');
+            }
+
+            if(btn) btn.addEventListener('click', toggle);
+            if(overlay) overlay.addEventListener('click', toggle);
+        });
+    </script>
+
+    <script src="/admin/admin.js"></script>
+    <% if (locals.script) { %>
+        <script src="/admin/<%= script %>"></script>
+    <% } %>
+</body>
+</html>

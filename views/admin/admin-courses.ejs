@@ -1,0 +1,162 @@
+<%- include('partials/admin-header', { title: 'Manage Courses', page: 'courses' }) %>
+
+<main class="main-content">
+    <header class="main-header">
+        <h1>Manage Courses</h1>
+    </header>
+    <section class="content-area">
+        <div class="content-grid">
+            
+            <div class="form-container content-block">
+                <h2>Add New Course</h2>
+                <form id="addCourseForm">
+                    <div class="input-group">
+                        <label for="courseTitle">Course Title</label>
+                        <input type="text" id="courseTitle" placeholder="e.g., UGC NET Paper 1" required>
+                    </div>
+                    <div class="input-group">
+    <label for="courseOriginalPrice">Original Price / MRP (INR)</label>
+    <input type="number" id="courseOriginalPrice" placeholder="e.g., 1499">
+</div>
+<div class="input-group">
+    <label for="coursePrice">Discounted Price (INR)</label>
+    <input type="number" id="coursePrice" placeholder="e.g., 499" required>
+</div>
+                    <div class="input-group">
+                        <label for="coursePrice">Price (INR)</label>
+                        <input type="number" id="coursePrice" placeholder="e.g., 4999" required>
+                    </div>
+                    <div class="input-group-checkbox">
+                        <input type="checkbox" id="isPublished" name="isPublished" checked>
+                        <label for="isPublished">Published</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Course</button>
+                </form>
+            </div>
+
+            <div class="list-container content-block">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <h2>Existing Courses</h2>
+                    <input type="text" id="courseSearch" placeholder="Search courses..." 
+                           style="padding:8px; border:1px solid #ddd; border-radius:4px; width:200px;">
+                </div>
+
+                <div class="table-responsive">
+                    <table id="coursesTable" class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="coursesTableBody">
+                            <tr><td colspan="4" style="text-align:center; padding:20px;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="coursePagination" class="pagination-controls" 
+                     style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        loadCourses(1);
+
+        // Add Course Form Handler
+        document.getElementById('addCourseForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            // ... (Your existing add course logic here, or call a function from admin.js)
+            // After adding, reload the list: loadCourses(1);
+        });
+
+        // Search Handler (Debounced)
+        let debounceTimer;
+        document.getElementById('courseSearch')?.addEventListener('input', (e) => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => loadCourses(1), 500);
+        });
+    });
+
+    async function loadCourses(page) {
+        const search = document.getElementById('courseSearch').value;
+        const tbody = document.getElementById('coursesTableBody');
+        
+        try {
+            const res = await fetch(`/api/admin/courses?page=${page}&limit=8&search=${search}`);
+            const data = await res.json();
+
+            if (data.success) {
+                renderCoursesTable(data.courses);
+                renderPagination(data.pagination, 'coursePagination', loadCourses);
+            }
+        } catch (error) {
+            console.error(error);
+            tbody.innerHTML = `<tr><td colspan="4" style="color:red; text-align:center;">Error loading courses</td></tr>`;
+        }
+    }
+
+    function renderCoursesTable(courses) {
+        const tbody = document.getElementById('coursesTableBody');
+        if (courses.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No courses found.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = courses.map(course => `
+            <tr>
+                <td><strong>${course.title}</strong></td>
+                <td>₹${course.price}</td>
+                <td>
+                    <span class="badge ${course.isPublished ? 'success' : 'warning'}">
+                        ${course.isPublished ? 'Published' : 'Draft'}
+                    </span>
+                </td>
+                <td>
+                    <a href="/admin/edit-course?id=${course._id}" class="btn-icon" title="Edit"><i class="fas fa-edit"></i></a>
+                    <button onclick="deleteCourse('${course._id}')" class="btn-icon delete" title="Delete"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // Generic Pagination Renderer
+    function renderPagination(meta, containerId, fetchFunction) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        if (meta.totalPages <= 1) {
+            container.innerHTML = '';
+            return;
+        }
+
+        container.innerHTML = `
+            <button class="btn btn-sm btn-outline" ${!meta.hasPrev ? 'disabled' : ''} onclick="${fetchFunction.name}(${meta.currentPage - 1})">
+                <i class="fas fa-chevron-left"></i> Prev
+            </button>
+            <span style="padding: 5px 10px; font-weight:600; color:#555;">
+                Page ${meta.currentPage} of ${meta.totalPages}
+            </span>
+            <button class="btn btn-sm btn-outline" ${!meta.hasNext ? 'disabled' : ''} onclick="${fetchFunction.name}(${meta.currentPage + 1})">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        `;
+    }
+
+    // Stub for delete (ensure this exists in your admin.js or here)
+    async function deleteCourse(id) {
+        if(!confirm('Are you sure?')) return;
+        try {
+            await fetch(`/api/admin/courses/${id}`, { method: 'DELETE' });
+            loadCourses(1); // Reload current page
+        } catch(e) { alert('Delete failed'); }
+    }
+</script>
+
+<%- include('partials/admin-footer', { script: null }) %>

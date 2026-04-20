@@ -1,0 +1,455 @@
+<%- include('partials/header-professional', { title: 'Knowledge Base', script: '/js/knowledge-pro.js' }) %>
+
+<style>
+/* ── KNOWLEDGE BASE ── */
+.kb-page { padding-bottom: 4rem; }
+
+/* Hero with Search */
+.kb-hero {
+  background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 55%, #0EA5E9 100%);
+  padding: 3.5rem 0 5rem; position: relative; overflow: hidden;
+}
+.kb-hero::after {
+  content: ''; position: absolute; right: -80px; top: -80px;
+  width: 350px; height: 350px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent);
+}
+.kb-hero h1 { font-family: var(--font-heading); font-size: 2.25rem; font-weight: 800; color: white; text-align: center; margin-bottom: 0.5rem; }
+.kb-hero p { color: rgba(255,255,255,0.75); text-align: center; font-size: 1rem; margin-bottom: 2rem; }
+
+.kb-search-bar {
+  max-width: 580px; margin: 0 auto; display: flex; gap: 0;
+  background: white; border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15); overflow: hidden;
+}
+.kb-search-bar i { padding: 0 1rem; display: flex; align-items: center; color: var(--gray-400); font-size: 1rem; }
+.kb-search-bar input {
+  flex: 1; border: none; outline: none; padding: 0.9rem 0; font-family: var(--font-body);
+  font-size: 0.95rem; color: var(--gray-800);
+}
+.kb-search-bar input::placeholder { color: var(--gray-400); }
+.kb-search-bar button {
+  padding: 0.9rem 1.5rem; background: var(--brand-blue); color: white; border: none;
+  font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; cursor: pointer;
+  transition: background 0.2s;
+}
+.kb-search-bar button:hover { background: var(--brand-blue-d); }
+
+/* Category Tabs Bar — floats over hero */
+.kb-tabs-bar {
+  max-width: 900px; margin: -1.5rem auto 0; padding: 0 1rem; position: relative; z-index: 10;
+}
+.kb-tabs {
+  background: white; border-radius: 14px; box-shadow: var(--shadow-md);
+  display: flex; overflow-x: auto; gap: 0; scrollbar-width: none;
+}
+.kb-tabs::-webkit-scrollbar { display: none; }
+.kb-tab {
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  padding: 1rem 1.5rem; border: none; background: none; cursor: pointer;
+  font-family: var(--font-heading); font-size: 0.82rem; font-weight: 600;
+  color: var(--gray-500); white-space: nowrap; transition: all 0.2s;
+  border-bottom: 3px solid transparent; min-width: 110px; text-align: center;
+}
+.kb-tab i { font-size: 1.1rem; }
+.kb-tab:hover { color: var(--brand-blue); }
+.kb-tab.active { color: var(--brand-blue); border-bottom-color: var(--brand-blue); background: rgba(14,165,233,0.04); }
+.kb-tab .tab-count { font-size: 0.7rem; background: var(--gray-100); border-radius: 20px; padding: 0.1rem 0.5rem; color: var(--gray-500); }
+.kb-tab.active .tab-count { background: rgba(14,165,233,0.1); color: var(--brand-blue); }
+
+/* Main layout */
+.kb-layout { margin-top: 2.5rem; display: grid; grid-template-columns: 240px 1fr; gap: 1.75rem; align-items: start; }
+
+/* Sidebar */
+.kb-sidebar { position: sticky; top: 80px; }
+.kb-sidebar-card { background: white; border-radius: 14px; padding: 1.25rem; box-shadow: var(--shadow-sm); margin-bottom: 1rem; }
+.kb-sidebar-title { font-family: var(--font-heading); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); margin-bottom: 0.9rem; }
+.topic-list { list-style: none; display: flex; flex-direction: column; gap: 0.2rem; }
+.topic-list li a {
+  display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.7rem;
+  border-radius: 8px; font-size: 0.84rem; color: var(--gray-600); text-decoration: none;
+  transition: all 0.15s;
+}
+.topic-list li a:hover, .topic-list li a.active { background: rgba(14,165,233,0.08); color: var(--brand-blue); font-weight: 600; }
+.topic-count { font-size: 0.72rem; background: var(--gray-100); border-radius: 20px; padding: 0.1rem 0.5rem; }
+
+/* Content Area */
+.kb-content {}
+
+/* Category Panels */
+.kb-panel { display: none; }
+.kb-panel.active { display: block; }
+
+/* Stats bar */
+.kb-stats { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.kb-stat-chip {
+  display: flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.9rem;
+  background: white; border-radius: 10px; border: 1px solid var(--gray-200);
+  font-size: 0.82rem; color: var(--gray-600); box-shadow: var(--shadow-sm);
+}
+.kb-stat-chip i { color: var(--brand-blue); }
+.kb-stat-chip strong { color: var(--gray-900); font-family: var(--font-heading); }
+
+/* Article Cards */
+.articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.1rem; }
+.article-card {
+  background: white; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100); transition: transform 0.2s, box-shadow 0.2s;
+  display: flex; flex-direction: column;
+}
+.article-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.article-thumb {
+  height: 140px; overflow: hidden; position: relative;
+  background: linear-gradient(135deg, #0EA5E9, #0369a1);
+}
+.article-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.article-thumb-placeholder {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; color: rgba(255,255,255,0.6);
+}
+.article-category-tag {
+  position: absolute; top: 0.75rem; left: 0.75rem; font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em; padding: 0.25rem 0.6rem;
+  border-radius: 6px; background: rgba(255,255,255,0.2); color: white;
+  backdrop-filter: blur(4px);
+}
+.article-body { padding: 1.1rem; flex: 1; display: flex; flex-direction: column; }
+.article-meta { display: flex; gap: 0.75rem; margin-bottom: 0.6rem; font-size: 0.74rem; color: var(--gray-400); align-items: center; }
+.article-meta i { font-size: 0.65rem; }
+.article-title { font-family: var(--font-heading); font-size: 0.92rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.5rem; line-height: 1.4; }
+.article-excerpt { font-size: 0.8rem; color: var(--gray-500); line-height: 1.6; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.article-footer { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1.1rem; border-top: 1px solid var(--gray-100); }
+.read-more-link { font-size: 0.8rem; font-weight: 700; color: var(--brand-blue); text-decoration: none; display: flex; align-items: center; gap: 0.35rem; }
+.read-more-link:hover { gap: 0.55rem; }
+.read-time { font-size: 0.74rem; color: var(--gray-400); }
+
+/* Resource Cards (for PDFs, Videos) */
+.resources-list { display: flex; flex-direction: column; gap: 0.85rem; }
+.resource-card {
+  background: white; border-radius: 12px; padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+  display: flex; align-items: center; gap: 1rem; transition: all 0.2s;
+}
+.resource-card:hover { box-shadow: var(--shadow-md); border-color: rgba(14,165,233,0.2); }
+.resource-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.resource-icon.pdf { background: #fee2e2; color: #ef4444; }
+.resource-icon.video { background: #dbeafe; color: #2563eb; }
+.resource-icon.doc { background: #e0e7ff; color: #7c3aed; }
+.resource-icon.link { background: #dcfce7; color: #16a34a; }
+.resource-info { flex: 1; min-width: 0; }
+.resource-name { font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--gray-800); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.resource-meta { font-size: 0.76rem; color: var(--gray-400); margin-top: 0.15rem; }
+.btn-download {
+  padding: 0.5rem 1rem; background: var(--gray-50); border: 1.5px solid var(--gray-200);
+  border-radius: 8px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 700;
+  color: var(--gray-600); cursor: pointer; text-decoration: none; transition: all 0.2s;
+  white-space: nowrap; display: flex; align-items: center; gap: 0.35rem;
+}
+.btn-download:hover { background: var(--brand-blue); color: white; border-color: var(--brand-blue); }
+
+/* Empty state */
+.kb-empty { text-align: center; padding: 3rem 1rem; color: var(--gray-400); }
+.kb-empty i { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
+
+/* Loading */
+.kb-loading { display: flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 2rem; color: var(--gray-400); }
+
+@media (max-width: 900px) { .kb-layout { grid-template-columns: 1fr; } .kb-sidebar { position: static; } }
+@media (max-width: 600px) { .kb-hero h1 { font-size: 1.6rem; } .articles-grid { grid-template-columns: 1fr; } }
+</style>
+
+<main class="kb-page">
+
+  <!-- Hero -->
+  <div class="kb-hero">
+    <div class="container" style="position:relative;z-index:1;">
+      <h1><i class="fas fa-book-open" style="margin-right:.5rem;opacity:.8;"></i>Knowledge Base</h1>
+      <p>Study materials, previous papers, videos and articles for UGC NET preparation</p>
+      <div class="kb-search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="kb-search" placeholder="Search articles, PDFs, topics..." autocomplete="off">
+        <button type="button" id="kb-search-btn">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs Bar -->
+  <div class="kb-tabs-bar">
+    <div class="kb-tabs" id="kbTabs">
+      <button class="kb-tab active" data-tab="all">
+        <i class="fas fa-th"></i> All Resources <span class="tab-count" id="count-all">0</span>
+      </button>
+      <button class="kb-tab" data-tab="articles">
+        <i class="fas fa-newspaper"></i> Articles <span class="tab-count" id="count-articles">0</span>
+      </button>
+      <button class="kb-tab" data-tab="pdf">
+        <i class="fas fa-file-pdf"></i> PDFs <span class="tab-count" id="count-pdf">0</span>
+      </button>
+      <button class="kb-tab" data-tab="video">
+        <i class="fas fa-video"></i> Videos <span class="tab-count" id="count-video">0</span>
+      </button>
+      <button class="kb-tab" data-tab="papers">
+        <i class="fas fa-scroll"></i> Previous Papers <span class="tab-count" id="count-papers">0</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="kb-layout">
+
+      <!-- Mobile topic filter (replaces sidebar on small screens) -->
+      <div class="kb-mobile-topics" id="kb-mobile-topics">
+        <button class="kb-mobile-topic-pill active" data-topic="all">All Topics</button>
+        <button class="kb-mobile-topic-pill" data-topic="teaching">Teaching Aptitude</button>
+        <button class="kb-mobile-topic-pill" data-topic="research">Research Methodology</button>
+        <button class="kb-mobile-topic-pill" data-topic="ict">ICT</button>
+        <button class="kb-mobile-topic-pill" data-topic="communication">Communication</button>
+        <button class="kb-mobile-topic-pill" data-topic="environment">Environment</button>
+        <button class="kb-mobile-topic-pill" data-topic="maths">Mathematical Reasoning</button>
+        <button class="kb-mobile-topic-pill" data-topic="logical">Logical Reasoning</button>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="kb-sidebar">
+        <div class="kb-sidebar-card">
+          <div class="kb-sidebar-title">Browse Topics</div>
+          <ul class="topic-list" id="topicList">
+            <li><a href="#" data-topic="all" class="active">All Topics <span class="topic-count" id="tc-all">--</span></a></li>
+            <li><a href="#" data-topic="teaching">Teaching Aptitude <span class="topic-count">--</span></a></li>
+            <li><a href="#" data-topic="research">Research Methodology <span class="topic-count">--</span></a></li>
+            <li><a href="#" data-topic="ict">ICT <span class="topic-count">--</span></a></li>
+            <li><a href="#" data-topic="communication">Communication <span class="topic-count">--</span></a></li>
+            <li><a href="#" data-topic="environment">Environment <span class="topic-count">--</span></a></li>
+            <li><a href="#" data-topic="maths">Mathematical Reasoning <span class="topic-count">--</span></a></li>
+            <li><a href="#" data-topic="logical">Logical Reasoning <span class="topic-count">--</span></a></li>
+          </ul>
+        </div>
+
+        <div class="kb-sidebar-card">
+          <div class="kb-sidebar-title">Quick Stats</div>
+          <div style="display:flex;flex-direction:column;gap:0.6rem;">
+            <div class="kb-stat-chip"><i class="fas fa-newspaper"></i> <strong id="stat-articles">--</strong> Articles</div>
+            <div class="kb-stat-chip"><i class="fas fa-file-pdf"></i> <strong id="stat-pdf">--</strong> PDFs</div>
+            <div class="kb-stat-chip"><i class="fas fa-video"></i> <strong id="stat-video">--</strong> Videos</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="kb-content">
+
+        <!-- Loading state -->
+        <div class="kb-loading" id="kb-loading">
+          <i class="fas fa-spinner fa-spin"></i> Loading resources...
+        </div>
+
+        <!-- Content rendered by knowledge-pro.js -->
+        <div id="kb-content-area" style="display:none;">
+
+          <!-- Articles Grid -->
+          <div class="kb-panel active" id="panel-articles">
+            <div class="articles-grid" id="articles-grid">
+              <% if (locals.articles && articles.length > 0) { %>
+                <% articles.forEach(article => { %>
+                  <div class="article-card" data-tab="articles" data-topic="<%= (article.category || '').toLowerCase() %>">
+                    <div class="article-thumb">
+                      <% if (article.thumbnail) { %>
+                        <img src="<%= article.thumbnail %>" alt="<%= article.title %>" loading="lazy">
+                      <% } else { %>
+                        <div class="article-thumb-placeholder"><i class="fas fa-newspaper"></i></div>
+                      <% } %>
+                      <span class="article-category-tag"><%= article.category || 'Article' %></span>
+                    </div>
+                    <div class="article-body">
+                      <div class="article-meta">
+                        <span><i class="fas fa-calendar"></i> <%= new Date(article.createdAt || Date.now()).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'}) %></span>
+                        <% if (article.author) { %><span><i class="fas fa-user"></i> <%= article.author %></span><% } %>
+                      </div>
+                      <div class="article-title"><%= article.title %></div>
+                      <div class="article-excerpt"><%= article.excerpt || article.summary || '' %></div>
+                    </div>
+                    <div class="article-footer">
+                      <a href="/article/<%= article.slug || article._id %>" class="read-more-link">Read More <i class="fas fa-arrow-right"></i></a>
+                      <span class="read-time"><i class="fas fa-clock" style="margin-right:.3rem;"></i><%= article.readTime || '5' %> min read</span>
+                    </div>
+                  </div>
+                <% }); %>
+              <% } else { %>
+                <div class="kb-empty" style="grid-column:1/-1;">
+                  <i class="fas fa-newspaper"></i>
+                  <h3>No articles yet</h3>
+                  <p>Check back soon — new content is added weekly.</p>
+                </div>
+              <% } %>
+            </div>
+          </div>
+
+          <!-- Resources: PDFs -->
+          <div class="kb-panel" id="panel-pdf">
+            <div class="resources-list" id="pdf-list">
+              <% if (locals.resources) { %>
+                <% const pdfs = resources.filter(r => r.type === 'pdf'); %>
+                <% if (pdfs.length > 0) { %>
+                  <% pdfs.forEach(r => { %>
+                    <div class="resource-card">
+                      <div class="resource-icon pdf"><i class="fas fa-file-pdf"></i></div>
+                      <div class="resource-info">
+                        <div class="resource-name"><%= r.title %></div>
+                        <div class="resource-meta"><%= r.description || '' %> <% if (r.fileSize) { %>• <%= r.fileSize %><% } %></div>
+                      </div>
+                      <a href="<%= r.url || r.fileUrl %>" target="_blank" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                    </div>
+                  <% }); %>
+                <% } else { %>
+                  <div class="kb-empty"><i class="fas fa-file-pdf"></i><h3>No PDFs yet</h3></div>
+                <% } %>
+              <% } %>
+            </div>
+          </div>
+
+          <!-- Resources: Videos -->
+          <div class="kb-panel" id="panel-video">
+            <div class="resources-list" id="video-list">
+              <% if (locals.resources) { %>
+                <% const vids = resources.filter(r => r.type === 'video'); %>
+                <% if (vids.length > 0) { %>
+                  <% vids.forEach(r => { %>
+                    <div class="resource-card">
+                      <div class="resource-icon video"><i class="fas fa-play-circle"></i></div>
+                      <div class="resource-info">
+                        <div class="resource-name"><%= r.title %></div>
+                        <div class="resource-meta"><%= r.description || '' %><% if (r.duration) { %> • <%= r.duration %><% } %></div>
+                      </div>
+                      <a href="<%= r.url || r.fileUrl %>" target="_blank" class="btn-download"><i class="fas fa-external-link-alt"></i> Watch</a>
+                    </div>
+                  <% }); %>
+                <% } else { %>
+                  <div class="kb-empty"><i class="fas fa-video"></i><h3>No videos yet</h3></div>
+                <% } %>
+              <% } %>
+            </div>
+          </div>
+
+          <!-- Previous Papers -->
+          <div class="kb-panel" id="panel-papers">
+            <div class="resources-list" id="papers-list">
+              <% if (locals.resources) { %>
+                <% const papers = resources.filter(r => r.type === 'paper' || r.type === 'previous-paper'); %>
+                <% if (papers.length > 0) { %>
+                  <% papers.forEach(r => { %>
+                    <div class="resource-card">
+                      <div class="resource-icon doc"><i class="fas fa-scroll"></i></div>
+                      <div class="resource-info">
+                        <div class="resource-name"><%= r.title %></div>
+                        <div class="resource-meta"><%= r.year || '' %> <% if (r.description) { %>• <%= r.description %><% } %></div>
+                      </div>
+                      <a href="<%= r.url || r.fileUrl %>" target="_blank" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                    </div>
+                  <% }); %>
+                <% } else { %>
+                  <div class="kb-empty"><i class="fas fa-scroll"></i><h3>No papers yet</h3></div>
+                <% } %>
+              <% } %>
+            </div>
+          </div>
+
+        </div><!-- end kb-content-area -->
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  // Show content, hide loader
+  const loading = document.getElementById('kb-loading');
+  const area = document.getElementById('kb-content-area');
+  if(loading) loading.style.display = 'none';
+  if(area) area.style.display = 'block';
+
+  // Tab switching
+  const tabs = document.querySelectorAll('.kb-tab');
+  const panels = document.querySelectorAll('.kb-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const key = tab.dataset.tab;
+      if (key === 'all') {
+        panels.forEach(p => p.classList.add('active'));
+      } else {
+        const panel = document.getElementById('panel-' + key);
+        if (panel) panel.classList.add('active');
+      }
+    });
+  });
+
+  // Count items for tab badges
+  const articleCount = document.querySelectorAll('#articles-grid .article-card').length;
+  const pdfCount = document.querySelectorAll('#pdf-list .resource-card').length;
+  const videoCount = document.querySelectorAll('#video-list .resource-card').length;
+  const paperCount = document.querySelectorAll('#papers-list .resource-card').length;
+  const total = articleCount + pdfCount + videoCount + paperCount;
+
+  document.getElementById('count-all').textContent = total;
+  document.getElementById('count-articles').textContent = articleCount;
+  document.getElementById('count-pdf').textContent = pdfCount;
+  document.getElementById('count-video').textContent = videoCount;
+  document.getElementById('count-papers').textContent = paperCount;
+  document.getElementById('stat-articles').textContent = articleCount;
+  document.getElementById('stat-pdf').textContent = pdfCount;
+  document.getElementById('stat-video').textContent = videoCount;
+  if(document.getElementById('tc-all')) document.getElementById('tc-all').textContent = total;
+
+  // Search
+  function doSearch(query) {
+    const q = query.toLowerCase().trim();
+    document.querySelectorAll('.article-card').forEach(card => {
+      const title = card.querySelector('.article-title')?.textContent.toLowerCase() || '';
+      const excerpt = card.querySelector('.article-excerpt')?.textContent.toLowerCase() || '';
+      card.style.display = (!q || title.includes(q) || excerpt.includes(q)) ? '' : 'none';
+    });
+    document.querySelectorAll('.resource-card').forEach(card => {
+      const name = card.querySelector('.resource-name')?.textContent.toLowerCase() || '';
+      card.style.display = (!q || name.includes(q)) ? '' : 'none';
+    });
+  }
+
+  document.getElementById('kb-search').addEventListener('input', e => doSearch(e.target.value));
+  document.getElementById('kb-search-btn').addEventListener('click', () => doSearch(document.getElementById('kb-search').value));
+  document.getElementById('kb-search').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(e.target.value); });
+
+  // Mobile topic pills (synced with sidebar)
+  document.querySelectorAll('.kb-mobile-topic-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.kb-mobile-topic-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      // Also trigger the sidebar link
+      const topic = pill.dataset.topic;
+      const sidebarLink = document.querySelector('[data-topic="' + topic + '"]');
+      if (sidebarLink) sidebarLink.click();
+    });
+  });
+
+  // Topic filter
+  document.querySelectorAll('[data-topic]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('[data-topic]').forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      const topic = link.dataset.topic;
+      document.querySelectorAll('.article-card').forEach(card => {
+        card.style.display = (topic === 'all' || card.dataset.topic === topic) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+
+<%- include('partials/footer-professional') %>
