@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6JLV23PQ23"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6JLV23PQ23');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-graduation-cap"></i> Admin Panel</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="<%= page === 'dashboard' ? 'active' : '' %>">
+                        <a href="/admin/dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+                    </li>
+                    <li class="<%= page === 'students' ? 'active' : '' %>">
+                        <a href="/admin/students"><i class="fas fa-users"></i> <span>Students</span></a>
+                    </li>
+                    <li class="<%= page === 'courses' ? 'active' : '' %>">
+                        <a href="/admin/courses"><i class="fas fa-book-open"></i> <span>Courses</span></a>
+                    </li>
+                    <li class="<%= page === 'tests' ? 'active' : '' %>">
+                        <a href="/admin/tests"><i class="fas fa-file-alt"></i> <span>Tests</span></a>
+                    </li>
+                    <li class="<%= page === 'knowledge' ? 'active' : '' %>">
+                        <a href="/admin/knowledge-base"><i class="fas fa-lightbulb"></i> <span>Knowledge Base</span></a>
+                    </li>
+                     <li class="<%= page === 'resources' ? 'active' : '' %>">
+                        <a href="/admin/resources"><i class="fas fa-file-pdf"></i> <span>Resources</span></a>
+                    </li>
+                    <li>
+                        <a href="#" id="admin-logout"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>

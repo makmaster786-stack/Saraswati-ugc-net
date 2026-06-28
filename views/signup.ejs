@@ -1,0 +1,446 @@
+<%- include('partials/header-professional', { title: 'Sign Up - Saraswati UGC NET', script: '/js/auth.js' }) %>
+
+<style>
+/* Reuse auth-split structure from login */
+.auth-page { min-height: 100vh; background: var(--gray-50); }
+.auth-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; width: 100%; }
+
+.auth-left {
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 2.5rem 2rem; background: white; position: relative; overflow-y: auto;
+}
+.auth-left::before {
+  content: ''; position: absolute; top: -80px; right: -80px; width: 250px; height: 250px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(14,165,233,0.06), transparent 70%);
+  pointer-events: none;
+}
+.auth-form-box { width: 100%; max-width: 480px; }
+.auth-logo-link {
+  display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-heading);
+  font-weight: 800; font-size: 1.1rem; color: var(--brand-blue-d); text-decoration: none; margin-bottom: 2rem;
+}
+.auth-logo-link img { width: 36px; height: 36px; border-radius: 8px; }
+
+.auth-heading { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; color: var(--gray-900); margin-bottom: 0.3rem; }
+.auth-subheading { color: var(--gray-500); font-size: 0.88rem; margin-bottom: 1.5rem; }
+
+.btn-google {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+  padding: 0.75rem 1rem; border: 1.5px solid var(--gray-200); border-radius: 12px;
+  background: white; color: var(--gray-700); font-weight: 600; font-size: 0.9rem;
+  cursor: pointer; transition: all 0.2s; font-family: var(--font-body); text-decoration: none;
+}
+.btn-google:hover { border-color: #4285F4; background: #fafbff; box-shadow: 0 4px 12px rgba(66,133,244,0.12); }
+
+.auth-divider {
+  display: flex; align-items: center; gap: 1rem; margin: 1.1rem 0;
+  color: var(--gray-400); font-size: 0.82rem;
+}
+.auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+
+/* Step indicator */
+.step-bar { display: flex; gap: 0; margin-bottom: 1.75rem; border-radius: 10px; overflow: hidden; border: 1px solid var(--gray-200); }
+.step-item {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+  padding: 0.55rem 0.5rem; font-size: 0.78rem; font-weight: 600; color: var(--gray-400);
+  background: var(--gray-50); cursor: pointer; transition: all 0.2s; border-right: 1px solid var(--gray-200);
+}
+.step-item:last-child { border-right: none; }
+.step-item.active { background: var(--brand-blue); color: white; }
+.step-item.done { background: #ecfdf5; color: #059669; }
+.step-num { width: 20px; height: 20px; border-radius: 50%; background: currentColor; opacity: 0.2;
+  display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; }
+.step-item.active .step-num, .step-item.done .step-num { opacity: 1; background: rgba(255,255,255,0.25); color: inherit; }
+
+/* Form fields */
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+.auth-field { margin-bottom: 0.9rem; }
+.auth-label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--gray-600); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.auth-input {
+  width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid var(--gray-200); border-radius: 10px;
+  font-family: var(--font-body); font-size: 0.88rem; color: var(--gray-800); background: white;
+  transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+}
+.auth-input:focus { border-color: var(--brand-blue); box-shadow: 0 0 0 3px rgba(14,165,233,0.1); }
+.auth-input::placeholder { color: var(--gray-300); }
+.field-error { font-size: 0.76rem; color: #ef4444; margin-top: 0.25rem; display: none; }
+.auth-input.is-error { border-color: #ef4444; }
+.auth-input.is-valid { border-color: #10b981; }
+
+/* Password strength */
+.pw-strength-bar { height: 4px; border-radius: 2px; background: var(--gray-200); margin-top: 0.4rem; overflow: hidden; }
+.pw-strength-fill { height: 100%; border-radius: 2px; transition: width 0.3s, background 0.3s; width: 0%; }
+.pw-strength-text { font-size: 0.74rem; margin-top: 0.25rem; }
+
+.input-group { position: relative; }
+.input-group .auth-input { padding-right: 2.75rem; }
+.toggle-pw { position: absolute; right: 0.9rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--gray-400); font-size: 0.9rem; padding: 0; }
+.toggle-pw:hover { color: var(--gray-700); }
+
+/* Step panels */
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+.btn-auth {
+  width: 100%; padding: 0.85rem; background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-d));
+  color: white; border: none; border-radius: 12px; font-family: var(--font-heading);
+  font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 0.5rem;
+}
+.btn-auth:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(14,165,233,0.35); }
+.btn-auth-outline {
+  width: 100%; padding: 0.75rem; background: white; color: var(--gray-600);
+  border: 1.5px solid var(--gray-200); border-radius: 12px; font-family: var(--font-heading);
+  font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 0.5rem;
+}
+.btn-auth-outline:hover { border-color: var(--gray-400); background: var(--gray-50); }
+
+.terms-row { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.75rem; }
+.terms-row input { accent-color: var(--brand-blue); margin-top: 2px; flex-shrink: 0; }
+.terms-row label { font-size: 0.82rem; color: var(--gray-600); line-height: 1.5; }
+.terms-row a { color: var(--brand-blue); text-decoration: none; }
+
+.auth-switch { text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: var(--gray-500); }
+.auth-link { color: var(--brand-blue); text-decoration: none; font-weight: 600; }
+
+/* RIGHT PANEL */
+.auth-right {
+  background: linear-gradient(145deg, #0c4a6e 0%, #0369a1 50%, #0EA5E9 100%);
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 3rem 2.5rem; position: relative; overflow: hidden;
+}
+.auth-right::before {
+  content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 60%);
+}
+.auth-right::after {
+  content: ''; position: absolute; bottom: -80px; left: -80px; width: 300px; height: 300px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(245,158,11,0.15), transparent 60%);
+}
+.auth-right-content { max-width: 360px; position: relative; z-index: 1; }
+.auth-right h2 { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; color: white; line-height: 1.25; margin-bottom: 0.75rem; }
+.auth-right > .auth-right-content > p { color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-bottom: 2rem; }
+
+.auth-features-list { display: flex; flex-direction: column; gap: 0.9rem; }
+.auth-feature-item {
+  display: flex; align-items: flex-start; gap: 0.9rem;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px; padding: 0.85rem 1rem; backdrop-filter: blur(8px);
+}
+.auth-feature-icon {
+  width: 34px; height: 34px; background: rgba(255,255,255,0.15); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--brand-gold); font-size: 0.9rem; flex-shrink: 0;
+}
+.auth-feature-text h4 { font-family: var(--font-heading); color: white; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.15rem; }
+.auth-feature-text p { color: rgba(255,255,255,0.65); font-size: 0.78rem; margin: 0; line-height: 1.5; }
+
+/* Testimonial card */
+.auth-testimonial {
+  margin-top: 1.75rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px; padding: 1.1rem 1.25rem;
+}
+.auth-testimonial p { color: rgba(255,255,255,0.85); font-size: 0.85rem; font-style: italic; line-height: 1.6; margin-bottom: 0.75rem; }
+.testimonial-author { display: flex; align-items: center; gap: 0.6rem; }
+.t-avatar { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: white; }
+.t-name { font-size: 0.78rem; font-weight: 700; color: white; }
+.t-sub { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+.stars { color: var(--brand-gold); font-size: 0.7rem; margin-bottom: 0.15rem; }
+
+@media (max-width: 900px) { .auth-right { display: none; } .auth-split { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .auth-left { padding: 1.5rem 1.1rem; } .form-row-2 { grid-template-columns: 1fr; } }
+</style>
+
+<main class="auth-page" style="padding-top:0;">
+  <div class="auth-split">
+
+    <!-- LEFT: FORM -->
+    <div class="auth-left">
+      <div class="auth-form-box">
+
+        <a href="/" class="auth-logo-link">
+          <img src="/images/logo.jpeg" alt="Logo">
+          Saraswati UGC NET
+        </a>
+
+        <h1 class="auth-heading">Create your account 🎓</h1>
+        <p class="auth-subheading">Join thousands of UGC NET aspirants — it's free.</p>
+
+        <a href="/api/auth/google?action=signup" class="btn-google">
+          <svg width="20" height="20" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.715H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/><path d="M3.964 10.706a5.41 5.41 0 0 1-.282-1.706c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.038l3.007-2.332z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.962l3.007 2.332c.708-2.131 2.692-3.715 5.036-3.715z" fill="#EA4335"/></svg>
+          Sign up with Google (Fastest)
+        </a>
+
+        <div class="auth-divider"><span>or fill details below</span></div>
+
+        <!-- Step Bar -->
+        <div class="step-bar" id="stepBar">
+          <div class="step-item active" data-step="1"><span class="step-num">1</span> Personal</div>
+          <div class="step-item" data-step="2"><span class="step-num">2</span> Academic</div>
+          <div class="step-item" data-step="3"><span class="step-num">3</span> Security</div>
+        </div>
+
+        <form id="signupForm" novalidate>
+
+          <!-- STEP 1: Personal Details -->
+          <div class="step-panel active" id="step-1">
+            <div class="form-row-2">
+              <div class="auth-field">
+                <label class="auth-label" for="fullname">Full Name *</label>
+                <input type="text" id="fullname" name="fullname" class="auth-input" placeholder="Dr. / Mr. / Ms. Full Name" required autocomplete="name">
+                <div class="field-error" id="fullname-error"></div>
+              </div>
+              <div class="auth-field">
+                <label class="auth-label" for="email">Email *</label>
+                <input type="email" id="email" name="email" class="auth-input" placeholder="you@email.com" required autocomplete="email">
+                <div class="field-error" id="email-error"></div>
+              </div>
+            </div>
+            <div class="form-row-2">
+              <div class="auth-field">
+                <label class="auth-label" for="phone">Phone *</label>
+                <input type="tel" id="phone" name="phone" class="auth-input" placeholder="10-digit mobile" required pattern="[0-9]{10}" maxlength="10">
+                <div class="field-error" id="phone-error"></div>
+              </div>
+              <div class="auth-field">
+                <label class="auth-label" for="gender">Gender</label>
+                <select id="gender" name="gender" class="auth-input">
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                  <option value="prefer-not-to-say">Prefer not to say</option>
+                </select>
+              </div>
+            </div>
+            <div class="auth-field">
+              <label class="auth-label" for="dob">Date of Birth *</label>
+              <input type="date" id="dob" name="dob" class="auth-input" required>
+              <div class="field-error" id="dob-error"></div>
+            </div>
+            <button type="button" class="btn-auth" id="step1-next">Continue <i class="fas fa-arrow-right"></i></button>
+          </div>
+
+          <!-- STEP 2: Academic Details -->
+          <div class="step-panel" id="step-2">
+            <div class="auth-field">
+              <label class="auth-label" for="highestQualification">Highest Qualification *</label>
+              <select id="highestQualification" name="highestQualification" class="auth-input" required>
+                <option value="">Select Qualification</option>
+                <option value="bachelor">Bachelor's Degree</option>
+                <option value="master">Master's Degree</option>
+                <option value="mphil">M.Phil</option>
+                <option value="phd">Ph.D</option>
+                <option value="other">Other</option>
+              </select>
+              <div class="field-error" id="highestQualification-error"></div>
+            </div>
+            <div class="form-row-2">
+              <div class="auth-field">
+                <label class="auth-label" for="subject">Your Subject *</label>
+                <input type="text" id="subject" name="subject" class="auth-input" placeholder="e.g., Political Science" required>
+                <div class="field-error" id="subject-error"></div>
+              </div>
+              <div class="auth-field">
+                <label class="auth-label" for="collegeUniversity">University / College *</label>
+                <input type="text" id="collegeUniversity" name="collegeUniversity" class="auth-input" placeholder="University Name" required>
+                <div class="field-error" id="collegeUniversity-error"></div>
+              </div>
+            </div>
+            <button type="button" class="btn-auth" id="step2-next">Continue <i class="fas fa-arrow-right"></i></button>
+            <button type="button" class="btn-auth-outline" id="step2-back"><i class="fas fa-arrow-left"></i> Back</button>
+          </div>
+
+          <!-- STEP 3: Password -->
+          <div class="step-panel" id="step-3">
+            <div class="auth-field">
+              <label class="auth-label" for="password">Create Password *</label>
+              <div class="input-group">
+                <input type="password" id="password" name="password" class="auth-input" placeholder="Minimum 8 characters" required minlength="8" autocomplete="new-password">
+                <button type="button" class="toggle-pw" id="toggle-pw1"><i class="fas fa-eye" id="eye1"></i></button>
+              </div>
+              <div class="pw-strength-bar"><div class="pw-strength-fill" id="pw-fill"></div></div>
+              <div class="pw-strength-text" id="pw-text"></div>
+              <div class="field-error" id="password-error"></div>
+            </div>
+            <div class="auth-field">
+              <label class="auth-label" for="confirmPassword">Confirm Password *</label>
+              <div class="input-group">
+                <input type="password" id="confirmPassword" name="confirmPassword" class="auth-input" placeholder="Repeat your password" required autocomplete="new-password">
+                <button type="button" class="toggle-pw" id="toggle-pw2"><i class="fas fa-eye" id="eye2"></i></button>
+              </div>
+              <div class="field-error" id="confirmPassword-error"></div>
+            </div>
+            <div class="terms-row">
+              <input type="checkbox" id="terms" name="terms" required>
+              <label for="terms">I agree to the <a href="/terms" target="_blank">Terms of Service</a> &amp; <a href="/privacy" target="_blank">Privacy Policy</a></label>
+            </div>
+            <div class="field-error" id="terms-error"></div>
+            <button type="submit" class="btn-auth" id="submit-btn">
+              <i class="fas fa-user-plus"></i> Create My Account
+            </button>
+            <button type="button" class="btn-auth-outline" id="step3-back"><i class="fas fa-arrow-left"></i> Back</button>
+          </div>
+
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="/login" class="auth-link">Sign in →</a></p>
+      </div>
+    </div>
+
+    <!-- RIGHT: Benefits -->
+    <div class="auth-right">
+      <div class="auth-right-content">
+        <h2>Everything you need to crack UGC NET</h2>
+        <p>Join 5,000+ students already using Saraswati UGC NET to prepare smarter.</p>
+
+        <div class="auth-features-list">
+          <div class="auth-feature-item">
+            <div class="auth-feature-icon"><i class="fas fa-tasks"></i></div>
+            <div class="auth-feature-text">
+              <h4>NTA-Pattern Mock Tests</h4>
+              <p>100+ full-length tests matching real exam pattern with bilingual support.</p>
+            </div>
+          </div>
+          <div class="auth-feature-item">
+            <div class="auth-feature-icon"><i class="fas fa-video"></i></div>
+            <div class="auth-feature-text">
+              <h4>Expert Video Lectures</h4>
+              <p>Structured courses by experienced NET-qualified faculty.</p>
+            </div>
+          </div>
+          <div class="auth-feature-item">
+            <div class="auth-feature-icon"><i class="fas fa-brain"></i></div>
+            <div class="auth-feature-text">
+              <h4>AI-Powered Insights</h4>
+              <p>Get personalized recommendations based on your weak topics.</p>
+            </div>
+          </div>
+          <div class="auth-feature-item">
+            <div class="auth-feature-icon"><i class="fas fa-mobile-alt"></i></div>
+            <div class="auth-feature-text">
+              <h4>Study Anywhere</h4>
+              <p>Fully mobile-optimised — practice on the go, anytime.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-testimonial">
+          <p>"I cleared UGC NET in my first attempt thanks to the mock tests and detailed analysis here."</p>
+          <div class="testimonial-author">
+            <div class="t-avatar">P</div>
+            <div>
+              <div class="stars">★★★★★</div>
+              <div class="t-name">Priya Sharma</div>
+              <div class="t-sub">NET Qualified — Political Science</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+// Step navigation
+let currentStep = 1;
+const totalSteps = 3;
+
+function goToStep(n) {
+  document.getElementById(`step-${currentStep}`).classList.remove('active');
+  document.querySelectorAll('.step-item').forEach((el, i) => {
+    el.classList.remove('active');
+    if (i + 1 < n) el.classList.add('done'); else el.classList.remove('done');
+  });
+  currentStep = n;
+  document.getElementById(`step-${currentStep}`).classList.add('active');
+  document.querySelectorAll('.step-item')[currentStep - 1].classList.add('active');
+}
+
+function validateStep1() {
+  let ok = true;
+  const checks = [
+    { id: 'fullname', msg: 'Full name is required', test: v => v.trim().length >= 2 },
+    { id: 'email', msg: 'Valid email required', test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+    { id: 'phone', msg: '10-digit phone required', test: v => /^\d{10}$/.test(v) },
+    { id: 'dob', msg: 'Date of birth required', test: v => v.trim().length > 0 },
+  ];
+  checks.forEach(({ id, msg, test }) => {
+    const el = document.getElementById(id);
+    const err = document.getElementById(id + '-error');
+    if (!test(el.value)) {
+      el.classList.add('is-error'); if(err){ err.textContent = msg; err.style.display='block'; } ok = false;
+    } else {
+      el.classList.remove('is-error'); el.classList.add('is-valid'); if(err){ err.style.display='none'; }
+    }
+  });
+  return ok;
+}
+
+function validateStep2() {
+  let ok = true;
+  ['highestQualification','subject','collegeUniversity'].forEach(id => {
+    const el = document.getElementById(id);
+    const err = document.getElementById(id + '-error');
+    if (!el.value.trim()) {
+      el.classList.add('is-error'); if(err){ err.textContent='This field is required'; err.style.display='block'; } ok = false;
+    } else {
+      el.classList.remove('is-error'); el.classList.add('is-valid'); if(err){ err.style.display='none'; }
+    }
+  });
+  return ok;
+}
+
+document.getElementById('step1-next').addEventListener('click', () => { if(validateStep1()) goToStep(2); });
+document.getElementById('step2-next').addEventListener('click', () => { if(validateStep2()) goToStep(3); });
+document.getElementById('step2-back').addEventListener('click', () => goToStep(1));
+document.getElementById('step3-back').addEventListener('click', () => goToStep(2));
+
+// Password strength
+document.getElementById('password').addEventListener('input', function() {
+  const v = this.value;
+  const fill = document.getElementById('pw-fill');
+  const text = document.getElementById('pw-text');
+  let score = 0;
+  if (v.length >= 8) score++;
+  if (/[A-Z]/.test(v)) score++;
+  if (/[0-9]/.test(v)) score++;
+  if (/[^A-Za-z0-9]/.test(v)) score++;
+  const levels = [
+    { w: '0%', c: '', t: '' },
+    { w: '25%', c: '#ef4444', t: '⚠️ Too weak' },
+    { w: '50%', c: '#f97316', t: '🔓 Weak' },
+    { w: '75%', c: '#f59e0b', t: '🔒 Good' },
+    { w: '100%', c: '#10b981', t: '✅ Strong!' },
+  ];
+  fill.style.width = levels[score].w;
+  fill.style.background = levels[score].c;
+  text.textContent = levels[score].t;
+  text.style.color = levels[score].c;
+});
+
+// Toggle passwords
+function togglePw(btnId, eyeId, inputId) {
+  document.getElementById(btnId).addEventListener('click', () => {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(eyeId);
+    input.type = input.type === 'password' ? 'text' : 'password';
+    icon.classList.toggle('fa-eye'); icon.classList.toggle('fa-eye-slash');
+  });
+}
+togglePw('toggle-pw1','eye1','password');
+togglePw('toggle-pw2','eye2','confirmPassword');
+
+// Live input clearing
+document.querySelectorAll('.auth-input').forEach(el => {
+  el.addEventListener('input', () => {
+    el.classList.remove('is-error');
+    const err = document.getElementById(el.id + '-error');
+    if (err) err.style.display = 'none';
+  });
+});
+</script>
+
+<%- include('partials/footer-professional') %>

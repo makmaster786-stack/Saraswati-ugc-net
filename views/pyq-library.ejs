@@ -1,0 +1,67 @@
+<%- include('partials/header-professional', { title: 'PYQ Library', script: '/js/pyq-library.js' }) %>
+
+<main class="pyq-page">
+    <div class="container">
+        <div class="pyq-header">
+            <h1><i class="fas fa-history"></i> Previous Year Papers</h1>
+            <p>Directly solve questions from past UGC NET exams.</p>
+        </div>
+
+        <div class="pyq-filters">
+            <select id="pyq-paper" class="modern-select">
+                <option value="Paper 2">Political Science</option>
+                <option value="Paper 1">General Paper</option>
+            </select>
+        </div>
+
+        <div id="pyq-grid" class="pyq-grid">
+            <div class="loading-state"><div class="spinner"></div> Loading Archives...</div>
+        </div>
+    </div>
+</main>
+
+<script>
+// Simple Inline JS to fetch the data
+document.addEventListener('DOMContentLoaded', async () => {
+    const grid = document.getElementById('pyq-grid');
+    
+    try {
+        const res = await fetch('/api/pyq/available');
+        const data = await res.json();
+        
+        if(data.archives.length === 0) {
+            grid.innerHTML = '<p>No archives uploaded yet.</p>';
+            return;
+        }
+
+        grid.innerHTML = data.archives.map(item => {
+            const { year, month, paper } = item._id;
+            return `
+                <div class="pyq-card">
+                    <div class="pyq-icon">
+                        <span class="year">${year}</span>
+                        <span class="month">${month}</span>
+                    </div>
+                    <div class="pyq-info">
+                        <h3>${paper}</h3>
+                        <p>${item.count} Questions Available</p>
+                    </div>
+                    <button onclick="startPyq('${year}', '${month}', '${paper}')" class="btn btn-primary">
+                        Solve Now
+                    </button>
+                </div>
+            `;
+        }).join('');
+
+    } catch (e) {
+        grid.innerHTML = '<p>Error loading archives.</p>';
+    }
+});
+
+async function startPyq(year, month, paper) {
+    // Logic to start the test (Calls the API we made in Step 1)
+    alert(`Starting ${month} ${year}... Feature coming in next update!`);
+}
+</script>
+
+<%- include('partials/footer-professional') %>

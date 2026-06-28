@@ -1,0 +1,240 @@
+<%/* FILE: views/courses-pro.ejs — Courses Listing Page */%>
+<%- include('partials/header-professional', {
+    title: 'UGC NET Courses & Test Series - Saraswati UGC NET',
+    script: '/js/courses-pro.js'
+}) %>
+
+<main class="courses-page" style="padding-top:0;">
+
+    <!-- ── HERO ── -->
+    <section class="courses-hero">
+        <div class="container">
+            <div class="hero-content" style="max-width:750px;margin:0 auto;">
+                <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.15);border-radius:50px;padding:0.35rem 0.9rem;margin-bottom:1rem;font-size:0.78rem;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:0.04em;">
+                    <i class="fas fa-graduation-cap" style="color:#fbbf24;"></i> Trusted by 5,000+ Students
+                </div>
+                <h1 class="hero-title">Master UGC NET with India's Best Courses</h1>
+                <p class="hero-subtitle">Comprehensive preparation programs designed by experts with 15+ years of UGC NET experience</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">5,000+</span>
+                        <span class="stat-label">Students Enrolled</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Satisfaction Rate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Mock Tests</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Years Expertise</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FILTERS ── -->
+    <section class="course-filters-section">
+        <div class="container">
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label for="category-filter">Category</label>
+                    <select id="category-filter" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="UGC NET">UGC NET</option>
+                        <option value="Paper 1">Paper 1 (General)</option>
+                        <option value="Political Science">Political Science</option>
+                        <option value="Test Series">Test Series</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-filter">Price</label>
+                    <select id="price-filter" class="filter-select">
+                        <option value="all">All Prices</option>
+                        <option value="free">Free Courses</option>
+                        <option value="paid">Paid Courses</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort-filter">Sort By</label>
+                    <select id="sort-filter" class="filter-select">
+                        <option value="popular">Most Popular</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label>Search Courses</label>
+                    <i class="fas fa-search" style="position:absolute;left:1rem;bottom:0.72rem;color:var(--gray-400);"></i>
+                    <input type="text" id="course-search" placeholder="Search by name or topic..." class="search-input">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── COURSES GRID ── -->
+    <section class="courses-grid-section">
+        <div class="container">
+
+            <div class="section-header" style="text-align:left;margin-bottom:1.5rem;">
+                <h2 style="font-size:1.3rem;">
+                    Featured Courses
+                    <span id="course-count" style="font-size:0.9rem;font-weight:500;color:var(--gray-500);margin-left:0.5rem;"></span>
+                </h2>
+            </div>
+
+            <!-- Loading State -->
+            <div id="courses-loading" class="loading-state hidden">
+                <div class="spinner"></div>
+                <p>Finding the best courses for you...</p>
+            </div>
+
+            <!-- Courses Container -->
+            <div id="courses-container" class="courses-grid">
+                <% if (locals.courses && courses.length > 0) { %>
+                    <% courses.forEach(course => { %>
+                        <div class="course-card-pro" data-course-id="<%= course._id %>">
+
+                            <a href="/course/<%= course._id %>" class="course-card-header" style="display:block;text-decoration:none;">
+                                <img src="<%= course.thumbnail || '/images/course-placeholder.jpg' %>"
+                                     alt="<%= course.title %>"
+                                     loading="lazy"
+                                     onerror="this.src='/images/course-placeholder.jpg'">
+                                <span class="course-badge <%= course.price === 0 ? 'free' : 'bestseller' %>">
+                                    <%= course.price === 0 ? '🎁 Free' : '🔥 Bestseller' %>
+                                </span>
+                            </a>
+
+                            <div class="course-card-body">
+                                <div class="course-category"><%= course.category || 'UGC NET' %></div>
+                                <h3 class="course-title">
+                                    <a href="/course/<%= course._id %>"><%= course.title %></a>
+                                </h3>
+                                <p class="course-description">
+                                    <%= course.shortDescription || (course.description || '').substring(0, 110) + '...' %>
+                                </p>
+                                <div class="course-meta">
+                                    <span><i class="fas fa-users"></i> <%= (course.studentsEnrolled || 0).toLocaleString('en-IN') %> students</span>
+                                    <span><i class="fas fa-clock"></i> <%= course.duration || '6 Months' %></span>
+                                </div>
+                                <!-- Rating Stars -->
+                                <div style="display:flex;align-items:center;gap:0.4rem;margin-top:0.6rem;">
+                                    <div style="color:#f59e0b;font-size:0.82rem;">
+                                        <% const rating = course.rating || 4.5;
+                                           for(let i=1;i<=5;i++) { %>
+                                            <% if(i <= Math.floor(rating)) { %><i class="fas fa-star"></i>
+                                            <% } else if(i - rating < 1) { %><i class="fas fa-star-half-alt"></i>
+                                            <% } else { %><i class="far fa-star"></i><% } %>
+                                        <% } %>
+                                    </div>
+                                    <span style="font-size:0.8rem;font-weight:700;color:var(--gray-700);"><%= rating.toFixed(1) %></span>
+                                    <span style="font-size:0.75rem;color:var(--gray-400);">(<%= course.reviewCount || 0 %> reviews)</span>
+                                </div>
+                            </div>
+
+                            <div class="course-card-footer">
+                                <div class="course-price">
+                                    <% if (course.price === 0) { %>
+                                        <span class="price-free">Free</span>
+                                    <% } else { %>
+                                        <span class="price-current">₹<%= course.price.toLocaleString('en-IN') %></span>
+                                        <% if (course.originalPrice && course.originalPrice > course.price) { %>
+                                            <span class="price-original">₹<%= course.originalPrice.toLocaleString('en-IN') %></span>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+                                <div style="display:flex;gap:0.4rem;">
+                                    <a href="/course/<%= course._id %>" class="btn btn-secondary btn-sm">Details</a>
+                                    <%
+                                    let isEnrolled = false;
+                                    if (locals.user && locals.user.enrolledCourses) {
+                                        isEnrolled = locals.user.enrolledCourses.some(ec => {
+                                            try { return ec.courseId.toString() === course._id.toString(); }
+                                            catch(e) { return false; }
+                                        });
+                                    }
+                                    %>
+                                    <% if (isEnrolled) { %>
+                                        <a href="/dashboard" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-play"></i> Continue
+                                        </a>
+                                    <% } else { %>
+                                        <button class="btn btn-primary btn-sm enroll-btn"
+                                                data-course-id="<%= course._id %>"
+                                                data-course-price="<%= course.price %>"
+                                                data-course-title="<%= course.title %>">
+                                            <%= course.price === 0 ? 'Enroll Free' : 'Enroll Now' %>
+                                        </button>
+                                    <% } %>
+                                </div>
+                            </div>
+
+                        </div>
+                    <% }); %>
+                <% } %>
+            </div>
+
+            <!-- Empty State -->
+            <div id="courses-empty" class="empty-state hidden">
+                <i class="fas fa-search"></i>
+                <h3>No courses found</h3>
+                <p>Try adjusting your filters or search terms</p>
+                <button onclick="document.getElementById('course-search').value='';document.getElementById('category-filter').value='all';" class="btn btn-primary btn-sm">Clear Filters</button>
+            </div>
+
+            <!-- Pagination -->
+            <div id="courses-pagination" class="pagination hidden" style="display:flex;justify-content:center;gap:0.5rem;margin-top:2.5rem;flex-wrap:wrap;"></div>
+        </div>
+    </section>
+
+    <!-- ── WHY US ── -->
+    <section class="benefits-section" style="padding:4rem 0;background:white;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Students Choose Saraswati UGC NET</h2>
+                <p>Every feature is designed to maximize your chances of success</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;" class="benefits-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Expert Faculty</h3>
+                    <p>15+ years of UGC NET expertise from Dr. Rajesh Mishra</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3>100+ Mock Tests</h3>
+                    <p>NTA pattern mock tests with detailed analytics</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-language"></i></div>
+                    <h3>Bilingual Content</h3>
+                    <p>All materials in both English and Hindi</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile Ready</h3>
+                    <p>Study anytime on any device, seamlessly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<style>
+@media (max-width: 1024px) {
+    .benefits-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 768px) {
+    .benefits-grid { grid-template-columns: 1fr !important; }
+    .courses-hero .hero-stats { gap: 1.5rem; }
+}
+</style>
+
+<%- include('partials/footer-professional') %>

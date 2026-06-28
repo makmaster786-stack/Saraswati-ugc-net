@@ -1,0 +1,602 @@
+<%- include('partials/header-professional', { title: 'My Results', script: '/js/result-pro.js' }) %>
+
+<!-- Chart.js from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<style>
+/* ══ MY RESULTS PAGE ══ */
+.results-page { padding-bottom: 4rem; background: var(--gray-50); min-height: 100vh; }
+
+/* ── HERO ── */
+.results-hero {
+  background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 55%, #0EA5E9 100%);
+  padding: 2.5rem 0 4.5rem; position: relative; overflow: hidden;
+}
+.results-hero::after {
+  content:''; position:absolute; right:-80px; top:-80px;
+  width:350px; height:350px; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,0.05), transparent);
+}
+.results-hero h1 { font-family:var(--font-heading); font-size:1.9rem; font-weight:800; color:white; margin-bottom:.35rem; }
+.results-hero p { color:rgba(255,255,255,.75); font-size:.92rem; }
+
+/* ── STATS CARDS (float over hero) ── */
+.results-stats-row {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;
+  max-width:900px; margin:-2.5rem auto 0; padding:0 1rem;
+  position:relative; z-index:10;
+}
+.stat-float-card {
+  background:white; border-radius:16px; padding:1.25rem 1.1rem;
+  box-shadow:0 8px 24px rgba(0,0,0,.1); text-align:center; border:1px solid var(--gray-100);
+  transition:transform .2s, box-shadow .2s;
+}
+.stat-float-card:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.12); }
+.stat-icon {
+  width:44px; height:44px; border-radius:12px; margin:0 auto .75rem;
+  display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+}
+.si-blue { background:rgba(14,165,233,.1); color:var(--brand-blue); }
+.si-green { background:#dcfce7; color:#16a34a; }
+.si-gold { background:#fef3c7; color:#d97706; }
+.si-purple { background:#ede9fe; color:#7c3aed; }
+.stat-num { font-family:var(--font-heading); font-size:1.75rem; font-weight:800; color:var(--gray-900); line-height:1; margin-bottom:.3rem; }
+.stat-lbl { font-size:.76rem; color:var(--gray-400); font-weight:600; text-transform:uppercase; letter-spacing:.04em; }
+
+/* ── MAIN LAYOUT ── */
+.results-layout { margin-top:2rem; display:grid; grid-template-columns:1fr 340px; gap:1.5rem; align-items:start; }
+
+/* ── CHARTS SECTION ── */
+.chart-row { display:grid; grid-template-columns:1fr 220px; gap:1.25rem; margin-bottom:1.25rem; }
+.chart-card {
+  background:white; border-radius:16px; padding:1.4rem; box-shadow:var(--shadow-sm);
+  border:1px solid var(--gray-100);
+}
+.chart-card-title {
+  font-family:var(--font-heading); font-size:.88rem; font-weight:800;
+  color:var(--gray-900); margin-bottom:1.1rem; display:flex; align-items:center; gap:.5rem;
+}
+.chart-card-title i { color:var(--brand-blue); }
+.trend-chart-wrap { position:relative; height:180px; }
+.donut-chart-wrap { position:relative; height:180px; display:flex; align-items:center; justify-content:center; }
+.donut-center {
+  position:absolute; display:flex; flex-direction:column; align-items:center;
+  top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none;
+}
+.donut-center-num { font-family:var(--font-heading); font-size:1.4rem; font-weight:800; color:var(--gray-900); line-height:1; }
+.donut-center-lbl { font-size:.68rem; color:var(--gray-400); margin-top:.2rem; }
+.donut-legend { display:flex; flex-direction:column; gap:.4rem; margin-top:.85rem; }
+.donut-legend-row { display:flex; align-items:center; gap:.5rem; font-size:.75rem; color:var(--gray-600); }
+.donut-legend-dot { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
+
+/* ── RESULT LIST ── */
+.results-feed { background:white; border-radius:16px; box-shadow:var(--shadow-sm); border:1px solid var(--gray-100); overflow:hidden; }
+.feed-header {
+  padding:1rem 1.25rem; border-bottom:1px solid var(--gray-100);
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.75rem;
+}
+.feed-title { font-family:var(--font-heading); font-size:.88rem; font-weight:800; color:var(--gray-900); display:flex; align-items:center; gap:.5rem; }
+.feed-title i { color:var(--brand-blue); }
+.feed-filters { display:flex; gap:.6rem; }
+.feed-select {
+  padding:.4rem .75rem; border:1.5px solid var(--gray-200); border-radius:8px;
+  font-family:var(--font-body); font-size:.8rem; color:var(--gray-600); outline:none; background:white;
+}
+.feed-select:focus { border-color:var(--brand-blue); }
+
+/* Result Card */
+.result-card-item {
+  display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem;
+  border-bottom:1px solid var(--gray-50); transition:background .15s;
+}
+.result-card-item:last-child { border-bottom:none; }
+.result-card-item:hover { background:#fafbfc; }
+
+.rci-score-ring { position:relative; width:52px; height:52px; flex-shrink:0; }
+.rci-ring-svg { transform:rotate(-90deg); }
+.rci-ring-bg { fill:none; stroke:var(--gray-200); stroke-width:5; }
+.rci-ring-fill { fill:none; stroke-width:5; stroke-linecap:round; transition:stroke-dashoffset .5s; }
+.rci-ring-pct { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:.72rem; font-weight:800; color:var(--gray-800); }
+
+.rci-info { flex:1; min-width:0; }
+.rci-title { font-family:var(--font-heading); font-size:.9rem; font-weight:700; color:var(--gray-900); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:.3rem; }
+.rci-meta { display:flex; flex-wrap:wrap; gap:.6rem; }
+.rci-meta-chip { display:flex; align-items:center; gap:.3rem; font-size:.74rem; color:var(--gray-400); }
+.rci-meta-chip i { font-size:.65rem; }
+
+.rci-grade {
+  display:flex; flex-direction:column; align-items:center; gap:.2rem; flex-shrink:0;
+}
+.grade-badge {
+  font-size:.68rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em;
+  padding:.25rem .6rem; border-radius:20px;
+}
+.grade-A { background:#dcfce7; color:#15803d; }
+.grade-B { background:#dbeafe; color:#1d4ed8; }
+.grade-C { background:#fef3c7; color:#92400e; }
+.grade-F { background:#fee2e2; color:#b91c1c; }
+.grade-score { font-family:var(--font-heading); font-size:.78rem; font-weight:700; color:var(--gray-600); }
+
+.btn-view-result {
+  display:flex; align-items:center; gap:.4rem; padding:.5rem .9rem;
+  background:white; border:1.5px solid var(--gray-200); border-radius:9px;
+  font-family:var(--font-heading); font-size:.78rem; font-weight:700; color:var(--gray-600);
+  cursor:pointer; transition:all .2s; flex-shrink:0; text-decoration:none;
+}
+.btn-view-result:hover { background:var(--brand-blue); color:white; border-color:var(--brand-blue); }
+
+/* Empty state */
+.results-empty { padding:3.5rem 1rem; text-align:center; color:var(--gray-400); }
+.results-empty i { font-size:3rem; margin-bottom:.75rem; display:block; }
+.results-empty h3 { font-family:var(--font-heading); font-size:1.05rem; color:var(--gray-600); margin-bottom:.4rem; }
+
+/* Loading skeleton */
+.skeleton-row { display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem; border-bottom:1px solid var(--gray-50); }
+.skel { background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; border-radius:6px; }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* ── SIDEBAR ── */
+.results-sidebar { position:sticky; top:80px; display:flex; flex-direction:column; gap:1.1rem; }
+.rs-card { background:white; border-radius:16px; padding:1.25rem; box-shadow:var(--shadow-sm); border:1px solid var(--gray-100); }
+.rs-card-title { font-family:var(--font-heading); font-size:.8rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--gray-400); margin-bottom:.9rem; }
+
+/* Improvement tips */
+.tip-item { display:flex; gap:.6rem; align-items:flex-start; padding:.65rem 0; border-bottom:1px solid var(--gray-50); }
+.tip-item:last-child { border-bottom:none; padding-bottom:0; }
+.tip-icon { width:30px; height:30px; border-radius:8px; background:rgba(14,165,233,.1); color:var(--brand-blue); display:flex; align-items:center; justify-content:center; font-size:.8rem; flex-shrink:0; }
+.tip-text { font-size:.8rem; color:var(--gray-600); line-height:1.5; }
+.tip-text strong { color:var(--gray-900); display:block; font-size:.82rem; margin-bottom:.1rem; }
+
+/* Quick links */
+.quick-link {
+  display:flex; align-items:center; gap:.6rem; padding:.6rem .75rem; border-radius:10px;
+  border:1.5px solid var(--gray-100); text-decoration:none; color:var(--gray-700);
+  font-size:.82rem; font-weight:600; transition:all .2s; margin-bottom:.4rem; font-family:var(--font-heading);
+}
+.quick-link:last-child { margin-bottom:0; }
+.quick-link:hover { border-color:var(--brand-blue); color:var(--brand-blue); background:rgba(14,165,233,.04); }
+.quick-link i { width:16px; text-align:center; color:var(--brand-blue); }
+
+/* ══ RESULT ANALYSIS MODAL ══ */
+.modal-pro-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,.65); backdrop-filter:blur(4px);
+  display:flex; align-items:flex-end; justify-content:center; z-index:99999;
+  opacity:0; pointer-events:none; transition:opacity .25s;
+}
+.modal-pro-overlay.active { opacity:1; pointer-events:all; }
+.modal-pro-container {
+  background:white; width:100%; max-width:820px; max-height:90vh;
+  border-radius:24px 24px 0 0; display:flex; flex-direction:column;
+  transform:translateY(40px); transition:transform .3s ease;
+  overflow:hidden;
+}
+.modal-pro-overlay.active .modal-pro-container { transform:translateY(0); }
+
+/* Modal Header */
+.modal-header-modern {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.1rem 1.5rem; background:white; border-bottom:1px solid var(--gray-100);
+  flex-shrink:0; position:sticky; top:0; z-index:10;
+}
+.modal-header-left h2 { font-family:var(--font-heading); font-size:1.05rem; font-weight:800; color:var(--gray-900); margin-bottom:.25rem; }
+.modal-test-date { font-size:.76rem; color:var(--gray-400); }
+.badge-pro { font-size:.7rem; font-weight:700; padding:.25rem .65rem; border-radius:20px; background:#dcfce7; color:#15803d; margin-left:.5rem; }
+.btn-modal-x {
+  width:34px; height:34px; border-radius:9px; border:none; background:var(--gray-100);
+  color:var(--gray-500); cursor:pointer; display:flex; align-items:center; justify-content:center;
+  font-size:1rem; transition:all .2s;
+}
+.btn-modal-x:hover { background:var(--gray-200); }
+
+/* Modal Body */
+.modal-body-modern { flex:1; overflow-y:auto; padding:1.25rem 1.5rem 2rem; }
+
+/* Score summary grid */
+.result-score-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:.85rem; margin-bottom:1.5rem; }
+.rsg-card { border-radius:14px; padding:1rem; text-align:center; }
+.rsg-card .lbl { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:rgba(0,0,0,.5); margin-bottom:.35rem; }
+.rsg-card .val { font-family:var(--font-heading); font-size:1.5rem; font-weight:800; line-height:1; }
+.rsg-score { background:linear-gradient(135deg,#0c4a6e,#0EA5E9); }
+.rsg-score .lbl,.rsg-score .val { color:white; }
+.rsg-pct { background:#dcfce7; }
+.rsg-pct .val { color:#15803d; }
+.rsg-acc { background:#fef3c7; }
+.rsg-acc .val { color:#d97706; }
+.rsg-time { background:#ede9fe; }
+.rsg-time .val { color:#7c3aed; }
+
+/* Unit-wise chart in modal */
+.unit-analysis-wrap { margin-bottom:1.5rem; }
+.unit-bar-row { margin-bottom:.6rem; }
+.unit-bar-label { display:flex; justify-content:space-between; font-size:.78rem; color:var(--gray-700); margin-bottom:.25rem; }
+.unit-bar-label strong { font-family:var(--font-heading); }
+.unit-bar-track { height:8px; background:var(--gray-100); border-radius:4px; overflow:hidden; }
+.unit-bar-fill { height:100%; border-radius:4px; transition:width .6s ease; }
+
+/* Question review list */
+.review-section-hdr {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:1rem; padding-bottom:.75rem; border-bottom:1px solid var(--gray-100);
+}
+.review-section-hdr h3 { font-family:var(--font-heading); font-size:.92rem; font-weight:800; color:var(--gray-900); }
+.review-legend { display:flex; gap:.75rem; font-size:.74rem; }
+.legend-dot { width:9px; height:9px; border-radius:50%; display:inline-block; margin-right:.25rem; }
+.legend-dot.correct { background:#16a34a; }
+.legend-dot.wrong { background:#dc2626; }
+.legend-dot.skipped { background:#94a3b8; }
+
+/* Review cards */
+.question-review-list { display:flex; flex-direction:column; gap:.75rem; }
+.review-card { border-radius:14px; padding:1.1rem; border:1.5px solid var(--gray-100); }
+.review-card.correct { border-color:#86efac; background:#f0fdf4; }
+.review-card.wrong { border-color:#fca5a5; background:#fff5f5; }
+.review-card.skipped { border-color:#e2e8f0; background:#f8fafc; }
+
+.review-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:.75rem; }
+.review-q-meta { display:flex; align-items:center; gap:.5rem; }
+.review-q-num { font-family:var(--font-heading); font-size:.78rem; font-weight:800; color:var(--gray-500); background:var(--gray-100); padding:.2rem .55rem; border-radius:6px; }
+.review-status-badge { font-size:.72rem; font-weight:700; padding:.22rem .6rem; border-radius:20px; display:flex; align-items:center; gap:.3rem; }
+.review-status-badge.correct { background:#dcfce7; color:#15803d; }
+.review-status-badge.wrong { background:#fee2e2; color:#b91c1c; }
+.review-status-badge.skipped { background:#f1f5f9; color:var(--gray-500); }
+.review-marks { font-family:var(--font-heading); font-size:.82rem; font-weight:800; }
+.review-marks.got { color:#16a34a; }
+.review-marks.lost { color:#dc2626; }
+
+.review-question-text { font-size:.88rem; color:var(--gray-800); line-height:1.7; margin-bottom:.85rem; font-weight:500; }
+.review-options-grid { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.85rem; }
+.review-option {
+  display:flex; align-items:flex-start; gap:.6rem; padding:.55rem .75rem;
+  border-radius:9px; border:1.5px solid var(--gray-200); font-size:.82rem; color:var(--gray-700);
+  background:white;
+}
+.review-option.opt-is-correct { border-color:#86efac; background:#f0fdf4; color:#15803d; font-weight:700; }
+.review-option.opt-is-wrong { border-color:#fca5a5; background:#fff5f5; color:#b91c1c; font-weight:700; text-decoration:line-through; }
+.review-option .opt-icon i { font-size:.85rem; }
+.opt-is-correct .opt-icon i { color:#16a34a; }
+.opt-is-wrong .opt-icon i { color:#dc2626; }
+
+.review-explanation { background:rgba(14,165,233,.06); border:1px solid rgba(14,165,233,.2); border-radius:10px; padding:.75rem 1rem; font-size:.82rem; color:var(--gray-700); line-height:1.65; }
+.exp-label { font-family:var(--font-heading); font-weight:700; color:var(--brand-blue); font-size:.78rem; margin-bottom:.3rem; display:flex; align-items:center; gap:.35rem; }
+
+/* Modal loading state */
+.modal-loading { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:4rem 1rem; color:var(--gray-400); gap:.75rem; }
+.modal-loading i { font-size:2rem; }
+
+/* Review filter tabs */
+.review-filter-tabs { display:flex; gap:.4rem; margin-bottom:1rem; }
+.review-tab { padding:.4rem .85rem; border-radius:8px; border:1.5px solid var(--gray-200); font-size:.76rem; font-weight:700; color:var(--gray-500); cursor:pointer; background:white; font-family:var(--font-heading); transition:all .15s; }
+.review-tab.active { background:var(--brand-blue); color:white; border-color:var(--brand-blue); }
+
+@media (max-width:900px) { .results-layout { grid-template-columns:1fr; } .results-sidebar { position:static; } .result-score-grid { grid-template-columns:1fr 1fr; } }
+@media (max-width:640px) { .results-stats-row { grid-template-columns:1fr 1fr; } .chart-row { grid-template-columns:1fr; } .result-card-item { flex-wrap:wrap; } }
+</style>
+
+<main class="results-page">
+
+  <!-- HERO -->
+  <div class="results-hero">
+    <div class="container" style="position:relative;z-index:1;">
+      <h1><i class="fas fa-chart-line" style="margin-right:.5rem;opacity:.8;"></i>My Test Results</h1>
+      <p>Detailed performance analytics — track your progress and find your weak areas.</p>
+    </div>
+  </div>
+
+  <!-- FLOATING STAT CARDS -->
+  <div class="results-stats-row">
+    <div class="stat-float-card">
+      <div class="stat-icon si-blue"><i class="fas fa-file-alt"></i></div>
+      <div class="stat-num" id="total-tests">0</div>
+      <div class="stat-lbl">Tests Taken</div>
+    </div>
+    <div class="stat-float-card">
+      <div class="stat-icon si-green"><i class="fas fa-chart-line"></i></div>
+      <div class="stat-num" id="average-score">0%</div>
+      <div class="stat-lbl">Avg Score</div>
+    </div>
+    <div class="stat-float-card">
+      <div class="stat-icon si-gold"><i class="fas fa-trophy"></i></div>
+      <div class="stat-num" id="best-score">0%</div>
+      <div class="stat-lbl">Best Score</div>
+    </div>
+    <div class="stat-float-card">
+      <div class="stat-icon si-purple"><i class="fas fa-clock"></i></div>
+      <div class="stat-num" id="total-time">0h</div>
+      <div class="stat-lbl">Study Time</div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top:2.5rem;">
+    <div class="results-layout">
+
+      <!-- MAIN CONTENT -->
+      <div>
+        <!-- Charts row -->
+        <div class="chart-row">
+          <!-- Score Trend -->
+          <div class="chart-card">
+            <div class="chart-card-title"><i class="fas fa-chart-area"></i>Score Trend</div>
+            <div class="trend-chart-wrap">
+              <canvas id="scoreTrendChart"></canvas>
+            </div>
+          </div>
+          <!-- Donut -->
+          <div class="chart-card">
+            <div class="chart-card-title"><i class="fas fa-chart-pie"></i>Overview</div>
+            <div class="donut-chart-wrap">
+              <canvas id="overviewDonut" width="160" height="160" style="max-width:160px;"></canvas>
+              <div class="donut-center">
+                <div class="donut-center-num" id="donut-pct">—</div>
+                <div class="donut-center-lbl">Avg Score</div>
+              </div>
+            </div>
+            <div class="donut-legend" id="donut-legend"></div>
+          </div>
+        </div>
+
+        <!-- Results Feed -->
+        <div class="results-feed">
+          <div class="feed-header">
+            <div class="feed-title"><i class="fas fa-list-alt"></i>All Test Attempts</div>
+            <div class="feed-filters">
+              <select class="feed-select" id="sort-results">
+                <option value="newest">Newest</option>
+                <option value="score-high">Highest Score</option>
+                <option value="score-low">Lowest Score</option>
+              </select>
+              <select class="feed-select" id="time-filter">
+                <option value="all">All Time</option>
+                <option value="month">Last 30 Days</option>
+                <option value="year">Last Year</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="results-table-body">
+            <% if (locals.results && results.length > 0) { %>
+              <% results.forEach(result => { %>
+                <%
+                  const pct = result.percentage || Math.round((result.score / (result.totalQuestions||1)) * 100);
+                  const scoreClass = pct >= 70 ? 'good' : pct >= 50 ? 'avg' : 'bad';
+                  const grade = pct >= 70 ? 'A' : pct >= 55 ? 'B' : pct >= 40 ? 'C' : 'F';
+                  const gradeColor = pct >= 70 ? '#16a34a' : pct >= 55 ? '#1d4ed8' : pct >= 40 ? '#d97706' : '#b91c1c';
+                  const circ = 2 * Math.PI * 20;
+                  const offset = circ - (pct / 100) * circ;
+                  const ringColor = pct >= 70 ? '#16a34a' : pct >= 40 ? '#f59e0b' : '#dc2626';
+                  const dur = result.timeTaken ? (Math.floor(result.timeTaken/60) + 'm ' + (result.timeTaken%60) + 's') : 'N/A';
+                  const dateStr = new Date(result.submittedAt).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'});
+                %>
+                <div class="result-card-item"
+                     data-pct="<%= pct %>"
+                     data-date="<%= new Date(result.submittedAt).getTime() %>"
+                     data-title="<%= (result.test ? result.test.title : '').toLowerCase() %>">
+
+                  <!-- Score ring -->
+                  <div class="rci-score-ring">
+                    <svg class="rci-ring-svg" width="52" height="52" viewBox="0 0 52 52">
+                      <circle class="rci-ring-bg" cx="26" cy="26" r="20"/>
+                      <circle class="rci-ring-fill" cx="26" cy="26" r="20"
+                        stroke="<%= ringColor %>"
+                        stroke-dasharray="<%= circ.toFixed(1) %>"
+                        stroke-dashoffset="<%= offset.toFixed(1) %>"/>
+                    </svg>
+                    <div class="rci-ring-pct"><%= pct %>%</div>
+                  </div>
+
+                  <!-- Info -->
+                  <div class="rci-info">
+                    <div class="rci-title"><%= result.test ? result.test.title : 'Deleted Test' %></div>
+                    <div class="rci-meta">
+                      <span class="rci-meta-chip"><i class="far fa-calendar-alt"></i> <%= dateStr %></span>
+                      <span class="rci-meta-chip"><i class="far fa-clock"></i> <%= dur %></span>
+                      <span class="rci-meta-chip"><i class="fas fa-check-square"></i> <%= result.score %>/<%= result.totalQuestions %> correct</span>
+                    </div>
+                  </div>
+
+                  <!-- Grade -->
+                  <div class="rci-grade">
+                    <span class="grade-badge grade-<%= grade %>">Grade <%= grade %></span>
+                    <span class="grade-score"><%= pct %>%</span>
+                  </div>
+
+                  <!-- Action -->
+                  <button class="btn-view-result view-result-btn" data-result-id="<%= result._id %>">
+                    <i class="fas fa-chart-bar"></i> Analysis
+                  </button>
+                </div>
+              <% }); %>
+            <% } else { %>
+              <div class="results-empty">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>No tests taken yet</h3>
+                <p>Complete a mock test to see your performance analysis here.</p>
+                <a href="/available-tests" style="display:inline-block;margin-top:1rem;padding:.65rem 1.4rem;background:var(--brand-blue);color:white;border-radius:10px;text-decoration:none;font-family:var(--font-heading);font-weight:700;font-size:.88rem;">
+                  Take a Test Now →
+                </a>
+              </div>
+            <% } %>
+          </div>
+
+          <div id="results-loading" class="modal-loading" style="display:none;">
+            <i class="fas fa-spinner fa-spin"></i><span>Updating...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="results-sidebar">
+        <!-- Improvement Tips -->
+        <div class="rs-card">
+          <div class="rs-card-title">Improvement Tips</div>
+          <div class="tip-item">
+            <div class="tip-icon"><i class="fas fa-bullseye"></i></div>
+            <div class="tip-text"><strong>Practice Daily</strong>Take at least one test every day to maintain consistency.</div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-icon"><i class="fas fa-book-open"></i></div>
+            <div class="tip-text"><strong>Review Wrong Answers</strong>Click "Analysis" on any result to study your mistakes.</div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-icon"><i class="fas fa-clock"></i></div>
+            <div class="tip-text"><strong>Time Management</strong>Aim to finish each question in under 2 minutes.</div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="rs-card">
+          <div class="rs-card-title">Quick Links</div>
+          <a href="/available-tests" class="quick-link"><i class="fas fa-tasks"></i>Take a New Test</a>
+          <a href="/knowledge-base" class="quick-link"><i class="fas fa-book"></i>Study Materials</a>
+          <a href="/dashboard" class="quick-link"><i class="fas fa-th-large"></i>Dashboard</a>
+          <a href="/courses" class="quick-link"><i class="fas fa-graduation-cap"></i>Browse Courses</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+
+<!-- ══ RESULT ANALYSIS MODAL ══ -->
+<div id="result-modal" class="modal-pro-overlay">
+  <div class="modal-pro-container">
+
+    <div class="modal-header-modern">
+      <div class="modal-header-left">
+        <h2 id="modal-test-title">Test Analysis <span class="badge-pro" id="modal-status-badge">Completed</span></h2>
+        <div class="modal-test-date" id="modal-test-date"></div>
+      </div>
+      <button class="btn-modal-x" id="modal-close-btn"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="modal-body-modern">
+
+      <!-- Loading -->
+      <div id="modal-loading-state" class="modal-loading">
+        <i class="fas fa-spinner fa-spin"></i><span>Analysing your performance...</span>
+      </div>
+
+      <!-- Content -->
+      <div id="modal-results-content" class="hidden">
+
+        <!-- Score summary -->
+        <div class="result-score-grid">
+          <div class="rsg-card rsg-score"><div class="lbl">Score</div><div class="val" id="modal-score">—</div></div>
+          <div class="rsg-card rsg-pct"><div class="lbl">Percentage</div><div class="val" id="modal-percentage">—</div></div>
+          <div class="rsg-card rsg-acc"><div class="lbl">Accuracy</div><div class="val" id="modal-accuracy">—</div></div>
+          <div class="rsg-card rsg-time"><div class="lbl">Time Taken</div><div class="val" id="modal-time">—</div></div>
+        </div>
+
+        <!-- Unit-wise bars -->
+        <div class="unit-analysis-wrap">
+          <div class="chart-card-title" style="margin-bottom:.9rem;"><i class="fas fa-chart-bar"></i>Unit-Wise Performance</div>
+          <div id="modal-analysis-container"></div>
+        </div>
+
+        <!-- Question review -->
+        <div class="review-section-hdr">
+          <h3>Detailed Question Review</h3>
+          <div class="review-legend">
+            <span><span class="legend-dot correct"></span>Correct</span>
+            <span><span class="legend-dot wrong"></span>Wrong</span>
+            <span><span class="legend-dot skipped"></span>Skipped</span>
+          </div>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="review-filter-tabs">
+          <button class="review-tab active" data-filter="all">All</button>
+          <button class="review-tab" data-filter="correct">Correct</button>
+          <button class="review-tab" data-filter="wrong">Wrong</button>
+          <button class="review-tab" data-filter="skipped">Skipped</button>
+        </div>
+
+        <div id="modal-questions-list" class="question-review-list"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── REVIEW FILTER TABS ──
+document.querySelectorAll('.review-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.review-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter = tab.dataset.filter;
+    document.querySelectorAll('.review-card').forEach(card => {
+      card.style.display = (filter === 'all' || card.classList.contains(filter)) ? '' : 'none';
+    });
+  });
+});
+
+// ── CHARTS INIT (runs after result-pro.js loads stats) ──
+window.initResultCharts = function(results) {
+  if (!results || !results.length) return;
+
+  // Score trend (line chart)
+  const trendCtx = document.getElementById('scoreTrendChart');
+  if (trendCtx) {
+    const last10 = results.slice(-10).reverse();
+    new Chart(trendCtx, {
+      type: 'line',
+      data: {
+        labels: last10.map((r, i) => `Test ${i + 1}`),
+        datasets: [{
+          label: 'Score %',
+          data: last10.map(r => r.pct || 0),
+          borderColor: '#0EA5E9',
+          backgroundColor: 'rgba(14,165,233,0.1)',
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: last10.map(r => r.pct >= 70 ? '#16a34a' : r.pct >= 40 ? '#f59e0b' : '#dc2626'),
+          pointRadius: 5,
+          pointHoverRadius: 7,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `Score: ${ctx.parsed.y}%` } } },
+        scales: {
+          y: { min: 0, max: 100, ticks: { callback: v => v + '%', font: { size: 10 } }, grid: { color: '#f1f5f9' } },
+          x: { ticks: { font: { size: 10 } }, grid: { display: false } }
+        }
+      }
+    });
+  }
+
+  // Overview donut
+  const donutCtx = document.getElementById('overviewDonut');
+  if (donutCtx) {
+    const passed = results.filter(r => (r.pct || 0) >= 60).length;
+    const failed = results.length - passed;
+    const avg = results.reduce((s, r) => s + (r.pct || 0), 0) / results.length;
+    document.getElementById('donut-pct').textContent = Math.round(avg) + '%';
+
+    new Chart(donutCtx, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [passed, failed || 0.01],
+          backgroundColor: ['#16a34a', '#fee2e2'],
+          borderColor: ['#16a34a', '#fca5a5'],
+          borderWidth: 2,
+        }]
+      },
+      options: {
+        responsive: false, cutout: '72%',
+        plugins: { legend: { display: false }, tooltip: { enabled: false } }
+      }
+    });
+
+    const legend = document.getElementById('donut-legend');
+    if(legend) legend.innerHTML = `
+      <div class="donut-legend-row"><span class="donut-legend-dot" style="background:#16a34a;border-radius:3px;"></span>${passed} Passed (≥60%)</div>
+      <div class="donut-legend-row"><span class="donut-legend-dot" style="background:#fca5a5;border-radius:3px;"></span>${failed} Below 60%</div>
+    `;
+  }
+};
+</script>
+
+<%- include('partials/footer-professional') %>

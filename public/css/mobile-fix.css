@@ -1,0 +1,737 @@
+/* ==========================================================================
+   MOBILE-FIX.CSS — Saraswati UGC NET
+   Add this AFTER responsive-upgrade.css in header-professional.ejs
+   Fixes all mobile layout issues found in audit.
+   ========================================================================== */
+
+/* ── GLOBAL: Prevent horizontal scroll on any page ── */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+* { box-sizing: border-box; }
+
+/* ── CONTAINER: Tighter side padding on small screens ── */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   1. NAVBAR
+   ========================================================================== */
+
+/* Ensure hamburger shows on ALL mobile, not just ≤768px */
+@media (max-width: 768px) {
+  .navbar-pro .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .nav-logo span {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+  .nav-menu {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   2. HERO SECTION (Homepage)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 2.5rem 0 2rem;
+  }
+  .hero-grid-layout {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    text-align: center;
+  }
+  .hero-image-right {
+    display: none !important;
+  }
+  .hero-content-left {
+    text-align: center;
+  }
+  .hero-content-left h1 {
+    font-size: clamp(1.6rem, 6vw, 2.4rem) !important;
+  }
+  .hero-subtitle {
+    font-size: 0.95rem !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions {
+    flex-direction: column !important;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+    justify-content: center;
+  }
+  .hero-stats {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 2rem 0 1.75rem;
+  }
+  .hero-content-left h1 {
+    font-size: 1.55rem !important;
+  }
+  .hero-stats {
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 0.75rem;
+  }
+  .hero-stats .stat-number {
+    font-size: 1.4rem !important;
+  }
+}
+
+/* ==========================================================================
+   3. FEATURES SECTION
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+  .feature-card {
+    padding: 1.25rem 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .features-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ==========================================================================
+   4. COURSES GRID (Homepage + Courses Page)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .courses-preview-grid,
+  .courses-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .course-preview-card,
+  .course-card-pro {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   5. ARTICLES GRID
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .articles-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .articles-hero {
+    padding: 3rem 0 2.5rem !important;
+  }
+  .articles-hero h1 {
+    font-size: 1.6rem !important;
+  }
+}
+
+/* ==========================================================================
+   6. DASHBOARD
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .dashboard-pro {
+    padding-top: 1.25rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* Welcome banner stacks */
+  .welcome-section {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 1.25rem !important;
+    gap: 0.75rem !important;
+  }
+  .welcome-section::after { display: none !important; }
+
+  /* Stats: 2 columns on tablet, 1 on phone */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Quick actions: 3 per row on tablet */
+  .actions-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Course items wrap nicely */
+  .course-item-pro {
+    flex-wrap: wrap;
+  }
+  .course-item-pro .course-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .actions-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .stat-card {
+    padding: 1rem !important;
+  }
+  .stat-info h3 {
+    font-size: 1.2rem !important;
+  }
+  .last-active {
+    white-space: normal !important;
+    text-align: center;
+  }
+}
+
+/* ==========================================================================
+   7. COURSES PAGE — FILTERS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .course-filters-section {
+    position: static !important;
+    padding: 1.25rem 0 !important;
+  }
+  .filters-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ==========================================================================
+   8. AUTH PAGES (Login / Signup)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .auth-container {
+    grid-template-columns: 1fr !important;
+    width: 94% !important;
+  }
+  /* Hide the branding/features column on mobile — show only the form */
+  .auth-features,
+  .auth-branding {
+    display: none !important;
+  }
+  .auth-form-container {
+    padding: 2rem 1.5rem !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .auth-form-container {
+    padding: 1.5rem 1.1rem !important;
+  }
+  .auth-header h1,
+  .auth-header h2 {
+    font-size: 1.3rem !important;
+  }
+}
+
+/* ==========================================================================
+   9. TAKE TEST PAGE — Mobile-first full-screen layout
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  /* Stack question + palette vertically */
+  main.test-interface-fullscreen {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .test-interface-fullscreen .test-body {
+    overflow: visible !important;
+    padding: 10px !important;
+  }
+  .test-interface-fullscreen .test-layout {
+    flex-direction: column !important;
+    height: auto !important;
+    gap: 10px !important;
+  }
+
+  /* Question panel full-width, scrollable */
+  .test-interface-fullscreen .question-panel-pro {
+    flex-basis: auto !important;
+    width: 100% !important;
+    max-height: 65vh;
+    overflow-y: auto !important;
+  }
+
+  /* Palette collapses into a compact row at top */
+  .test-interface-fullscreen .sidebar-panel {
+    flex-basis: auto !important;
+    width: 100% !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 8px !important;
+    overflow: visible !important;
+  }
+  .test-interface-fullscreen .sidebar-panel .palette-card {
+    flex: 1;
+    min-width: 200px;
+    overflow: visible !important;
+  }
+  .test-interface-fullscreen .question-palette-grid {
+    grid-template-columns: repeat(8, 1fr) !important;
+    overflow-y: visible !important;
+    max-height: 200px;
+    overflow-y: auto !important;
+  }
+  .test-interface-fullscreen .sidebar-panel .actions-card {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  /* Footer buttons scroll horizontally if needed */
+  .question-footer-pro {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+    padding: 10px !important;
+    justify-content: flex-start !important;
+  }
+  .question-footer-pro button {
+    flex-shrink: 0 !important;
+    white-space: nowrap;
+    font-size: 0.78rem !important;
+    padding: 7px 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .test-interface-fullscreen .question-palette-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+  }
+  .test-header-content {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .test-interface-fullscreen .section-tabs {
+    overflow-x: auto;
+  }
+  .test-interface-fullscreen .section-tab {
+    font-size: 0.82rem !important;
+    padding: 10px 12px !important;
+    white-space: nowrap;
+  }
+  .test-interface-fullscreen .question-content-pro {
+    padding: 12px !important;
+  }
+}
+
+/* ==========================================================================
+   10. AVAILABLE TESTS PAGE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Make test cards stack in a single column */
+  .tests-grid,
+  .available-tests-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ==========================================================================
+   11. MY RESULTS PAGE
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .result-card-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+  }
+  .result-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* ==========================================================================
+   12. FOOTER
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .footer-pro {
+    padding: 2.5rem 0 0 !important;
+  }
+  .footer-content {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    text-align: center !important;
+  }
+  .footer-logo {
+    justify-content: center !important;
+  }
+  .social-links {
+    justify-content: center !important;
+  }
+  .contact-item {
+    justify-content: center !important;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 0.4rem !important;
+    text-align: center !important;
+  }
+  .footer-legal {
+    justify-content: center !important;
+  }
+}
+
+/* ==========================================================================
+   13. KNOWLEDGE BASE PAGE
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  /* Sidebar filter → hidden; mobile pill bar handles filtering */
+  .kb-sidebar {
+    display: none !important;
+  }
+  .kb-main-content {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .kb-layout {
+    display: block !important;
+  }
+}
+
+/* ==========================================================================
+   14. FORM ROWS — prevent min-width overflow
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column !important;
+  }
+  .form-row .form-group {
+    min-width: unset !important;
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   15. COURSES PAGE HERO
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .courses-hero {
+    padding: 2.5rem 0 2rem !important;
+  }
+  .courses-hero .hero-stats {
+    gap: 1.5rem !important;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .courses-hero .hero-title {
+    font-size: 1.6rem !important;
+  }
+}
+
+/* ==========================================================================
+   16. TOAST — full-width on very small screens
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .toast-container {
+    left: 0.75rem !important;
+    right: 0.75rem !important;
+    bottom: 0.75rem !important;
+  }
+  .toast {
+    max-width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   17. IMAGES — never overflow parent
+   ========================================================================== */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==========================================================================
+   18. TABLES — horizontal scroll on mobile instead of breaking layout
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .table-responsive,
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   19. ABOUT / CONTACT PAGES
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .mission-grid,
+  .founder-content,
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .founder-content {
+    text-align: center !important;
+  }
+}
+
+/* ==========================================================================
+   20. BOTTOM SAFE AREA (for iOS notch / home bar)
+   ========================================================================== */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .question-footer-pro,
+  .mobile-menu-auth {
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* ==========================================================================
+   21. TOUCH TARGETS — minimum 44×44px on mobile
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .btn,
+  .nav-link,
+  .mobile-nav-link,
+  .filter-select,
+  .search-input,
+  .action-card,
+  .dropdown-item {
+    min-height: 44px;
+  }
+  .mobile-menu-toggle {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ==========================================================================
+   22. SECTION PADDING — reduce on mobile for breathing room
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --section-py: 2.5rem !important;
+    --section-py-sm: 1.75rem !important;
+  }
+  section {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* ==========================================================================
+   23. HERO MENTOR IMAGE — Show on mobile (compact version)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Override the hide from responsive-upgrade.css */
+  .hero-image-right {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  .mentor-image-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Compact circular/rounded photo on mobile */
+  .mentor-img {
+    width: 160px !important;
+    height: 190px !important;
+    border-radius: 16px !important;
+    object-fit: cover;
+    border: 3px solid rgba(255,255,255,0.4) !important;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25) !important;
+    display: block;
+  }
+
+  /* Hide floating achievement cards on mobile (too small) */
+  .hero-achievement-cards {
+    display: none !important;
+  }
+
+  /* Keep mentor badge but make it smaller */
+  .mentor-badge {
+    font-size: 0.72rem !important;
+    padding: 0.4rem 0.75rem !important;
+    bottom: -10px !important;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .mentor-img {
+    width: 130px !important;
+    height: 155px !important;
+  }
+
+  /* On very small screens, show achievement as a single compact strip */
+  .hero-grid-layout {
+    gap: 1rem !important;
+  }
+}
+
+/* ==========================================================================
+   24. MOBILE NAVBAR — Full Bottom Nav Bar for Mobile Users
+       A sticky bottom navigation bar — most natural UX for phone users
+   ========================================================================== */
+
+/* The bottom nav bar itself */
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Show the bottom nav */
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    z-index: 1997;
+    align-items: stretch;
+    justify-content: space-around;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .mobile-bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 3px;
+    text-decoration: none;
+    color: #6b7280;
+    font-size: 0.6rem;
+    font-weight: 600;
+    font-family: var(--font-body, 'Nunito', sans-serif);
+    letter-spacing: 0.02em;
+    transition: color 0.2s, background 0.2s;
+    border-radius: 0;
+    position: relative;
+  }
+
+  .mobile-bottom-nav a i {
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+  }
+
+  .mobile-bottom-nav a:hover,
+  .mobile-bottom-nav a.active {
+    color: #0EA5E9;
+    background: rgba(14,165,233,0.05);
+  }
+
+  .mobile-bottom-nav a.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 3px;
+    background: #0EA5E9;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .mobile-bottom-nav a.active i {
+    transform: translateY(-1px);
+  }
+
+  /* Special style for the CTA "Tests" button */
+  .mobile-bottom-nav a.nav-cta {
+    color: white;
+    background: linear-gradient(135deg, #0EA5E9, #0369a1);
+    border-radius: 12px;
+    margin: 8px 4px;
+    flex: 0 0 64px;
+    box-shadow: 0 4px 12px rgba(14,165,233,0.35);
+    padding: 0 4px;
+  }
+  .mobile-bottom-nav a.nav-cta:hover {
+    background: linear-gradient(135deg, #0369a1, #0EA5E9);
+    color: white;
+  }
+  .mobile-bottom-nav a.nav-cta::after {
+    display: none;
+  }
+
+  /* Add padding to body so content isn't hidden behind bottom nav */
+  body {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Ensure hamburger top drawer still works too (secondary nav) */
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+}

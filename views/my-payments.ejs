@@ -1,0 +1,74 @@
+<% /* --- FILE: views/my-payments.ejs (NEW) --- */ %>
+<%- include('partials/header-professional', { 
+    title: 'My Payment History' 
+}) %>
+
+<main class="payments-page">
+    <section class="page-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>My Payment History</h1>
+                <p>Here is a record of all your course enrollments and payments.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="payments-section">
+        <div class="container">
+            <div class="payments-list-container">
+
+                <%# Check if the 'payments' array is empty %>
+                <% if (payments && payments.length > 0) { %>
+
+                    <div class="payments-header">
+                        <div class="header-item course">Course</div>
+                        <div class="header-item amount">Amount</div>
+                        <div class="header-item date">Date</div>
+                        <div class="header-item payment-id">Payment ID</div>
+                        <div class="header-item status">Status</div>
+                    </div>
+
+                    <%# Loop over each payment %>
+                    <% payments.forEach(payment => { %>
+                        <div class="payment-item">
+                            <div class="payment-course">
+                                <%# Handle if course was deleted but payment remains %>
+                                <% if (payment.course) { %>
+                                    <img src="<%= payment.course.thumbnail || '/images/course-placeholder.jpg' %>" alt="<%= payment.course.title %>">
+                                    <span><%= payment.course.title %></span>
+                                <% } else { %>
+                                    <img src="/images/course-placeholder.jpg" alt="Course no longer available">
+                                    <span>Course no longer available</span>
+                                <% } %>
+                            </div>
+                            <div class="payment-amount">
+                                ₹<%= payment.amount.toFixed(2) %>
+                            </div>
+                            <div class="payment-date">
+                                <%= new Date(payment.paymentDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) %>
+                            </div>
+                            <div class="payment-id">
+                                <%= payment.razorpay_payment_id %>
+                            </div>
+                            <div class="payment-status">
+                                <span class="status-badge success"><%= payment.status %></span>
+                            </div>
+                        </div>
+                    <% }); %>
+
+                <% } else { %>
+                    <%# This is the "empty state" if no payments are found %>
+                    <div class="empty-state" style="padding: 3rem; text-align: center;">
+                        <i class="fas fa-file-invoice-dollar fa-3x" style="color: var(--gray-400); margin-bottom: 1.5rem;"></i>
+                        <h3>No Payment History Found</h3>
+                        <p>You have not made any payments yet. Enrolled courses will appear here.</p>
+                        <a href="/courses" class="btn btn-primary" style="margin-top: 1.5rem;">Browse Courses</a>
+                    </div>
+                <% } %>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer-professional') %>

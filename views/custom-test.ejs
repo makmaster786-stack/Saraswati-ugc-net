@@ -1,0 +1,150 @@
+<%- include('partials/header-professional', { title: 'Custom Mock Test', script: '/js/custom-test.js' }) %>
+
+<main class="custom-test-page" style="background: #f8fafc; min-height: 90vh; padding: 40px 0;">
+    <div class="container" style="max-width: 900px;">
+        
+        <div class="header-box" style="text-align: center; margin-bottom: 40px;">
+            <h1 style="color: #1e293b; font-weight: 800; margin-bottom: 10px;">
+                <i class="fas fa-sliders-h" style="color: #0284c7;"></i> Custom Question Bank
+            </h1>
+            <p style="color: #64748b; font-size: 1.1rem;">
+                Select your weak units, choose the number of questions, and generate a tailored mock test instantly.
+            </p>
+        </div>
+
+        <div class="config-card" style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border: 1px solid #e2e8f0;">
+            <form id="customTestForm">
+                
+                <div class="config-section" style="margin-bottom: 30px;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 15px; color: #334155;">
+                        <span class="step-badge" style="background: #e0f2fe; color: #0284c7; padding: 2px 10px; border-radius: 6px; font-size: 0.9em; margin-right: 10px;">1</span>
+                        Select Paper
+                    </h3>
+                    <div style="display: flex; gap: 20px;">
+                        <label class="radio-card selected" style="flex: 1; cursor: pointer;">
+                            <input type="radio" name="paper" value="Paper 2" checked onchange="toggleUnits('Paper 2')" style="display:none;">
+                            <div class="card-content" style="border: 2px solid #0284c7; padding: 15px; border-radius: 8px; text-align: center; background: #f0f9ff;">
+                                <strong>Paper 2 (Pol Sci)</strong>
+                            </div>
+                        </label>
+                        <label class="radio-card" style="flex: 1; cursor: pointer;">
+                            <input type="radio" name="paper" value="Paper 1" onchange="toggleUnits('Paper 1')" style="display:none;">
+                            <div class="card-content" style="border: 2px solid #e2e8f0; padding: 15px; border-radius: 8px; text-align: center;">
+                                <strong>Paper 1 (General)</strong>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section" style="margin-bottom: 30px;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 15px; color: #334155;">
+                        <span class="step-badge" style="background: #e0f2fe; color: #0284c7; padding: 2px 10px; border-radius: 6px; font-size: 0.9em; margin-right: 10px;">2</span>
+                        Select Units (Mix & Match)
+                    </h3>
+                    
+                    <div id="units-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px;">
+                        </div>
+                </div>
+
+                <div class="config-section" style="margin-bottom: 30px;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 15px; color: #334155;">
+                        <span class="step-badge" style="background: #e0f2fe; color: #0284c7; padding: 2px 10px; border-radius: 6px; font-size: 0.9em; margin-right: 10px;">3</span>
+                        Number of Questions
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                        <label class="count-opt"><input type="radio" name="count" value="25"> <span>25 Qs<br><small>30 Mins</small></span></label>
+                        <label class="count-opt"><input type="radio" name="count" value="50" checked> <span>50 Qs<br><small>60 Mins</small></span></label>
+                        <label class="count-opt"><input type="radio" name="count" value="100"> <span>100 Qs<br><small>120 Mins</small></span></label>
+                        <label class="count-opt"><input type="radio" name="count" value="150"> <span>150 Qs<br><small>180 Mins</small></span></label>
+                    </div>
+                </div>
+
+                <button type="submit" id="generateBtn" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.2rem; font-weight: 700;">
+                    <i class="fas fa-bolt"></i> Generate Custom Test
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<style>
+    .count-opt input { display: none; }
+    .count-opt span { display: block; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.2s; }
+    .count-opt input:checked + span { border-color: #0284c7; background: #e0f2fe; color: #0284c7; font-weight: bold; }
+    
+    .unit-chk input { margin-right: 8px; }
+    .unit-chk { display: flex; align-items: center; padding: 10px; border: 1px solid #f1f5f9; border-radius: 6px; cursor: pointer; }
+    .unit-chk:hover { background: #f8fafc; }
+</style>
+
+<script>
+    const p1Units = ["Teaching Aptitude", "Research Aptitude", "Comprehension", "Communication", "Mathematical Reasoning", "Logical Reasoning", "Data Interpretation", "ICT", "People & Environment", "Higher Education"];
+    const p2Units = ["Political Theory", "Western Political Thought", "Indian Political Thought", "Comparative Politics", "International Relations", "India's Foreign Policy", "Political Institutions", "Political Processes", "Public Administration", "Governance"];
+
+    function toggleUnits(paper) {
+        const container = document.getElementById('units-container');
+        const list = paper === 'Paper 1' ? p1Units : p2Units;
+        
+        container.innerHTML = list.map(u => `
+            <label class="unit-chk">
+                <input type="checkbox" name="units" value="${u}"> ${u}
+            </label>
+        `).join('');
+        
+        // Visual toggle for paper cards
+        document.querySelectorAll('input[name="paper"]').forEach(rb => {
+            const card = rb.nextElementSibling;
+            if(rb.checked) {
+                card.style.border = '2px solid #0284c7';
+                card.style.background = '#f0f9ff';
+            } else {
+                card.style.border = '2px solid #e2e8f0';
+                card.style.background = 'white';
+            }
+        });
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => toggleUnits('Paper 2'));
+
+    // Handle Submit
+    document.getElementById('customTestForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('generateBtn');
+        const formData = new FormData(e.target);
+        
+        const paper = formData.get('paper');
+        const count = parseInt(formData.get('count'));
+        const units = [];
+        document.querySelectorAll('input[name="units"]:checked').forEach(cb => units.push(cb.value));
+
+        if(units.length === 0) return alert("Please select at least one Unit.");
+
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating Test...';
+        btn.disabled = true;
+
+        try {
+            const res = await fetch('/api/custom-test/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ paper, units, count })
+            });
+            const data = await res.json();
+            
+            if(data.success) {
+                // Redirect to your existing test interface
+                window.location.href = `/take-test?id=${data.attemptId}`;
+            } else {
+                alert(data.message);
+                btn.innerHTML = 'Generate Custom Test';
+                btn.disabled = false;
+            }
+        } catch (err) {
+            alert("Error generating test.");
+            btn.innerHTML = 'Generate Custom Test';
+            btn.disabled = false;
+        }
+    });
+</script>
+
+<%- include('partials/footer-professional') %>

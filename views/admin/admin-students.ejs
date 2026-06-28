@@ -1,0 +1,82 @@
+<%- include('partials/admin-header', { title: 'Manage Students', page: 'students' }) %>
+
+<main class="main-content">
+    <header class="main-header">
+        <h1>Manage Students</h1>
+    </header>
+    <section class="content-area">
+        <div class="content-block">
+            <div class="table-controls">
+                <input type="text" placeholder="Search by Name, Email, or Phone..." class="search-bar" id="studentSearch">
+                <div class="pagination-summary" id="pagination-summary">
+                    Loading...
+                </div>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table class="admin-table" id="studentsTableElement">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Contact Info</th>
+                            <th>Courses</th>
+                            <th>Performance</th>
+                            <th>Reg. Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTable">
+                        <tr><td colspan="6" style="text-align:center; padding:20px;">Loading student data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination-controls" id="studentPagination" style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;"></div>
+        </div>
+    </section>
+</main>
+
+<div id="studentModal" class="modal-overlay hidden">
+    <div class="modal-content large-modal">
+        <div class="modal-header">
+            <h2 id="modalStudentName">Student Details</h2>
+            <button class="close-modal-btn" id="closeStudentModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="info-grid">
+                <div class="info-item"><label>Email:</label> <span id="modalEmail"></span></div>
+                <div class="info-item"><label>Phone:</label> <span id="modalPhone"></span></div>
+                <div class="info-item"><label>Highest Qual:</label> <span id="modalEducation"></span></div>
+                <div class="info-item"><label>Target Goal:</label> <span id="modalTarget"></span></div>
+            </div>
+            <hr>
+            <h3><i class="fas fa-history"></i> Test Performance History</h3>
+            <div class="table-responsive">
+                <table class="simple-table">
+                    <thead>
+                        <tr>
+                            <th>Test Title</th>
+                            <th>Score</th>
+                            <th>%</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modalTestHistory">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styling Updates */
+    .hidden { display: none !important; }
+    .badge { background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 0.8em; margin-right: 3px; }
+    .score-high { color: #16a34a; font-weight: bold; }
+    .score-low { color: #dc2626; font-weight: bold; }
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+    .modal-content { background: white; padding: 25px; border-radius: 10px; width: 90%; max-width: 700px; max-height: 85vh; overflow-y: auto; }
+</style>
+
+<%- include('partials/admin-footer', { script: null }) %>

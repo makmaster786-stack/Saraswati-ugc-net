@@ -1,0 +1,405 @@
+<%- include('partials/header-professional', { script: '/js/payment.js' }) %>
+
+<style>
+/* ── COURSE DETAILS PAGE ── */
+.course-details-page { padding-bottom: 5rem; }
+
+/* Hero */
+.cd-hero {
+  background: linear-gradient(145deg, #0c4a6e 0%, #0369a1 60%, #0EA5E9 100%);
+  padding: 3rem 0 4rem; position: relative; overflow: hidden;
+}
+.cd-hero::after {
+  content: ''; position: absolute; right: -100px; top: -100px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent);
+}
+.cd-breadcrumb { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem; }
+.cd-breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; }
+.cd-breadcrumb a:hover { color: white; }
+.cd-breadcrumb i { color: rgba(255,255,255,0.4); font-size: 0.65rem; }
+.cd-breadcrumb span { color: rgba(255,255,255,0.9); font-size: 0.85rem; }
+
+.cd-hero-content { max-width: 680px; position: relative; z-index: 1; }
+.cd-category-badge {
+  display: inline-block; padding: 0.3rem 0.9rem; background: rgba(245,158,11,0.2);
+  border: 1px solid rgba(245,158,11,0.4); border-radius: 20px;
+  color: var(--brand-gold); font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 1rem;
+}
+.cd-hero-title { font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: white; line-height: 1.25; margin-bottom: 0.75rem; }
+.cd-hero-desc { color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
+
+.cd-hero-meta { display: flex; flex-wrap: wrap; gap: 1rem; }
+.cd-meta-badge {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px; padding: 0.45rem 0.9rem; color: rgba(255,255,255,0.9); font-size: 0.82rem;
+}
+.cd-meta-badge i { color: var(--brand-gold); }
+
+/* Rating stars */
+.cd-rating { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+.stars-row { color: var(--brand-gold); font-size: 0.9rem; letter-spacing: 0.05em; }
+.rating-num { font-family: var(--font-heading); font-weight: 800; font-size: 1.1rem; color: white; }
+.rating-count { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+
+/* Layout */
+.cd-layout { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 340px; gap: 2rem; align-items: start; }
+
+/* Sticky Sidebar Card */
+.cd-sticky-card {
+  position: sticky; top: 80px; background: white; border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12); overflow: hidden; border: 1px solid var(--gray-100);
+}
+.cd-card-image { position: relative; }
+.cd-card-image img { width: 100%; height: 190px; object-fit: cover; display: block; }
+.cd-card-image-placeholder {
+  height: 190px; background: linear-gradient(135deg, #0EA5E9, #0369a1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; color: rgba(255,255,255,0.4);
+}
+.cd-card-body { padding: 1.5rem; }
+
+/* Price */
+.cd-price-row { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1.25rem; }
+.price-main { font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--gray-900); }
+.price-original { font-size: 1.1rem; color: var(--gray-400); text-decoration: line-through; }
+.price-save { font-size: 0.78rem; font-weight: 700; color: #16a34a; background: #dcfce7; padding: 0.2rem 0.5rem; border-radius: 6px; }
+.price-free-tag { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 800; color: #16a34a; }
+
+/* CTA Button */
+.btn-enroll {
+  width: 100%; padding: 1rem; background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white; border: none; border-radius: 12px; font-family: var(--font-heading);
+  font-size: 1.05rem; font-weight: 800; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-bottom: 0.75rem;
+}
+.btn-enroll:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245,158,11,0.4); }
+.btn-enrolled {
+  width: 100%; padding: 1rem; background: linear-gradient(135deg, #10b981, #059669);
+  color: white; border: none; border-radius: 12px; font-family: var(--font-heading);
+  font-size: 1.05rem; font-weight: 800; cursor: pointer; text-decoration: none;
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-bottom: 0.75rem;
+}
+.cd-guarantee { text-align: center; font-size: 0.78rem; color: var(--gray-400); margin-bottom: 1.25rem; }
+.cd-guarantee i { color: #10b981; margin-right: 0.3rem; }
+
+.cd-card-meta { display: flex; flex-direction: column; gap: 0.6rem; border-top: 1px solid var(--gray-100); padding-top: 1rem; }
+.cd-card-meta-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; }
+.cd-card-meta-row span:first-child { color: var(--gray-500); display: flex; align-items: center; gap: 0.5rem; }
+.cd-card-meta-row span:first-child i { color: var(--brand-blue); width: 14px; }
+.cd-card-meta-row span:last-child { font-weight: 700; color: var(--gray-800); }
+
+/* Main content sections */
+.cd-section { background: white; border-radius: 16px; padding: 1.75rem; box-shadow: var(--shadow-sm); margin-bottom: 1.25rem; }
+.cd-section-title { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--gray-900); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--gray-100); }
+
+/* What you'll learn */
+.learn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+.learn-item { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.85rem; color: var(--gray-700); }
+.learn-item i { color: #10b981; font-size: 0.75rem; margin-top: 0.2rem; flex-shrink: 0; }
+
+/* Curriculum Accordion */
+.curriculum-section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 1rem; background: var(--gray-50); border-radius: 10px;
+  cursor: pointer; transition: background 0.15s; margin-bottom: 0.4rem; border: 1px solid var(--gray-100);
+}
+.curriculum-section-head:hover { background: rgba(14,165,233,0.06); }
+.curriculum-section-head.open { background: rgba(14,165,233,0.08); border-color: rgba(14,165,233,0.2); }
+.curriculum-section-title { font-family: var(--font-heading); font-size: 0.88rem; font-weight: 700; color: var(--gray-800); }
+.curriculum-section-meta { font-size: 0.75rem; color: var(--gray-400); margin-top: 0.15rem; }
+.curriculum-toggle { color: var(--gray-400); transition: transform 0.2s; }
+.curriculum-section-head.open .curriculum-toggle { transform: rotate(180deg); }
+.curriculum-items { display: none; margin-bottom: 0.75rem; border: 1px solid var(--gray-100); border-radius: 0 0 10px 10px; overflow: hidden; }
+.curriculum-items.open { display: block; }
+.curriculum-item {
+  display: flex; align-items: center; gap: 0.85rem; padding: 0.7rem 1rem;
+  font-size: 0.82rem; color: var(--gray-700); border-bottom: 1px solid var(--gray-50);
+}
+.curriculum-item:last-child { border-bottom: none; }
+.curriculum-item i { color: var(--gray-400); font-size: 0.8rem; width: 14px; }
+.curriculum-item .item-duration { margin-left: auto; font-size: 0.75rem; color: var(--gray-400); }
+.curriculum-item.free-preview i { color: var(--brand-blue); }
+.free-badge { font-size: 0.68rem; font-weight: 700; color: var(--brand-blue); background: rgba(14,165,233,0.1); padding: 0.1rem 0.45rem; border-radius: 4px; }
+
+/* Instructor */
+.instructor-card { display: flex; gap: 1.25rem; align-items: flex-start; }
+.instructor-avatar {
+  width: 70px; height: 70px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+  border: 3px solid rgba(14,165,233,0.2);
+}
+.instructor-avatar-placeholder {
+  width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-d));
+  display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; flex-shrink: 0;
+}
+.instructor-name { font-family: var(--font-heading); font-size: 1.05rem; font-weight: 800; color: var(--gray-900); }
+.instructor-title { font-size: 0.82rem; color: var(--brand-blue); font-weight: 600; margin-bottom: 0.5rem; }
+.instructor-bio { font-size: 0.84rem; color: var(--gray-600); line-height: 1.7; }
+.instructor-stats { display: flex; gap: 1.25rem; margin-top: 0.75rem; }
+.i-stat { font-size: 0.78rem; color: var(--gray-500); }
+.i-stat strong { color: var(--gray-800); font-family: var(--font-heading); font-weight: 700; display: block; font-size: 0.9rem; }
+
+@media (max-width: 1024px) { .cd-layout { grid-template-columns: 1fr; } .cd-sticky-card { position: static; } }
+@media (max-width: 600px) { .learn-grid { grid-template-columns: 1fr; } .cd-hero-title { font-size: 1.5rem; } }
+</style>
+
+<main class="course-details-page">
+
+  <div class="cd-hero">
+    <div class="container" style="position:relative;z-index:1;">
+      <nav class="cd-breadcrumb">
+        <a href="/courses"><i class="fas fa-home"></i> Courses</a>
+        <i class="fas fa-chevron-right"></i>
+        <span><%= course.title %></span>
+      </nav>
+      <div class="cd-hero-content">
+        <span class="cd-category-badge"><%= course.category || 'UGC NET' %></span>
+        <h1 class="cd-hero-title"><%= course.title %></h1>
+        <p class="cd-hero-desc"><%= course.shortDescription || course.description || 'Comprehensive preparation course.' %></p>
+        <div class="cd-rating">
+          <span class="rating-num">4.8</span>
+          <span class="stars-row">★★★★★</span>
+          <span class="rating-count">(Students enrolled)</span>
+        </div>
+        
+        <div class="cd-hero-meta">
+          <span class="cd-meta-badge"><i class="fas fa-file-signature"></i> <%= course.fetchedTests ? course.fetchedTests.length : (course.lessons || '0') %> Total Mocks</span>
+          <span class="cd-meta-badge"><i class="fas fa-desktop"></i> Latest NTA CBT Interface</span>
+          <span class="cd-meta-badge"><i class="fas fa-language"></i> Bilingual (Hindi + English)</span>
+          <span class="cd-meta-badge"><i class="fas fa-chart-pie"></i> Detailed AI Analytics</span>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cd-layout">
+
+      <div class="cd-main">
+
+        <div class="cd-section">
+          <h2 class="cd-section-title"><i class="fas fa-check-circle" style="color:#10b981;margin-right:.5rem;"></i>What You'll Learn</h2>
+          <div class="learn-grid">
+            <div class="learn-item"><i class="fas fa-check"></i><span>Complete Paper 1 coverage — all 10 units</span></div>
+            <div class="learn-item"><i class="fas fa-check"></i><span>NTA exam pattern and strategy</span></div>
+            <div class="learn-item"><i class="fas fa-check"></i><span>Previous year question analysis</span></div>
+            <div class="learn-item"><i class="fas fa-check"></i><span>Full-length mock tests with review</span></div>
+            <div class="learn-item"><i class="fas fa-check"></i><span>Unit-wise practice and quizzes</span></div>
+            <div class="learn-item"><i class="fas fa-check"></i><span>AI-powered weak topic identification</span></div>
+            <div class="learn-item"><i class="fas fa-check"></i><span>Bilingual explanations for every answer</span></div>
+            <div class="learn-item"><i class="fas fa-check"></i><span>Telegram group support for doubts</span></div>
+          </div>
+        </div>
+
+        <div class="cd-section">
+          <h2 class="cd-section-title"><i class="fas fa-info-circle" style="color:var(--brand-blue);margin-right:.5rem;"></i>About This Test Series</h2>
+          <div class="course-description-content" style="font-size:0.95rem;color:var(--gray-700);line-height:1.8; white-space: pre-line;">
+            <%- course.description || 'A comprehensive test series designed to help you crack the UGC NET exam with confidence.<br><br>Master time management and get familiar with the NTA CBT interface.' %>
+          </div>
+        </div>
+
+        <div class="cd-section" id="curriculum">
+          <h2 class="cd-section-title"><i class="fas fa-calendar-alt" style="color:var(--brand-blue);margin-right:.5rem;"></i>Mock Test Schedule</h2>
+          
+          <% if (locals.course && course.fetchedTests && course.fetchedTests.length > 0) { %>
+            
+            <div class="curriculum-items open">
+              <% 
+                /* 1. Check if the user is enrolled or is an admin before rendering the buttons */
+                let isStudentEnrolled = false;
+                if (locals.user && locals.user.enrolledCourses) {
+                  isStudentEnrolled = locals.user.enrolledCourses.some(ec => {
+                    const id = ec.courseId ? ec.courseId.toString() : ec.toString();
+                    return id === course._id.toString();
+                  });
+                }
+                if (locals.user && locals.user.role === 'admin') isStudentEnrolled = true;
+              %>
+
+              <% course.fetchedTests.forEach((test, index) => { %>
+                <div class="curriculum-item <%= test.isFree ? 'free-preview' : '' %>" style="display: flex; align-items: center; padding: 0.8rem 1rem;">
+                  <i class="fas fa-file-alt"></i> 
+                  
+                  <span style="flex: 1;"><%= test.title %></span>
+                  
+                  <% if (test.isFree) { %><span class="free-badge" style="margin-right: 12px;">FREE</span><% } %>
+                  
+                  <span class="item-duration" style="margin-left: auto; margin-right: 15px;">
+                    <%= test.questions ? test.questions.length : 0 %> Qs • <%= test.duration || 60 %> Mins
+                  </span>
+
+                  <% 
+                    /* 2. Logic to determine what button/icon to show */
+                    let canTake = isStudentEnrolled || test.isFree;
+                    let isLockedByDate = false;
+                    let unlockText = "";
+                    if (test.unlockDate) {
+                        const unlock = new Date(test.unlockDate);
+                        if (unlock > new Date()) {
+                            isLockedByDate = true;
+                            unlockText = unlock.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+                        }
+                    }
+                  %>
+
+                  <% if (canTake && !isLockedByDate) { %>
+                    <a href="/take-test?id=<%= test._id %>" style="background: var(--brand-blue); color: white; padding: 0.35rem 0.85rem; border-radius: 6px; font-size: 0.75rem; font-family: var(--font-heading); font-weight: 700; text-decoration: none; transition: background 0.2s;">
+                      Start
+                    </a>
+                  <% } else if (isLockedByDate) { %>
+                    <span style="font-size: 0.75rem; color: var(--gray-400); background: var(--gray-100); padding: 0.35rem 0.6rem; border-radius: 6px;">
+                      <i class="fas fa-lock"></i> <%= unlockText %>
+                    </span>
+                  <% } else { %>
+                    <span style="font-size: 0.85rem; color: var(--gray-300);" title="Enroll to unlock">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  <% } %>
+
+                </div>
+              <% }); %>
+            </div>
+
+          <% } else { %>
+            <div style="text-align: center; padding: 2.5rem 1rem; border: 1px dashed var(--gray-200); border-radius: 10px; background: var(--gray-50);">
+              <i class="fas fa-calendar-plus" style="font-size: 2.5rem; color: var(--gray-300); margin-bottom: 1rem;"></i>
+              <h3 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--gray-800); margin-bottom: 0.3rem;">Schedule Upcoming</h3>
+              <p style="font-size: 0.85rem; color: var(--gray-500);">The detailed mock test schedule will be updated here shortly.</p>
+            </div>
+          <% } %>
+        </div>
+
+        <div class="cd-section">
+          <h2 class="cd-section-title"><i class="fas fa-chalkboard-teacher" style="color:var(--brand-blue);margin-right:.5rem;"></i>Your Instructor</h2>
+          <div class="instructor-card">
+            <% if (course.instructor && course.instructor.avatar) { %>
+              <img src="<%= course.instructor.avatar %>" alt="Instructor" class="instructor-avatar">
+            <% } else { %>
+              <div class="instructor-avatar-placeholder"><i class="fas fa-user"></i></div>
+            <% } %>
+            <div>
+              <div class="instructor-name"><%= (course.instructor && course.instructor.name) ? course.instructor.name : 'Dr. Expert Faculty' %></div>
+              <div class="instructor-title">NET Qualified — UGC NET Expert</div>
+              <div class="instructor-bio">
+                <%= (course.instructor && course.instructor.bio) ? course.instructor.bio : 'Experienced faculty with over 10 years of teaching UGC NET aspirants. Specialises in Paper 1 with a deep focus on conceptual clarity and exam strategy.' %>
+              </div>
+              <div class="instructor-stats">
+                <div class="i-stat"><strong>5,000+</strong>Students Taught</div>
+                <div class="i-stat"><strong>10+ yrs</strong>Experience</div>
+                <div class="i-stat"><strong>98%</strong>Success Rate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div>
+        <div class="cd-sticky-card">
+          <div class="cd-card-image">
+            <% if (course.thumbnail) { %>
+              <img src="<%= course.thumbnail %>" alt="<%= course.title %>">
+            <% } else { %>
+              <div class="cd-card-image-placeholder"><i class="fas fa-graduation-cap"></i></div>
+            <% } %>
+          </div>
+          <div class="cd-card-body">
+            <div class="cd-price-row">
+              <% if (course.price === 0) { %>
+                <span class="price-free-tag">Free Enrollment</span>
+              <% } else { %>
+                <span class="price-main">₹<%= course.price %></span>
+                <% if (course.originalPrice && course.originalPrice > course.price) { %>
+                  <span class="price-original">₹<%= course.originalPrice %></span>
+                  <span class="price-save"><%= Math.round((1 - course.price/course.originalPrice)*100) %>% OFF</span>
+                <% } %>
+              <% } %>
+            </div>
+
+            <%
+              let isEnrolled = false;
+              if (locals.user && locals.user.enrolledCourses) {
+                isEnrolled = locals.user.enrolledCourses.some(ec => {
+                  const id = ec.courseId ? ec.courseId.toString() : ec.toString();
+                  return id === course._id.toString();
+                });
+              }
+            %>
+
+            <% if (isEnrolled) { %>
+              <a href="/dashboard" class="btn-enrolled"><i class="fas fa-play"></i> Go to Dashboard</a>
+            <% } else if (course.price === 0) { %>
+              <button class="btn-enroll" id="buy-now-btn"
+                data-course-id="<%= course._id %>"
+                data-course-price="0"
+                data-course-title="<%= course.title %>">
+                <i class="fas fa-file-signature"></i> Enroll for Free
+              </button>
+            <% } else { %>
+              <button class="btn-enroll" id="buy-now-btn"
+                data-course-id="<%= course._id %>"
+                data-course-price="<%= course.price %>"
+                data-course-title="<%= course.title %>"
+                data-razorpay-key="<%= process.env.RAZORPAY_KEY_ID %>"
+                data-user-name="<%= locals.user ? locals.user.fullname : '' %>"
+                data-user-email="<%= locals.user ? locals.user.email : '' %>">
+                <i class="fas fa-lock-open"></i> Join Test Series — ₹<%= course.price %>
+              </button>
+            <% } %>
+
+            <p class="cd-guarantee"><i class="fas fa-shield-alt"></i> 30-day satisfaction guarantee</p>
+
+            <div class="cd-card-meta">
+              <div class="cd-card-meta-row">
+                <span><i class="fas fa-laptop"></i> Format</span>
+                <span>Online CBT Exam</span>
+              </div>
+              <div class="cd-card-meta-row">
+                <span><i class="fas fa-calendar-check"></i> Validity</span>
+                <span>Till Exam Date</span>
+              </div>
+              <div class="cd-card-meta-row">
+                <span><i class="fas fa-tasks"></i> Total Questions</span>
+                <span><%= course.fetchedTests ? course.fetchedTests.reduce((sum, test) => sum + (test.questions ? test.questions.length : 0), 0) : '0' %>+ MCQs</span>
+              </div>
+              <div class="cd-card-meta-row">
+                <span><i class="fas fa-chart-line"></i> Analytics</span>
+                <span>All India Rank & Weak Topics</span>
+              </div>
+              <div class="cd-card-meta-row">
+                <span><i class="fas fa-mobile-alt"></i> Mobile App</span>
+                <span>Fully supported</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script>
+function toggleSection(header) {
+  const items = header.nextElementSibling;
+  const isOpen = header.classList.contains('open');
+  header.classList.toggle('open');
+  if (isOpen) items.classList.remove('open');
+  else items.classList.add('open');
+}
+// Open first section by default
+document.addEventListener('DOMContentLoaded', () => {
+  const first = document.querySelector('.curriculum-section-head');
+  if (first) toggleSection(first);
+});
+</script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script src="/js/payment.js"></script>
+
+<%- include('partials/footer-professional') %>

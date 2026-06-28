@@ -1,0 +1,287 @@
+<%/* FILE: views/index.ejs — Homepage (logged-out users only) */%>
+<%- include('partials/header-professional', { title: title, script: script }) %>
+
+<main>
+    <!-- ── HERO SECTION ── -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-grid-layout">
+
+                <!-- Left: Content -->
+                <div class="hero-content-left">
+                    <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.15);border-radius:50px;padding:0.4rem 1rem;margin-bottom:1.25rem;font-size:0.82rem;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:0.04em;">
+                        <i class="fas fa-star" style="color:#fbbf24;"></i> India's #1 UGC NET Coaching Platform
+                    </div>
+
+                    <h1>Unlock Your UGC NET Success with India's Finest Mentors</h1>
+
+                    <p class="hero-subtitle">
+                        Comprehensive bilingual courses, 100+ mock tests, and expert guidance for Paper 1 & Political Science.
+                        Join 5,000+ successful students today.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="/signup" class="btn btn-primary btn-lg">
+                            <i class="fas fa-rocket"></i> Start Free Trial
+                        </a>
+                        <a href="/courses" class="btn btn-outline btn-lg">
+                            <i class="fas fa-book-open"></i> Browse Courses
+                        </a>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">5,000+</span>
+                            <span class="stat-label">Successful Students</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">Success Rate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Mentor Image -->
+                <div class="hero-image-right">
+                    <div class="mentor-image-wrapper">
+                        <img src="/images/dr-rajesh-mishra-portrait.jpg"
+                             alt="Dr. Rajesh Mishra - UGC NET Expert"
+                             class="mentor-img"
+                             loading="eager">
+
+                        <!-- Floating Achievement Cards -->
+                        <div class="hero-achievement-cards">
+                            <div class="achievement-card">
+                                <span class="ach-icon">🏆</span>
+                                <div>
+                                    <div style="font-weight:700;font-size:0.78rem;">NTA UGC NET</div>
+                                    <div style="font-size:0.7rem;color:var(--gray-500);">Exam Pattern 2025</div>
+                                </div>
+                            </div>
+                            <div class="achievement-card">
+                                <span class="ach-icon">🌐</span>
+                                <div>
+                                    <div style="font-weight:700;font-size:0.78rem;">Bilingual Content</div>
+                                    <div style="font-size:0.7rem;color:var(--gray-500);">English & Hindi</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mentor-badge">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Dr. Rajesh Mishra — Lead Mentor</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── TRUST STRIP ── -->
+    <section style="background:white;border-bottom:1px solid var(--gray-100);padding:1.25rem 0;">
+        <div class="container">
+            <div style="display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;">
+                <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;font-weight:600;color:var(--gray-600);">
+                    <i class="fas fa-shield-alt" style="color:var(--brand-blue);"></i> NTA Approved Pattern
+                </div>
+                <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;font-weight:600;color:var(--gray-600);">
+                    <i class="fas fa-language" style="color:var(--brand-blue);"></i> Hindi & English
+                </div>
+                <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;font-weight:600;color:var(--gray-600);">
+                    <i class="fas fa-mobile-alt" style="color:var(--brand-blue);"></i> Mobile Friendly
+                </div>
+                <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;font-weight:600;color:var(--gray-600);">
+                    <i class="fas fa-headset" style="color:var(--brand-blue);"></i> 24/7 Support
+                </div>
+                <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;font-weight:600;color:var(--gray-600);">
+                    <i class="fas fa-certificate" style="color:var(--brand-blue);"></i> Expert Faculty
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FEATURES SECTION ── -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Saraswati UGC NET?</h2>
+                <p>Everything you need to crack the UGC NET exam in one platform</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Expert Faculty</h3>
+                    <p>Learn from Dr. Rajesh Mishra with 15+ years of NET-qualified expertise and a proven track record.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3>100+ Mock Tests</h3>
+                    <p>Comprehensive test series that perfectly mirrors the actual NTA UGC NET exam pattern.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-language"></i></div>
+                    <h3>Bilingual Content</h3>
+                    <p>All study materials and tests available in both English and Hindi for better understanding.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Performance Analytics</h3>
+                    <p>Detailed insights and personalized improvement suggestions after every test you take.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-book-reader"></i></div>
+                    <h3>PYQ Library</h3>
+                    <p>Previous Year Questions going back 10+ years with AI-powered explanations in both languages.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Learn anytime, anywhere with our fully responsive platform — works flawlessly on any device.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FEATURED COURSES ── -->
+    <% if (featuredCourses && featuredCourses.length > 0) { %>
+    <section class="courses-preview-section" style="padding:var(--section-py) 0;background:var(--gray-50);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Courses</h2>
+                <p>Handpicked courses designed for maximum UGC NET success</p>
+            </div>
+
+            <div class="courses-preview-grid">
+                <% featuredCourses.forEach(course => { %>
+                <div class="course-preview-card">
+                    <a href="/course/<%= course._id %>" class="course-preview-header" style="display:block;text-decoration:none;">
+                        <img src="<%= course.thumbnail || '/images/course-placeholder.jpg' %>"
+                             alt="<%= course.title %>" loading="lazy">
+                        <span class="course-badge <%= course.price === 0 ? 'free' : 'bestseller' %>">
+                            <%= course.price === 0 ? 'Free' : 'Bestseller' %>
+                        </span>
+                    </a>
+                    <div class="course-preview-body">
+                        <div class="course-category"><%= course.category || 'UGC NET' %></div>
+                        <h3 class="course-title">
+                            <a href="/course/<%= course._id %>"><%= course.title %></a>
+                        </h3>
+                        <p class="course-description"><%= course.shortDescription || (course.description || '').substring(0, 110) + '...' %></p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-play-circle"></i> <%= course.lessons || 0 %>+ Lectures</span>
+                            <span><i class="fas fa-clock"></i> <%= course.duration || '6 Months' %></span>
+                        </div>
+                    </div>
+                    <div class="course-preview-footer">
+                        <div class="course-price">
+                            <% if (course.price === 0) { %>
+                                <span class="price-free">Free</span>
+                            <% } else { %>
+                                <span class="current-price">₹<%= course.price.toLocaleString('en-IN') %></span>
+                                <% if (course.originalPrice && course.originalPrice > course.price) { %>
+                                    <span class="original-price">₹<%= course.originalPrice.toLocaleString('en-IN') %></span>
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <a href="/course/<%= course._id %>" class="btn btn-primary btn-sm">View Course</a>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+
+            <div style="text-align:center;margin-top:2.5rem;">
+                <a href="/courses" class="btn btn-primary btn-lg">
+                    <i class="fas fa-th-large"></i> View All Courses
+                </a>
+            </div>
+        </div>
+    </section>
+    <% } %>
+
+    <!-- ── TESTIMONIAL STRIP ── -->
+    <section style="padding:4rem 0;background:white;">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Students Say</h2>
+                <p>Real results from real students who cracked UGC NET with us</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;" class="testimonials-grid">
+                <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:16px;padding:1.75rem;position:relative;">
+                    <div style="color:#f59e0b;font-size:0.85rem;margin-bottom:0.75rem;">★★★★★</div>
+                    <p style="font-size:0.9rem;color:var(--gray-600);line-height:1.7;margin-bottom:1rem;">"The bilingual mock tests were game-changers for me. I cleared both Paper 1 and Paper 2 in my first attempt thanks to Saraswati UGC NET!"</p>
+                    <div style="display:flex;align-items:center;gap:0.6rem;">
+                        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--brand-blue),var(--brand-blue-d));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.85rem;">P</div>
+                        <div>
+                            <div style="font-weight:700;font-size:0.85rem;color:var(--gray-900);">Priya Sharma</div>
+                            <div style="font-size:0.75rem;color:var(--gray-500);">UGC NET JRF — Political Science</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:16px;padding:1.75rem;position:relative;">
+                    <div style="color:#f59e0b;font-size:0.85rem;margin-bottom:0.75rem;">★★★★★</div>
+                    <p style="font-size:0.9rem;color:var(--gray-600);line-height:1.7;margin-bottom:1rem;">"Dr. Rajesh Mishra's teaching style is exceptional. The PYQ analysis section helped me identify my weak areas and improve significantly."</p>
+                    <div style="display:flex;align-items:center;gap:0.6rem;">
+                        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#4338ca);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.85rem;">R</div>
+                        <div>
+                            <div style="font-weight:700;font-size:0.85rem;color:var(--gray-900);">Rahul Verma</div>
+                            <div style="font-size:0.75rem;color:var(--gray-500);">Assistant Professor — Delhi University</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:16px;padding:1.75rem;position:relative;">
+                    <div style="color:#f59e0b;font-size:0.85rem;margin-bottom:0.75rem;">★★★★★</div>
+                    <p style="font-size:0.9rem;color:var(--gray-600);line-height:1.7;margin-bottom:1rem;">"The detailed analytics after each test showed exactly where I was losing marks. Cleared NET in just 3 months of preparation!"</p>
+                    <div style="display:flex;align-items:center;gap:0.6rem;">
+                        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#059669,#047857);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.85rem;">A</div>
+                        <div>
+                            <div style="font-weight:700;font-size:0.85rem;color:var(--gray-900);">Ankita Singh</div>
+                            <div style="font-size:0.75rem;color:var(--gray-500);">UGC NET Qualified — Banaras</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CTA SECTION ── -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your UGC NET Journey?</h2>
+                <p>Join thousands of successful students. Take the first step towards becoming an Assistant Professor or JRF holder today.</p>
+
+                <div class="cta-actions">
+                    <a href="/signup" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus"></i> Start Free Trial
+                    </a>
+                    <a href="/login" class="btn btn-outline btn-lg">
+                        <i class="fas fa-sign-in-alt"></i> Login to Account
+                    </a>
+                </div>
+
+                <div class="cta-features">
+                    <div class="feature"><i class="fas fa-check-circle"></i> <span>No credit card required</span></div>
+                    <div class="feature"><i class="fas fa-check-circle"></i> <span>Free courses available</span></div>
+                    <div class="feature"><i class="fas fa-check-circle"></i> <span>Cancel anytime</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+@media (max-width: 768px) {
+    .testimonials-grid { grid-template-columns: 1fr !important; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+    .testimonials-grid { grid-template-columns: 1fr 1fr !important; }
+}
+</style>
+
+<%- include('partials/footer-professional') %>

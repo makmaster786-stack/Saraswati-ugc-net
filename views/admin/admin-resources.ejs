@@ -1,0 +1,81 @@
+<%- include('partials/admin-header', { title: 'Manage Resources', page: 'resources' }) %>
+
+<main class="main-content">
+    <header class="main-header">
+        <h1>Manage Study Resources</h1>
+    </header>
+
+    <section class="content-area">
+        <div class="content-grid">
+            <div class="form-container content-block">
+                <h2><i class="fas fa-upload"></i> Upload New Resource</h2>
+                <form id="addResourceForm" enctype="multipart/form-data">
+                    <div class="input-group">
+                        <label for="resourceTitle">Resource Title *</label>
+                        <input type="text" id="resourceTitle" name="resourceTitle" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="resourceCourse">Assign to Course *</label>
+                        <select id="resourceCourse" name="resourceCourse" required>
+                            <option value="">-- Loading Courses... --</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="resourceType">Resource Type *</label>
+                        <select id="resourceType" name="resourceType" required>
+                            <option value="">-- Select Type --</option>
+                            <option value="pdf">PDF Document</option>
+                            <option value="video">Video Lecture</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="resourceDescription">Description</label>
+                        <textarea id="resourceDescription" name="resourceDescription" rows="3"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="resourceFile">Upload File *</label>
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload or drag and drop</p>
+                            <input type="file" id="resourceFile" name="resourceFile" required hidden>
+                        </div>
+                        <div id="fileInfo" class="file-info hidden"></div>
+                    </div>
+
+                    <div class="input-group-checkbox">
+                        <input type="checkbox" id="isFreeResource" name="isFreeResource" checked>
+                        <label for="isFreeResource">Make this resource free</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-upload"></i> Upload Resource
+                    </button>
+                </form>
+            </div>
+
+            <div class="list-container content-block">
+                <h2><i class="fas fa-files"></i> Existing Resources</h2>
+                <table id="resourcesTable">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Course</th>
+                            <th>Size</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody> </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/admin-footer', { script: 'admin-resources.js' }) %>

@@ -1,0 +1,216 @@
+<%- include('partials/admin-header', { title: 'Manage Tests', page: 'tests' }) %>
+
+<main class="main-content">
+    <header class="main-header">
+        <h1>Manage Tests</h1>
+    </header>
+    <section class="content-area">
+        <div class="content-grid">
+            
+            <div class="form-container content-block">
+                <h2><i class="fas fa-plus-circle"></i> Create New Test</h2>
+                <form id="addTestForm">
+                    <div class="input-group">
+                        <label for="testTitle">Test Title *</label>
+                        <input type="text" id="testTitle" name="testTitle" placeholder="e.g., Teaching Aptitude Mock Test 1" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="testCourse">Assign to Course *</label>
+                        <select id="testCourse" name="testCourse" required>
+                            <option value="">-- Loading Courses... --</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="testDuration">Duration (in minutes) *</label>
+                        <input type="number" id="testDuration" name="testDuration" value="60" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="unlockDate">Unlock Date (Optional)</label>
+                        <input type="date" id="unlockDate" name="unlockDate">
+                        <small style="color: #666;">Leave empty to unlock immediately.</small>
+                    </div>
+
+                    <div class="input-group-checkbox">
+                        <input type="checkbox" id="isFreeTest" name="isFreeTest">
+                        <label for="isFreeTest">Make this test free (Demo)</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Create Test
+                    </button>
+                </form>
+            </div>
+
+            <div class="list-container content-block">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <h2><i class="fas fa-list"></i> Existing Tests</h2>
+                    <input type="text" id="testSearch" placeholder="Search tests..." 
+                           style="padding:8px; border:1px solid #ddd; border-radius:4px; width:200px;">
+                </div>
+
+                <div class="table-responsive">
+                    <table id="testsTable" class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Course</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="testsTableBody">
+                            <tr><td colspan="4" style="text-align:center; padding:20px;">Loading tests...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="testPagination" class="pagination-controls" 
+                     style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        loadTests(1);
+        populateCourseDropdown(); // Helper to fill the "Assign to Course" dropdown
+
+        // Search Handler
+        let debounceTimer;
+        document.getElementById('testSearch')?.addEventListener('input', (e) => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => loadTests(1), 500);
+        });
+        
+        // Add Test Form Handler
+        document.getElementById('addTestForm')?.addEventListener('submit', handleCreateTest);
+    });
+
+    // 1. Fetch Tests
+    async function loadTests(page) {
+        const search = document.getElementById('testSearch').value;
+        const tbody = document.getElementById('testsTableBody');
+        
+        try {
+            const res = await fetch(`/api/admin/tests?page=${page}&limit=8&search=${search}`);
+            const data = await res.json();
+
+            if (data.success) {
+                renderTestsTable(data.tests);
+                renderPagination(data.pagination, 'testPagination', loadTests);
+            }
+        } catch (error) {
+            console.error(error);
+            tbody.innerHTML = `<tr><td colspan="4" style="color:red; text-align:center;">Error loading tests</td></tr>`;
+        }
+    }
+
+    // 2. Render Table
+    function renderTestsTable(tests) {
+        const tbody = document.getElementById('testsTableBody');
+        if (tests.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No tests found.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = tests.map(test => `
+            <tr>
+                <td>
+                    <strong>${test.title}</strong>
+                    ${test.isFree ? '<span class="badge success" style="font-size:0.7em; margin-left:5px;">FREE</span>' : ''}
+                </td>
+                <td>${test.course?.title || 'General'}</td>
+                <td>
+                    <span class="badge ${test.questions?.length > 0 ? 'success' : 'warning'}">
+                        ${test.questions?.length || 0} Qs
+                    </span>
+                </td>
+                <td>
+                    <a href="/admin/edit-test?id=${test._id}" class="btn-icon" title="Edit / Add Questions"><i class="fas fa-edit"></i></a>
+                    <button onclick="deleteTest('${test._id}')" class="btn-icon delete" title="Delete"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // 3. Render Pagination Buttons
+    function renderPagination(meta, containerId, fetchFunction) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        if (meta.totalPages <= 1) {
+            container.innerHTML = '';
+            return;
+        }
+
+        container.innerHTML = `
+            <button class="btn btn-sm btn-outline" ${!meta.hasPrev ? 'disabled' : ''} onclick="${fetchFunction.name}(${meta.currentPage - 1})">
+                <i class="fas fa-chevron-left"></i> Prev
+            </button>
+            <span style="padding: 5px 10px; font-weight:600; color:#555;">
+                Page ${meta.currentPage} of ${meta.totalPages}
+            </span>
+            <button class="btn btn-sm btn-outline" ${!meta.hasNext ? 'disabled' : ''} onclick="${fetchFunction.name}(${meta.currentPage + 1})">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        `;
+    }
+
+    // Helper: Fill the course dropdown for the form
+    async function populateCourseDropdown() {
+        try {
+            const res = await fetch('/api/admin/courses?limit=100'); // Get enough courses for dropdown
+            const data = await res.json();
+            const select = document.getElementById('testCourse');
+            
+            if (data.success && select) {
+                select.innerHTML = '<option value="">-- Select Course --</option>' + 
+                    data.courses.map(c => `<option value="${c._id}">${c.title}</option>`).join('');
+            }
+        } catch (e) { console.error('Failed to load courses for dropdown'); }
+    }
+
+    // Helper: Delete Test
+    async function deleteTest(id) {
+        if(!confirm('Are you sure? This will delete the test and its associated questions.')) return;
+        try {
+            await fetch(`/api/admin/tests/${id}`, { method: 'DELETE' });
+            loadTests(1);
+        } catch(e) { alert('Delete failed'); }
+    }
+
+    // Helper: Create Test (Simple version)
+    async function handleCreateTest(e) {
+        e.preventDefault();
+        const formData = {
+            title: document.getElementById('testTitle').value,
+            courseId: document.getElementById('testCourse').value,
+            duration: document.getElementById('testDuration').value,
+            unlockDate: document.getElementById('unlockDate').value || null,
+            isFree: document.getElementById('isFreeTest').checked
+        };
+
+        try {
+            const res = await fetch('/api/admin/tests', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            if(res.ok) {
+                alert('Test Created Successfully!');
+                loadTests(1);
+                e.target.reset();
+            } else {
+                alert('Failed to create test');
+            }
+        } catch(err) { console.error(err); }
+    }
+</script>
+
+<%- include('partials/admin-footer', { script: null }) %>

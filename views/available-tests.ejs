@@ -1,0 +1,394 @@
+<%- include('partials/header-professional', { title: 'Available Tests', script: '/js/test-pro.js' }) %>
+
+<style>
+/* ── AVAILABLE TESTS PAGE ── */
+.tests-page { padding: 2rem 0 4rem; }
+
+/* Hero */
+.tests-hero {
+  background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 60%, #0EA5E9 100%);
+  padding: 3rem 0 2rem; margin-bottom: 2.5rem; position: relative; overflow: hidden;
+}
+.tests-hero::after {
+  content: ''; position: absolute; right: -60px; top: -60px;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05), transparent);
+}
+.tests-hero h1 { font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: white; margin-bottom: 0.4rem; }
+.tests-hero p { color: rgba(255,255,255,0.75); font-size: 0.95rem; }
+.hero-stats { display: flex; gap: 2rem; margin-top: 1.5rem; }
+.hero-stat span { color: white; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; display: block; }
+.hero-stat small { color: rgba(255,255,255,0.7); font-size: 0.78rem; }
+
+/* Filters Bar */
+.tests-filters {
+  background: white; border-radius: 16px; padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm); margin-bottom: 1.75rem;
+  display: flex; flex-wrap: wrap; gap: 0.9rem; align-items: center;
+}
+.filter-search {
+  flex: 1; min-width: 200px; display: flex; align-items: center; gap: 0.6rem;
+  border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 0.55rem 0.9rem;
+  transition: border-color 0.2s;
+}
+.filter-search:focus-within { border-color: var(--brand-blue); box-shadow: 0 0 0 3px rgba(14,165,233,0.1); }
+.filter-search i { color: var(--gray-400); font-size: 0.9rem; }
+.filter-search input { border: none; outline: none; font-family: var(--font-body); font-size: 0.88rem; color: var(--gray-700); flex: 1; }
+
+.filter-chips { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+.filter-chip {
+  padding: 0.45rem 0.9rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+  border: 1.5px solid var(--gray-200); background: white; cursor: pointer;
+  color: var(--gray-600); transition: all 0.2s; white-space: nowrap;
+}
+.filter-chip:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+.filter-chip.active { background: var(--brand-blue); color: white; border-color: var(--brand-blue); }
+
+.filter-select {
+  padding: 0.55rem 0.9rem; border: 1.5px solid var(--gray-200); border-radius: 10px;
+  font-family: var(--font-body); font-size: 0.85rem; color: var(--gray-600); outline: none;
+  background: white; cursor: pointer; transition: border-color 0.2s;
+}
+.filter-select:focus { border-color: var(--brand-blue); }
+
+.filter-count { margin-left: auto; font-size: 0.82rem; color: var(--gray-400); white-space: nowrap; }
+
+/* Tests Grid */
+.tests-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+/* Test Card */
+.test-card {
+  background: white; border-radius: 16px; padding: 1.5rem;
+  box-shadow: var(--shadow-sm); border: 1px solid var(--gray-100);
+  transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.test-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.test-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--brand-blue), var(--brand-blue-d));
+}
+.test-card.easy::before { background: linear-gradient(90deg, #10b981, #059669); }
+.test-card.hard::before { background: linear-gradient(90deg, #ef4444, #dc2626); }
+
+/* Card Top */
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1rem; gap: 0.75rem; }
+.card-subject-badge {
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 0.3rem 0.7rem; border-radius: 20px;
+  background: rgba(14,165,233,0.1); color: var(--brand-blue);
+}
+
+/* Difficulty Badge */
+.difficulty-badge {
+  font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.7rem;
+  border-radius: 20px; display: flex; align-items: center; gap: 0.3rem;
+}
+.difficulty-badge.easy { background: #dcfce7; color: #15803d; }
+.difficulty-badge.medium { background: #fef9c3; color: #a16207; }
+.difficulty-badge.hard { background: #fee2e2; color: #b91c1c; }
+
+.test-title { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 0.75rem; line-height: 1.35; }
+
+/* Meta row */
+.test-meta { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.1rem; }
+.meta-chip {
+  display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem;
+  color: var(--gray-500); background: var(--gray-50); padding: 0.3rem 0.65rem;
+  border-radius: 8px; border: 1px solid var(--gray-100);
+}
+.meta-chip i { color: var(--brand-blue); font-size: 0.7rem; }
+
+/* Progress ring area */
+.card-progress { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; padding: 0.85rem; background: var(--gray-50); border-radius: 12px; }
+.progress-ring-wrap { position: relative; width: 52px; height: 52px; flex-shrink: 0; }
+.progress-ring { transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: var(--gray-200); stroke-width: 5; }
+.ring-fill { fill: none; stroke: var(--brand-blue); stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset 0.5s ease; }
+.ring-fill.good { stroke: #10b981; }
+.ring-pct { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; color: var(--gray-700); font-family: var(--font-heading); }
+.progress-text h4 { font-family: var(--font-heading); font-size: 0.82rem; font-weight: 700; color: var(--gray-700); margin-bottom: 0.15rem; }
+.progress-text p { font-size: 0.75rem; color: var(--gray-400); margin: 0; }
+.progress-not-attempted { font-size: 0.78rem; color: var(--gray-400); font-style: italic; }
+
+/* Card Footer */
+.card-actions { margin-top: auto; display: flex; gap: 0.6rem; }
+.btn-start {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.7rem; background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-d));
+  color: white; border: none; border-radius: 10px; font-family: var(--font-heading);
+  font-size: 0.88rem; font-weight: 700; cursor: pointer; text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-start:hover { transform: translateY(-1px); box-shadow: 0 5px 15px rgba(14,165,233,0.3); color: white; }
+.btn-retry {
+  padding: 0.7rem 0.9rem; background: white; color: var(--gray-600);
+  border: 1.5px solid var(--gray-200); border-radius: 10px; font-family: var(--font-heading);
+  font-size: 0.82rem; font-weight: 600; cursor: pointer; text-decoration: none;
+  transition: all 0.2s; display: flex; align-items: center; gap: 0.4rem;
+}
+.btn-retry:hover { border-color: var(--brand-blue); color: var(--brand-blue); background: rgba(14,165,233,0.05); }
+
+/* Free / Paid tag */
+.access-tag {
+  position: absolute; top: 1rem; right: 1rem; font-size: 0.7rem; font-weight: 700;
+  padding: 0.25rem 0.6rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.access-tag.free { background: #dcfce7; color: #15803d; }
+.access-tag.paid { background: #fef3c7; color: #92400e; }
+
+/* Empty State */
+.tests-empty { text-align: center; padding: 4rem 2rem; color: var(--gray-400); }
+.tests-empty i { font-size: 3rem; margin-bottom: 1rem; display: block; }
+.tests-empty h3 { font-family: var(--font-heading); color: var(--gray-600); margin-bottom: 0.5rem; }
+
+/* Loading skeleton */
+.skeleton-card { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow-sm); }
+.skel { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.skel-title { height: 20px; width: 80%; margin-bottom: 12px; }
+.skel-line { height: 12px; width: 60%; margin-bottom: 8px; }
+.skel-btn { height: 40px; width: 100%; margin-top: 16px; }
+
+@media (max-width: 768px) {
+  .tests-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.25rem; }
+  .tests-filters { flex-direction: column; align-items: stretch; }
+  .filter-count { margin-left: 0; }
+}
+</style>
+
+<main class="tests-page">
+
+  <!-- Hero -->
+  <div class="tests-hero">
+    <div class="container">
+      <% if (locals.activeCourse) { %>
+        <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,0.15);border-radius:50px;padding:.3rem .9rem;margin-bottom:.75rem;font-size:.78rem;font-weight:700;color:rgba(255,255,255,0.9);">
+          <a href="/available-tests" style="color:rgba(255,255,255,0.7);text-decoration:none;"><i class="fas fa-arrow-left"></i> All Tests</a>
+          <span style="opacity:.5;">›</span>
+          <span><%= activeCourse %></span>
+        </div>
+        <h1><i class="fas fa-book-open" style="margin-right:.5rem;opacity:.8"></i><%= activeCourse %></h1>
+        <p>Mock tests for this course — NTA pattern with detailed analysis.</p>
+      <% } else { %>
+        <h1><i class="fas fa-tasks" style="margin-right:.5rem;opacity:.8"></i>Available Mock Tests</h1>
+        <p>NTA-Pattern tests with detailed analysis. Attempt, review, and improve.</p>
+      <% } %>
+      <div class="hero-stats">
+        <div class="hero-stat"><span id="total-tests-count"><%= locals.tests ? tests.length : '--' %></span><small><%= locals.activeCourse ? 'Course Tests' : 'Total Tests' %></small></div>
+        <div class="hero-stat"><span id="free-tests-count">--</span><small>Free Tests</small></div>
+        <div class="hero-stat"><span id="attempted-count">--</span><small>You've Attempted</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Filters -->
+    <div class="tests-filters" id="testsFilters">
+      <div class="filter-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchTests" placeholder="Search tests...">
+      </div>
+      <div class="filter-chips">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="free">Free</button>
+        <button class="filter-chip" data-filter="easy">Easy</button>
+        <button class="filter-chip" data-filter="medium">Medium</button>
+        <button class="filter-chip" data-filter="hard">Hard</button>
+        <button class="filter-chip" data-filter="attempted">Attempted</button>
+      </div>
+      <select class="filter-select" id="sortTests">
+        <option value="newest">Newest First</option>
+        <option value="title">A → Z</option>
+        <option value="questions-high">Most Questions</option>
+        <option value="duration-low">Shortest First</option>
+      </select>
+      <span class="filter-count" id="resultsCount"></span>
+    </div>
+
+    <!-- Tests Grid -->
+    <div class="tests-grid" id="testsGrid">
+      <% if (locals.tests && tests.length > 0) { %>
+        <% tests.forEach(test => { %>
+          <%
+            const diff = (test.difficulty || 'medium').toLowerCase();
+            const diffLabel = diff === 'easy' ? '✅ Easy' : diff === 'hard' ? '🔴 Hard' : '⚡ Medium';
+            const isFree = !test.isPaid;
+            const hasAttempt = locals.userResults && userResults.some(r => r.test && r.test.toString() === test._id.toString());
+            let bestPct = 0;
+            if (hasAttempt && locals.userResults) {
+              const attempts = userResults.filter(r => r.test && r.test.toString() === test._id.toString());
+              bestPct = Math.max(...attempts.map(a => a.percentage || 0));
+            }
+            const circumference = 2 * Math.PI * 20;
+            const dashOffset = circumference - (bestPct / 100) * circumference;
+          %>
+          <div class="test-card <%= diff %>"
+               data-title="<%= test.title.toLowerCase() %>"
+               data-difficulty="<%= diff %>"
+               data-access="<%= isFree ? 'free' : 'paid' %>"
+               data-attempted="<%= hasAttempt ? 'yes' : 'no' %>"
+               data-questions="<%= test.questions ? test.questions.length : 0 %>"
+               data-duration="<%= test.duration || 180 %>"
+               data-course="<%= test.course ? test.course._id : '' %>">
+
+            <% if (hasAttempt) { %>
+              <span class="access-tag free" style="background:#dbeafe;color:#1d4ed8;">Attempted</span>
+            <% } else { %>
+              <span class="access-tag <%= isFree ? 'free' : 'paid' %>"><%= isFree ? 'FREE' : 'PAID' %></span>
+            <% } %>
+
+            <div class="card-top">
+              <span class="card-subject-badge"><%= test.course ? test.course.title : 'General' %></span>
+              <span class="difficulty-badge <%= diff %>"><%= diffLabel %></span>
+            </div>
+
+            <h3 class="test-title"><%= test.title %></h3>
+
+            <div class="test-meta">
+              <span class="meta-chip"><i class="fas fa-question-circle"></i> <%= test.questions ? test.questions.length : 0 %> Questions</span>
+              <span class="meta-chip"><i class="fas fa-clock"></i> <%= test.duration || 180 %> mins</span>
+              <span class="meta-chip"><i class="fas fa-star"></i> 2 marks each</span>
+              <% if (test.subject) { %><span class="meta-chip"><i class="fas fa-book"></i> <%= test.subject %></span><% } %>
+            </div>
+
+            <% if (hasAttempt) { %>
+            <div class="card-progress">
+              <div class="progress-ring-wrap">
+                <svg class="progress-ring" width="52" height="52" viewBox="0 0 52 52">
+                  <circle class="ring-bg" cx="26" cy="26" r="20"/>
+                  <circle class="ring-fill <%= bestPct >= 60 ? 'good' : '' %>" cx="26" cy="26" r="20"
+                    stroke-dasharray="<%= circumference %>"
+                    stroke-dashoffset="<%= dashOffset %>"/>
+                </svg>
+                <div class="ring-pct"><%= Math.round(bestPct) %>%</div>
+              </div>
+              <div class="progress-text">
+                <h4>Best Score: <%= Math.round(bestPct) %>%</h4>
+                <p>Tap "Retry" to improve your score</p>
+              </div>
+            </div>
+            <% } else { %>
+            <div class="card-progress" style="justify-content:center;text-align:center;">
+              <p class="progress-not-attempted"><i class="fas fa-clock" style="margin-right:.35rem;"></i>Not attempted yet — be the first to try!</p>
+            </div>
+            <% } %>
+
+            <div class="card-actions">
+              <% if (isFree || (locals.user && locals.user.enrolledCourses && test.course && locals.user.enrolledCourses.includes(test.course._id))) { %>
+                <a href="/take-test?id=<%= test._id %>" class="btn-start">
+                  <i class="fas fa-<%= hasAttempt ? 'redo' : 'play' %>"></i>
+                  <%= hasAttempt ? 'Retry Test' : 'Start Test' %>
+                </a>
+                <% if (hasAttempt) { %>
+                  <a href="/my-results" class="btn-retry"><i class="fas fa-chart-bar"></i> Results</a>
+                <% } %>
+              <% } else { %>
+                <a href="/courses" class="btn-start" style="background:linear-gradient(135deg,#f59e0b,#d97706);">
+                  <i class="fas fa-lock"></i> Enroll to Unlock
+                </a>
+              <% } %>
+            </div>
+
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="tests-empty" style="grid-column:1/-1;">
+          <i class="fas fa-clipboard-list"></i>
+          <h3>No tests available yet</h3>
+          <p>Check back soon — new tests are added regularly.</p>
+        </div>
+      <% } %>
+    </div>
+
+  </div>
+</main>
+
+<script>
+// ── FILTER & SEARCH ──
+(function(){
+  const cards = Array.from(document.querySelectorAll('.test-card'));
+  const countEl = document.getElementById('resultsCount');
+
+  // Read course filter from URL (set server-side, but also guard client-side)
+  const urlParams = new URLSearchParams(window.location.search);
+  const courseIdFilter = urlParams.get('course') || '';
+
+  let activeFilter = 'all';
+  let searchQuery = '';
+  let sortBy = 'newest';
+
+  // Count stats (only among the cards visible for this course)
+  const visibleByDefault = courseIdFilter
+    ? cards.filter(c => c.dataset.course === courseIdFilter)
+    : cards;
+  const free = visibleByDefault.filter(c => c.dataset.access === 'free').length;
+  const attempted = visibleByDefault.filter(c => c.dataset.attempted === 'yes').length;
+  const freeEl = document.getElementById('free-tests-count');
+  const attEl  = document.getElementById('attempted-count');
+  const totalEl = document.getElementById('total-tests-count');
+  if (freeEl)  freeEl.textContent  = free;
+  if (attEl)   attEl.textContent   = attempted;
+  if (totalEl) totalEl.textContent = visibleByDefault.length;
+
+  function applyFilters() {
+    let visible = cards.filter(card => {
+      // Course filter — always applied if URL has ?course=
+      if (courseIdFilter && card.dataset.course !== courseIdFilter) return false;
+
+      const matchFilter =
+        activeFilter === 'all'       ? true :
+        activeFilter === 'free'      ? card.dataset.access === 'free' :
+        activeFilter === 'attempted' ? card.dataset.attempted === 'yes' :
+        card.dataset.difficulty === activeFilter;
+
+      const matchSearch = !searchQuery || card.dataset.title.includes(searchQuery.toLowerCase());
+      return matchFilter && matchSearch;
+    });
+
+    // Sort
+    visible.sort((a, b) => {
+      if (sortBy === 'title')          return a.dataset.title.localeCompare(b.dataset.title);
+      if (sortBy === 'questions-high') return parseInt(b.dataset.questions) - parseInt(a.dataset.questions);
+      if (sortBy === 'duration-low')   return parseInt(a.dataset.duration)  - parseInt(b.dataset.duration);
+      return 0;
+    });
+
+    cards.forEach(c => c.style.display = 'none');
+    const grid = document.getElementById('testsGrid');
+    visible.forEach(c => { c.style.display = 'flex'; grid.appendChild(c); });
+    if (countEl) countEl.textContent = `${visible.length} test${visible.length !== 1 ? 's' : ''} shown`;
+
+    const empty = document.querySelector('.tests-empty');
+    if (empty) empty.style.display = visible.length === 0 ? 'block' : 'none';
+  }
+
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  document.getElementById('searchTests').addEventListener('input', e => {
+    searchQuery = e.target.value;
+    applyFilters();
+  });
+
+  document.getElementById('sortTests').addEventListener('change', e => {
+    sortBy = e.target.value;
+    applyFilters();
+  });
+
+  applyFilters();
+})();
+</script>
+
+<%- include('partials/footer-professional') %>

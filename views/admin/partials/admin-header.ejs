@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title != 'undefined' ? title : 'Admin Panel' %> | Admin Panel</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/admin/admin.css">
+
+    <style>
+        /* 1. Layout Reset */
+        body {
+            margin: 0;
+            padding-top: 60px; /* Space for header */
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            overflow-x: hidden; /* Prevent scroll when menu opens */
+        }
+
+        /* 2. Top Bar (Fixed) */
+        .admin-top-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 60px;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex; align-items: center;
+            padding: 0 20px;
+            z-index: 2000; /* Highest priority */
+        }
+        .menu-toggle-btn {
+            background: none;
+            border: none; font-size: 1.5rem; 
+            cursor: pointer; margin-right: 15px; color: #333;
+        }
+
+        /* 3. Sidebar (Hidden Drawer) */
+        .sidebar {
+            position: fixed;
+            top: 60px; bottom: 0;
+            width: 260px;
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            z-index: 1999;
+            overflow-y: auto;
+            /* KEY: This hides the menu off-screen */
+            left: -280px !important;
+            transition: left 0.3s ease-in-out;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+        }
+
+        /* 4. Open State (Slide In) */
+        body.sidebar-open .sidebar {
+            left: 0 !important;
+        }
+
+        /* 5. Menu Link Styles */
+        .sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center; gap: 10px;
+            padding: 15px 20px;
+            color: #64748b; text-decoration: none;
+            font-weight: 500;
+            border-right: 3px solid transparent;
+        }
+        .sidebar-nav li a:hover { background: #f8fafc; color: #0284c7; }
+        
+        /* Active Link Color */
+        .sidebar-nav li.active a {
+            background: #e0f2fe;
+            color: #0284c7;
+            border-right-color: #0284c7;
+        }
+
+        /* 6. Dark Overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5); z-index: 1998;
+        }
+        body.sidebar-open .sidebar-overlay { display: block; }
+
+        /* 7. Main Content Reset */
+        .main-content {
+            width: 100%;
+            margin: 0 auto; padding: 20px; max-width: 1400px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="admin-top-bar">
+        <button id="sidebarToggleBtn" class="menu-toggle-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <h3 style="margin:0; color: #0284c7; display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-graduation-cap"></i> Admin Panel
+        </h3>
+        
+        <a href="#" id="admin-logout" style="margin-left: auto; color: #dc2626; text-decoration: none; font-weight: 600;">Logout</a>
+    </header>
+
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="<%= typeof page !== 'undefined' && page === 'dashboard' ? 'active' : '' %>">
+                    <a href="/admin/dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+                </li>
+                <li class="<%= typeof page !== 'undefined' && page === 'students' ? 'active' : '' %>">
+                    <a href="/admin/students"><i class="fas fa-users"></i> <span>Students</span></a>
+                </li>
+                <li class="<%= typeof page !== 'undefined' && page === 'courses' ? 'active' : '' %>">
+                    <a href="/admin/courses"><i class="fas fa-book-open"></i> <span>Courses</span></a>
+                </li>
+                <li class="<%= typeof page !== 'undefined' && page === 'tests' ? 'active' : '' %>">
+                    <a href="/admin/tests"><i class="fas fa-file-alt"></i> <span>Tests</span></a>
+                </li>
+                
+                <li class="<%= typeof page !== 'undefined' && page === 'pyq' ? 'active' : '' %>">
+                    <a href="/admin/pyq-manager"><i class="fas fa-database"></i> <span>PYQ Data Bank</span></a>
+                </li>
+                <li class="<%= page === 'questions' ? 'active' : '' %>">
+    <a href="/admin/questions"><i class="fas fa-list-ul"></i> <span>All Questions</span></a>
+</li>
+
+                <li class="<%= typeof page !== 'undefined' && page === 'knowledge' ? 'active' : '' %>">
+                    <a href="/admin/knowledge-base"><i class="fas fa-lightbulb"></i> <span>Knowledge Base</span></a>
+                </li>
+                <li class="<%= typeof page !== 'undefined' && page === 'resources' ? 'active' : '' %>">
+                    <a href="/admin/resources"><i class="fas fa-file-pdf"></i> <span>Resources</span></a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
