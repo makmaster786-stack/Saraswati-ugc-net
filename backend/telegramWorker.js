@@ -89,12 +89,12 @@ function initTelegramQuiz() {
             // Fetch 5 Paper 2 and 3 Paper 1 questions, excluding DI/Comprehension
             const paper2Questions = await Question.aggregate([
                 { $match: { paper: 'Paper 2', unit: { $nin: ["Data Interpretation", "Comprehension", "Reading Comprehension", "DI"] } } },
-                { $sample: { size: 5 } }
+                { $sample: { size: 8 } }
             ]);
 
             const paper1Questions = await Question.aggregate([
                 { $match: { paper: 'Paper 1', unit: { $nin: ["Data Interpretation", "Comprehension", "Reading Comprehension", "DI"] } } },
-                { $sample: { size: 3 } }
+                { $sample: { size: 5 } }
             ]);
 
             const allQuestions = [...paper2Questions, ...paper1Questions];
