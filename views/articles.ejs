@@ -1,0 +1,234 @@
+<%/* FILE: views/articles.ejs — Articles & Blog Page */%>
+<%- include('partials/header-professional', {
+    title: 'Articles & Study Notes - Saraswati UGC NET'
+}) %>
+
+<main class="articles-page" style="padding-top:0;">
+
+    <!-- ── HERO ── -->
+    <section class="articles-hero">
+        <div class="container">
+            <div style="position:relative;z-index:1;">
+                <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.12);border-radius:50px;padding:0.35rem 0.9rem;margin-bottom:1.25rem;font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:0.04em;">
+                    <i class="fas fa-pen-nib" style="color:#fbbf24;"></i> Expert-Written Study Content
+                </div>
+                <h1>UGC NET Insights & Articles</h1>
+                <p>In-depth study notes, political science theories, exam strategies, and latest notifications — all in one place.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── STICKY SEARCH ── -->
+    <section class="articles-search-section">
+        <div class="container">
+            <div class="articles-search-wrapper">
+                <i class="fas fa-search articles-search-icon"></i>
+                <input
+                    type="text"
+                    id="article-search"
+                    class="articles-search-input"
+                    placeholder="Search articles, topics, keywords..."
+                    autocomplete="off"
+                    aria-label="Search articles">
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ARTICLES GRID ── -->
+    <section class="articles-grid-section">
+        <div class="container">
+
+            <!-- Results Header -->
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:0.75rem;">
+                <div>
+                    <h2 style="font-family:var(--font-heading);font-size:1.3rem;font-weight:700;margin-bottom:0.15rem;color:var(--gray-900);">
+                        Latest Articles
+                        <% if (locals.articles) { %>
+                        <span style="font-size:0.88rem;font-weight:500;color:var(--gray-500);margin-left:0.4rem;">(<%= articles.length %> articles)</span>
+                        <% } %>
+                    </h2>
+                    <p style="font-size:0.85rem;color:var(--gray-500);margin:0;">By Dr. Rajesh Mishra & Saraswati UGC NET Team</p>
+                </div>
+                <!-- Tag Filters -->
+                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;" id="tag-filters">
+                    <button class="tag-btn active" data-tag="all" onclick="filterByTag(this, 'all')">All</button>
+                    <button class="tag-btn" data-tag="Political Science" onclick="filterByTag(this, 'Political Science')">Political Science</button>
+                    <button class="tag-btn" data-tag="Paper 1" onclick="filterByTag(this, 'Paper 1')">Paper 1</button>
+                    <button class="tag-btn" data-tag="Strategy" onclick="filterByTag(this, 'Strategy')">Exam Strategy</button>
+                    <button class="tag-btn" data-tag="News" onclick="filterByTag(this, 'News')">Latest News</button>
+                </div>
+            </div>
+
+            <!-- Grid -->
+            <div class="articles-grid" id="articles-grid">
+
+                <% if (locals.articles && articles.length > 0) { %>
+                    <% articles.forEach((article, index) => {
+                        const firstTag = (article.tags && article.tags.length > 0) ? article.tags[0] : 'UGC NET';
+                        const pubDate = article.datePublished ? new Date(article.datePublished) : new Date();
+                        const dateStr = pubDate.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+                    %>
+                    <article class="article-card"
+                             data-tags="<%= (article.tags || []).join(',') %>"
+                             data-title="<%= article.title.toLowerCase() %>"
+                             data-keywords="<%= (article.keywords || '').toLowerCase() %>">
+
+                        <div class="article-card-img">
+                            <% if (article.featuredImage) { %>
+                                <img src="<%= article.featuredImage %>"
+                                     alt="<%= article.title %>"
+                                     loading="<%= index < 6 ? 'eager' : 'lazy' %>"
+                                     onerror="this.parentElement.innerHTML='<div class=\'article-card-img-placeholder\'><i class=\'fas fa-newspaper\'></i></div>'">
+                            <% } else { %>
+                                <div class="article-card-img-placeholder">
+                                    <i class="fas fa-newspaper"></i>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <div class="article-card-body">
+                            <div class="article-tag"><%= firstTag %></div>
+
+                            <a href="/article/<%= article.slug %>" class="article-title">
+                                <%= article.title %>
+                            </a>
+
+                            <p class="article-excerpt">
+                                <%= article.metaDescription || '' %>
+                            </p>
+
+                            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;">
+                                <div class="article-meta">
+                                    <span><i class="far fa-calendar-alt"></i> <%= dateStr %></span>
+                                </div>
+                                <a href="/article/<%= article.slug %>" class="article-read-more">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </article>
+                    <% }); %>
+                <% } else { %>
+                    <div class="articles-empty">
+                        <i class="far fa-newspaper"></i>
+                        <h3>No articles published yet</h3>
+                        <p>Check back soon — new articles are published regularly.</p>
+                    </div>
+                <% } %>
+
+            </div>
+
+            <!-- No Results (shown by JS) -->
+            <div id="no-results" style="display:none;" class="articles-empty">
+                <i class="fas fa-search"></i>
+                <h3>No articles match your search</h3>
+                <p>Try a different keyword or browse all articles.</p>
+                <button onclick="clearSearch()" class="btn btn-primary btn-sm" style="margin-top:0.75rem;">
+                    <i class="fas fa-times"></i> Clear Search
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── CTA STRIP ── -->
+    <section style="background:linear-gradient(135deg,var(--brand-blue-d),var(--brand-blue));padding:3.5rem 0;color:white;text-align:center;">
+        <div class="container">
+            <h2 style="font-family:var(--font-heading);font-size:1.6rem;font-weight:800;color:white;margin-bottom:0.75rem;">
+                Ready to start practising?
+            </h2>
+            <p style="color:rgba(255,255,255,0.85);margin-bottom:1.75rem;max-width:480px;margin-left:auto;margin-right:auto;">
+                Take a UGC NET mock test today and see how well-prepared you are.
+            </p>
+            <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
+                <a href="/available-tests" class="btn btn-primary btn-lg" style="background:var(--brand-gold);color:#1a1a2e;border:none;font-weight:700;">
+                    <i class="fas fa-play-circle"></i> Take a Free Mock Test
+                </a>
+                <a href="/courses" class="btn btn-outline btn-lg" style="border-color:rgba(255,255,255,0.6);color:white;">
+                    <i class="fas fa-book-open"></i> View Courses
+                </a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<style>
+/* Tag filter buttons */
+.tag-btn {
+    background: white;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 20px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-body);
+}
+.tag-btn:hover { border-color: var(--brand-blue); color: var(--brand-blue); }
+.tag-btn.active { background: var(--brand-blue); border-color: var(--brand-blue); color: white; }
+</style>
+
+<script>
+(function() {
+    const searchInput = document.getElementById('article-search');
+    const grid = document.getElementById('articles-grid');
+    const noResults = document.getElementById('no-results');
+    let currentTag = 'all';
+
+    function applyFilters() {
+        const term = (searchInput?.value || '').trim().toLowerCase();
+        const cards = grid.querySelectorAll('.article-card');
+        let visible = 0;
+
+        cards.forEach(card => {
+            const title    = card.dataset.title || '';
+            const keywords = card.dataset.keywords || '';
+            const tags     = card.dataset.tags || '';
+
+            const matchSearch = !term || title.includes(term) || keywords.includes(term);
+            const matchTag    = currentTag === 'all' || tags.toLowerCase().includes(currentTag.toLowerCase());
+
+            if (matchSearch && matchTag) {
+                card.style.display = '';
+                visible++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    // Debounce search
+    let debounce;
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounce);
+            debounce = setTimeout(applyFilters, 280);
+        });
+    }
+
+    // Global tag filter function
+    window.filterByTag = function(btn, tag) {
+        currentTag = tag;
+        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilters();
+    };
+
+    window.clearSearch = function() {
+        if (searchInput) searchInput.value = '';
+        currentTag = 'all';
+        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        const allBtn = document.querySelector('[data-tag="all"]');
+        if (allBtn) allBtn.classList.add('active');
+        applyFilters();
+    };
+})();
+</script>
+
+<%- include('partials/footer-professional') %>

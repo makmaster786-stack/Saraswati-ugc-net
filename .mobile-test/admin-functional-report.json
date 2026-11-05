@@ -1,0 +1,38 @@
+[
+  {
+    "width": 320,
+    "tableScroll": true,
+    "detailsLoaded": true,
+    "dialogFits": true,
+    "dialogClosed": true,
+    "fileSelected": true,
+    "fileCleared": true,
+    "singleAdminScript": true,
+    "drawerClosed": true,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "tableScroll": true,
+    "detailsLoaded": true,
+    "dialogFits": true,
+    "dialogClosed": true,
+    "fileSelected": true,
+    "fileCleared": true,
+    "singleAdminScript": true,
+    "drawerClosed": true,
+    "errors": []
+  },
+  {
+    "width": 844,
+    "tableScroll": true,
+    "detailsLoaded": true,
+    "dialogFits": true,
+    "dialogClosed": true,
+    "fileSelected": true,
+    "fileCleared": true,
+    "singleAdminScript": true,
+    "drawerClosed": true,
+    "errors": []
+  }
+]

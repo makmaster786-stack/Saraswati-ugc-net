@@ -1,0 +1,18 @@
+<%- include('partials/admin-header', { title: 'Payments & Class Access', page: 'payments' }) %>
+<main class="main-content"><header class="main-header"><h1>Payments & Class Access</h1></header>
+<section class="content-area"><p>Arrange classes in your external application, then mark access as granted here. This records your action; it does not grant access in the other application.</p>
+<div class="table-responsive"><table class="admin-table"><thead><tr><th>Student</th><th>Course</th><th>Payment</th><th>External class access</th></tr></thead><tbody>
+<% payments.forEach(p => { %><tr><td><%= p.student?.fullname || 'Deleted account' %><br><%= p.student?.email || '' %><br><%= p.student?.phone || '' %></td><td><%= p.course?.title || 'Deleted course' %></td><td>₹<%= p.amount %><br><%= p.razorpay_payment_id %><br><%= p.status %></td><td><%= p.accessStatus || 'pending' %><% if (p.status === 'success') { %><button type="button" class="btn btn-secondary" data-id="<%= p._id %>" data-status="<%= p.accessStatus === 'granted' ? 'pending' : 'granted' %>"><%= p.accessStatus === 'granted' ? 'Mark pending' : 'Mark granted' %></button><% } %></td></tr><% }); %>
+</tbody></table></div><% if (!payments.length) { %><p>No payments on this page.</p><% } %>
+<nav><% if (currentPage > 1) { %><a href="?page=<%= currentPage - 1 %>">Previous</a><% } %> · Page <%= currentPage %> <% if (payments.length === 30) { %><a href="?page=<%= currentPage + 1 %>">Next</a><% } %></nav><p id="access-message" role="status"></p></section></main>
+<script>
+document.querySelectorAll('button[data-id]').forEach(button => button.addEventListener('click', async () => {
+  button.disabled = true;
+  try {
+    const response = await fetch('/api/admin/payments/' + button.dataset.id + '/access', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({status:button.dataset.status}) });
+    if (!response.ok) throw new Error('Could not update access. Please retry.');
+    location.reload();
+  } catch (error) { document.getElementById('access-message').textContent = error.message; button.disabled = false; }
+}));
+</script>
+<%- include('partials/admin-footer', { script: null }) %>

@@ -1,0 +1,1854 @@
+[
+  {
+    "id": "U01-Q022",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q024",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q025",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q026",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q027",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q028",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q029",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q030",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q031",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q032",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q033",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q034",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q038",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q041",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q042",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U01-Q043",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U01-Q044",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U01-Q046",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U01-Q047",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U01-Q049",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U01-Q050",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U01-Q051",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q052",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q053",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q054",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q055",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q056",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q057",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q058",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q059",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q060",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q061",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q062",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q063",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q064",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q065",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q066",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q067",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q068",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q069",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q070",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q071",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U01-Q072",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q002",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q007",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q020",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q021",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q022",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q023",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q024",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q025",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q026",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q027",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q028",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q029",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q031",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q032",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q034",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q036",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U02-Q041",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U02-Q042",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U02-Q046",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U02-Q048",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U02-Q051",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q052",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q052",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q053",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q054",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q055",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q056",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q057",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q058",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U02-Q103",
+    "reason": "Uncertain answer in book explanation"
+  },
+  {
+    "id": "U03-Q017",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q018",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q019",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q020",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q021",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q022",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q023",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q024",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q025",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q026",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q027",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q028",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q029",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q030",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q031",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q032",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q033",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q034",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q035",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q042",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q044",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q048",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U03-Q052",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q053",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q054",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q055",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q056",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q057",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q058",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q059",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q060",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q061",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q062",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q063",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q064",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q065",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q066",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q067",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q068",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q069",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q070",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q071",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q072",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q073",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U03-Q087",
+    "reason": "Uncertain answer in book explanation"
+  },
+  {
+    "id": "U03-Q092",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U04-Q012",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q013",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q014",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q015",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q016",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q018",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q019",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q020",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q021",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q022",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q023",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q024",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q031",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q034",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q035",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q036",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q037",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q038",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q039",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q040",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q041",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q042",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q043",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q044",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q045",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q046",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q047",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q048",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q049",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q050",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q051",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q052",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q053",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q054",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U04-Q055",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q005",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q010",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q046",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U05-Q065",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q066",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q067",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q068",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q069",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q070",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q071",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q072",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q073",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q074",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q075",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q076",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q077",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q078",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q079",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q080",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q081",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q082",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q083",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q084",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q085",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q086",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q087",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q088",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q089",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q090",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q091",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q092",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q093",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q094",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q095",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q096",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q097",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q098",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q098",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q100",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q101",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q102",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q103",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q104",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q105",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q106",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q107",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q108",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q109",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q111",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U05-Q112",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U05-Q113",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q117",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q118",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U05-Q119",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q122",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U05-Q123",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U05-Q124",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U05-Q126",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U05-Q128",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U05-Q129",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U05-Q135",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q136",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q137",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q138",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q139",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q140",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q141",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q142",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q143",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q144",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q145",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q146",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q147",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q148",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q149",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q150",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q152",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q153",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q154",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q155",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q156",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U05-Q157",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q016",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q018",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q019",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q020",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q021",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q022",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q027",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q030",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q038",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q039",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q040",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q041",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q042",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q043",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q044",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q045",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q046",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q047",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q048",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q049",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q050",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q051",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U06-Q076",
+    "reason": "Uncertain answer in book explanation"
+  },
+  {
+    "id": "U07-Q047",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q064",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q065",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q066",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q067",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q068",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q069",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q070",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q071",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q072",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q073",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q074",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q075",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q076",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q077",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q078",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q079",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q080",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q081",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q082",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q083",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q084",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q085",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q086",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q087",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q088",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q089",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q090",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q091",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q092",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q093",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q094",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q095",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q096",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q097",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q098",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q099",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q101",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U07-Q102",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U07-Q103",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U07-Q105",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U07-Q106",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U07-Q108",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q114",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U07-Q116",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U07-Q119",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U07-Q132",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q133",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q134",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q135",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q136",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q137",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q138",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q139",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q140",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q141",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q142",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q143",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q143",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q145",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q146",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q147",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q148",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q149",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U07-Q161",
+    "reason": "Uncertain answer in book explanation"
+  },
+  {
+    "id": "U07-Q169",
+    "reason": "Uncertain answer in book explanation"
+  },
+  {
+    "id": "U08-Q007",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q012",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q016",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U08-Q024",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q025",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q026",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q027",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q028",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q029",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q030",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q031",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q032",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q033",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q035",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U08-Q037",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q020",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U08-Q024",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U08-Q029",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q030",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q031",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q032",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q033",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q034",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q035",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q036",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q037",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q038",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q039",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q040",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q041",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q042",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q043",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q044",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q069",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q070",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q071",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U08-Q072",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q016",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q018",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U09-Q020",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q021",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q022",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q023",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q024",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q025",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q026",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q027",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q028",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q029",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q030",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q031",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q032",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q033",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q034",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q035",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q036",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U09-Q038",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U09-Q039",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U09-Q040",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q043",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q047",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U09-Q049",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U09-Q051",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U09-Q053",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q054",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q055",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q056",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q057",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q058",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q059",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q060",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q061",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q062",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q063",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q064",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q065",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q066",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q067",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q068",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q069",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q070",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q071",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q072",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U09-Q073",
+    "reason": "Uncertain answer in book explanation"
+  },
+  {
+    "id": "U09-Q113",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q011",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q014",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q015",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q016",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q017",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q018",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q019",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q020",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q021",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q022",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q023",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q036",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q037",
+    "reason": "Options need visual transcription"
+  },
+  {
+    "id": "U10-Q039",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q040",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q041",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q042",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q043",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q044",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q045",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q046",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q047",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q048",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q049",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q050",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q051",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q052",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q053",
+    "reason": "Missing or irregular answer/explanation"
+  },
+  {
+    "id": "U10-Q095",
+    "reason": "Uncertain answer in book explanation"
+  },
+  {
+    "id": "U01-Q090",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U02-Q045",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U04-Q076",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U04-Q077",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U05-Q014",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U06-Q067",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U06-Q068",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U06-Q069",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U06-Q070",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U06-Q071",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U06-Q072",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U06-Q073",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U06-Q074",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U06-Q075",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U07-Q167",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U07-Q168",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U07-Q170",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U07-Q171",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U07-Q172",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U08-Q067",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U09-Q101",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U10-Q077",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U10-Q078",
+    "reason": "Repeated English stem"
+  },
+  {
+    "id": "U10-Q079",
+    "reason": "Repeated English stem"
+  }
+]

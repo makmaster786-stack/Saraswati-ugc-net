@@ -1,0 +1,363 @@
+<%- include('partials/header-professional', { 
+    title: 'Study Resources - Saraswati UGC NET',
+    user: user
+}) %>
+
+<main class="resources-page">
+    <section class="page-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Study Resources</h1>
+                <p>Access comprehensive study materials, PDFs, and resources for UGC NET preparation</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="resources-section">
+        <div class="container">
+            <div class="resources-filters">
+                <div class="filter-group">
+                    <label for="resource-category">Category:</label>
+                    <select id="resource-category" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="pdf">PDF Notes</option>
+                        <option value="video">Video Lectures</option>
+                        <option value="practice">Practice Questions</option>
+                        <option value="syllabus">Syllabus</option>
+                        <option value="previous">Previous Papers</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="resource-subject">Subject:</label>
+                    <select id="resource-subject" class="filter-select">
+                        <option value="all">All Subjects</option>
+                        <option value="political-science">Political Science</option>
+                        <option value="history">History</option>
+                        <option value="economics">Economics</option>
+                        <option value="commerce">Commerce</option>
+                        <option value="management">Management</option>
+                        <option value="computer-science">Computer Science</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="resource-sort">Sort by:</label>
+                    <select id="resource-sort" class="filter-select">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="name">Name A-Z</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
+                
+                <div class="search-group">
+                    <input type="text" id="resource-search" placeholder="Search resources..." class="search-input">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+
+            <div class="resources-grid" id="resources-container">
+                <!-- Resources will be loaded here -->
+            </div>
+
+            <div id="resources-loading" class="loading-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading resources...</p>
+            </div>
+
+            <div id="resources-empty" class="empty-state hidden">
+                <i class="fas fa-folder-open"></i>
+                <h3>No Resources Found</h3>
+                <p>Try adjusting your filters or search terms</p>
+            </div>
+
+            <div class="resources-pagination" id="pagination">
+                <!-- Pagination will be loaded here -->
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+class ResourcesManager {
+    constructor() {
+        this.resources = [];
+        this.filteredResources = [];
+        this.filters = {
+            category: 'all',
+            subject: 'all',
+            sort: 'newest',
+            search: '',
+            page: 1,
+            limit: 12
+        };
+        
+        this.init();
+    }
+
+    async init() {
+        await this.loadResources();
+        this.setupEventListeners();
+        this.renderResources();
+    }
+
+    async loadResources() {
+        try {
+            this.showLoading();
+            
+            const queryParams = new URLSearchParams({
+                category: this.filters.category,
+                subject: this.filters.subject,
+                sort: this.filters.sort,
+                search: this.filters.search,
+                page: this.filters.page,
+                limit: this.filters.limit
+            });
+
+            const response = await fetch(`/api/resources?${queryParams}`);
+            const data = await response.json();
+            
+            if (data.success) {
+                this.resources = data.resources;
+                this.totalPages = data.totalPages;
+                this.applyFilters();
+            } else {
+                throw new Error('Failed to load resources');
+            }
+        } catch (error) {
+            console.error('Resources loading error:', error);
+            this.showError('Failed to load resources. Please try again.');
+        } finally {
+            this.hideLoading();
+        }
+    }
+
+    setupEventListeners() {
+        // Category filter
+        document.getElementById('resource-category').addEventListener('change', (e) => {
+            this.filters.category = e.target.value;
+            this.filters.page = 1;
+            this.loadResources();
+        });
+
+        // Subject filter
+        document.getElementById('resource-subject').addEventListener('change', (e) => {
+            this.filters.subject = e.target.value;
+            this.filters.page = 1;
+            this.loadResources();
+        });
+
+        // Sort filter
+        document.getElementById('resource-sort').addEventListener('change', (e) => {
+            this.filters.sort = e.target.value;
+            this.loadResources();
+        });
+
+        // Search functionality
+        document.getElementById('resource-search').addEventListener('input', 
+            ProfessionalUtils.debounce((e) => {
+                this.filters.search = e.target.value;
+                this.filters.page = 1;
+                this.loadResources();
+            }, 500)
+        );
+    }
+
+    applyFilters() {
+        let filtered = [...this.resources];
+        this.filteredResources = filtered;
+        this.renderResources();
+        this.renderPagination();
+    }
+
+    renderResources() {
+        const container = document.getElementById('resources-container');
+        const emptyState = document.getElementById('resources-empty');
+        const loadingState = document.getElementById('resources-loading');
+
+        if (!container) return;
+
+        loadingState.classList.add('hidden');
+
+        if (this.filteredResources.length === 0) {
+            container.innerHTML = '';
+            emptyState.classList.remove('hidden');
+            return;
+        }
+
+        emptyState.classList.add('hidden');
+        
+        container.innerHTML = this.filteredResources.map(resource => this.createResourceCard(resource)).join('');
+    }
+
+    createResourceCard(resource) {
+        const fileSize = resource.fileSize ? this.formatFileSize(resource.fileSize) : 'N/A';
+        const isFree = resource.isFree || resource.price === 0;
+        const canDownload = isFree || window.AppConfig.USER?.hasAccess;
+
+        return `
+            <div class="resource-card" data-resource-id="${resource._id}">
+                <div class="resource-header">
+                    <div class="resource-type ${resource.type}">
+                        <i class="${this.getResourceIcon(resource.type)}"></i>
+                        <span>${resource.type.toUpperCase()}</span>
+                    </div>
+                    ${isFree ? '<span class="resource-badge free">Free</span>' : ''}
+                </div>
+
+                <div class="resource-body">
+                    <h3 class="resource-title">${ProfessionalUtils.sanitizeHTML(resource.title)}</h3>
+                    <p class="resource-description">${resource.description || 'Comprehensive study material for UGC NET preparation'}</p>
+                    
+                    <div class="resource-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-book"></i>
+                            <span>${resource.subject || 'General'}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-file"></i>
+                            <span>${fileSize}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-download"></i>
+                            <span>${resource.downloadCount || 0} downloads</span>
+                        </div>
+                    </div>
+
+                    <div class="resource-tags">
+                        ${resource.tags ? resource.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
+                    </div>
+                </div>
+
+                <div class="resource-footer">
+                    ${canDownload ? 
+                        `<button class="btn btn-primary download-resource" data-resource-id="${resource._id}">
+                            <i class="fas fa-download"></i> Download
+                        </button>` :
+                        `<button class="btn btn-secondary" onclick="showToast('Please enroll in the course to access this resource', 'info')">
+                            <i class="fas fa-lock"></i> Enroll to Access
+                        </button>`
+                    }
+                </div>
+            </div>
+        `;
+    }
+
+    getResourceIcon(type) {
+        const icons = {
+            'pdf': 'fas fa-file-pdf',
+            'video': 'fas fa-video',
+            'practice': 'fas fa-edit',
+            'syllabus': 'fas fa-clipboard-list',
+            'previous': 'fas fa-file-alt'
+        };
+        return icons[type] || 'fas fa-file';
+    }
+
+    formatFileSize(bytes) {
+        if (!bytes) return 'N/A';
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(1024));
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    }
+
+    renderPagination() {
+        const container = document.getElementById('pagination');
+        if (!container || this.totalPages <= 1) {
+            container.innerHTML = '';
+            return;
+        }
+
+        let paginationHTML = '<div class="pagination">';
+        
+        // Previous button
+        if (this.filters.page > 1) {
+            paginationHTML += `<button class="page-btn" data-page="${this.filters.page - 1}">
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>`;
+        }
+
+        // Page numbers
+        for (let i = 1; i <= this.totalPages; i++) {
+            if (i === this.filters.page) {
+                paginationHTML += `<span class="page-btn active">${i}</span>`;
+            } else {
+                paginationHTML += `<button class="page-btn" data-page="${i}">${i}</button>`;
+            }
+        }
+
+        // Next button
+        if (this.filters.page < this.totalPages) {
+            paginationHTML += `<button class="page-btn" data-page="${this.filters.page + 1}">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>`;
+        }
+
+        paginationHTML += '</div>';
+        container.innerHTML = paginationHTML;
+
+        // Add event listeners to pagination buttons
+        container.querySelectorAll('.page-btn[data-page]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.filters.page = parseInt(e.target.dataset.page);
+                this.loadResources();
+            });
+        });
+    }
+
+    showLoading() {
+        document.getElementById('resources-loading').classList.remove('hidden');
+    }
+
+    hideLoading() {
+        document.getElementById('resources-loading').classList.add('hidden');
+    }
+
+    showError(message) {
+        window.showToast(message, 'error');
+    }
+}
+
+// Initialize resources manager
+document.addEventListener('DOMContentLoaded', () => {
+    window.resourcesManager = new ResourcesManager();
+    
+    // Download resource functionality
+    document.addEventListener('click', async (e) => {
+        if (e.target.closest('.download-resource')) {
+            const resourceId = e.target.closest('.download-resource').dataset.resourceId;
+            await downloadResource(resourceId);
+        }
+    });
+});
+
+async function downloadResource(resourceId) {
+    try {
+        const response = await fetch(`/api/resources/${resourceId}/download`, {
+            method: 'POST'
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            // Create a temporary link to trigger download
+            const link = document.createElement('a');
+            link.href = data.downloadUrl;
+            link.download = data.filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showToast('Download started!', 'success');
+        } else {
+            throw new Error(data.message || 'Download failed');
+        }
+    } catch (error) {
+        console.error('Download error:', error);
+        showToast('Download failed. Please try again.', 'error');
+    }
+}
+</script>
+
+<%- include('partials/footer-professional') %>

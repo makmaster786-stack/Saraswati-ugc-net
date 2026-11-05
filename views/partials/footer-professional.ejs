@@ -1,0 +1,135 @@
+<% /* --- FILE: views/partials/footer-professional.ejs (REVISED) --- */ %>
+<footer class="footer-pro">
+    <div class="container">
+        <div class="footer-content">
+            
+            <div class="footer-section footer-brand-info"> <%# 1. Branding Column %>
+                <a href="/" class="footer-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Saraswati UGC NET</span>
+                </a>
+                <p class="footer-description">
+                    Focused learning, purposeful practice and guidance for your UGC NET preparation.
+                </p>
+                
+                <a class="text-link" href="/contact">Plan your next step with us →</a>
+            </div>
+
+            <div class="footer-section footer-links-group"> <%# 2. Quick Links Column %>
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/courses">Courses</a></li>
+                    <li><a href="/available-tests">Mock Tests</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-links-group"> <%# 3. Resources Column %>
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/knowledge-base">Study Materials</a></li>
+                    <li><a href="/articles">Blog & Articles</a></li>
+                    <li><a href="/#questions">FAQ</a></li>
+                    <li><a href="/sitemap.xml">Sitemap</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section footer-contact-info"> <%# 4. Contact Column %>
+                <h4>Contact Info</h4>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+919667889491">+91 9667889491</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:saraswatiugcnet@gmail.com">saraswatiugcnet@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>A- 20, 102, Indraprasth Tower, Mukherjee nagar, New Delhi, India</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom"> <%# Bottom Copyright/Legal Row %>
+            <p>&copy; <%= new Date().getFullYear() %> Saraswati UGC NET. All Rights Reserved.</p>
+            <div class="footer-legal">
+                <a href="/contact">Help &amp; support</a>
+                <a href="/about">About Saraswati</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script>
+    // Global configuration passed from the server to the client-side JavaScript
+    window.AppConfig = {
+        // @ts-ignore
+        API_BASE_URL: '<%= process.env.API_BASE_URL || "/api" %>',
+        // @ts-ignore
+        ENVIRONMENT: '<%= process.env.NODE_ENV || "development" %>',
+        
+        // These lines are read by your client-side JS and are now EJS-compatible
+        // @ts-ignore
+        RAZORPAY_KEY_ID: '<%= process.env.RAZORPAY_KEY_ID %>',
+        // @ts-ignore
+        USER: <%- JSON.stringify(locals.user || null) %>
+    };
+</script>
+
+<script src="/js/professional.js"></script>
+
+<%# Load page-specific script (passed via locals.script from the server route) %>
+<% if (locals.script && locals.script !== '/js/test-interface.js') { %>
+  <script src="<%= locals.script %>"></script>
+<% } %>
+
+<%# Test interface gets the upgrade patch loaded right after it %>
+<% if (locals.script === '/js/test-interface.js') { %>
+  <script src="/js/test-interface.js"></script>
+  <script src="/js/test-interface-upgrade.js"></script>
+<% } %>
+
+<!-- ── MOBILE BOTTOM NAV BAR (hidden on desktop via CSS) ── -->
+<nav class="mobile-bottom-nav" role="navigation" aria-label="Mobile bottom navigation">
+
+  <a href="/" class="<%= (locals.title || '').includes('Home') || (locals.title || '').includes('Dashboard') ? 'active' : '' %>">
+    <i class="fas fa-home"></i>
+    <span>Home</span>
+  </a>
+
+  <a href="/courses" class="<%= (locals.title || '').includes('Course') ? 'active' : '' %>">
+    <i class="fas fa-book-open"></i>
+    <span>Courses</span>
+  </a>
+
+  <a href="/available-tests" class="nav-cta">
+    <i class="fas fa-file-alt"></i>
+    <span>Tests</span>
+  </a>
+
+  <a href="/articles" class="<%= (locals.title || '').includes('Article') ? 'active' : '' %>">
+    <i class="fas fa-newspaper"></i>
+    <span>Articles</span>
+  </a>
+
+  <% if (locals.user) { %>
+  <a href="/dashboard" class="<%= (locals.title || '').includes('Dashboard') ? 'active' : '' %>">
+    <i class="fas fa-tachometer-alt"></i>
+    <span>Account</span>
+  </a>
+  <% } else { %>
+  <a href="/login">
+    <i class="fas fa-sign-in-alt"></i>
+    <span>Login</span>
+  </a>
+  <% } %>
+
+</nav>
+<!-- ── END MOBILE BOTTOM NAV ── -->
+
+</body>
+</html>

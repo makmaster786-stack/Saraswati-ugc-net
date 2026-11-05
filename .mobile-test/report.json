@@ -1,0 +1,1253 @@
+[
+  {
+    "width": 320,
+    "name": "index",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    },
+    "menu": true,
+    "menuClosed": true
+  },
+  {
+    "width": 320,
+    "name": "login",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "signup",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "dashboard",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "courses-pro",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "course-details",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "available-tests",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "custom-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "knowledge-base",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "my-results",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "my-payments",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "about",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "contact",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 320,
+    "name": "take-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 0,
+      "desktopLinks": "none"
+    },
+    "exam": {
+      "mainHeight": 844,
+      "viewport": 844,
+      "buttons": [
+        {
+          "id": "save-next",
+          "visible": true,
+          "height": 58,
+          "unobstructed": true
+        },
+        {
+          "id": "save-review",
+          "visible": true,
+          "height": 58,
+          "unobstructed": true
+        },
+        {
+          "id": "mark-review",
+          "visible": true,
+          "height": 60,
+          "unobstructed": true
+        },
+        {
+          "id": "clear-response",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        }
+      ],
+      "scrollable": true
+    },
+    "palette": {
+      "active": true,
+      "height": 740,
+      "top": 104,
+      "bottom": 844
+    },
+    "paletteClosed": true
+  },
+  {
+    "width": 360,
+    "name": "index",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    },
+    "menu": true,
+    "menuClosed": true
+  },
+  {
+    "width": 360,
+    "name": "login",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "signup",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "dashboard",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "courses-pro",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "course-details",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "available-tests",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "custom-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "knowledge-base",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "my-results",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "my-payments",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "about",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "contact",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 360,
+    "name": "take-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 0,
+      "desktopLinks": "none"
+    },
+    "exam": {
+      "mainHeight": 844,
+      "viewport": 844,
+      "buttons": [
+        {
+          "id": "save-next",
+          "visible": true,
+          "height": 58,
+          "unobstructed": true
+        },
+        {
+          "id": "save-review",
+          "visible": true,
+          "height": 58,
+          "unobstructed": true
+        },
+        {
+          "id": "mark-review",
+          "visible": true,
+          "height": 60,
+          "unobstructed": true
+        },
+        {
+          "id": "clear-response",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        }
+      ],
+      "scrollable": true
+    },
+    "palette": {
+      "active": true,
+      "height": 740,
+      "top": 104,
+      "bottom": 844
+    },
+    "paletteClosed": true
+  },
+  {
+    "width": 390,
+    "name": "index",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    },
+    "menu": true,
+    "menuClosed": true
+  },
+  {
+    "width": 390,
+    "name": "login",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "signup",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "dashboard",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "courses-pro",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "course-details",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "available-tests",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "custom-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "knowledge-base",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "my-results",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "my-payments",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "about",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "contact",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 390,
+    "name": "take-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 0,
+      "desktopLinks": "none"
+    },
+    "exam": {
+      "mainHeight": 844,
+      "viewport": 844,
+      "buttons": [
+        {
+          "id": "save-next",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "save-review",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "mark-review",
+          "visible": true,
+          "height": 60,
+          "unobstructed": true
+        },
+        {
+          "id": "clear-response",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        }
+      ],
+      "scrollable": true
+    },
+    "palette": {
+      "active": true,
+      "height": 740,
+      "top": 104,
+      "bottom": 844
+    },
+    "paletteClosed": true
+  },
+  {
+    "width": 430,
+    "name": "index",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    },
+    "menu": true,
+    "menuClosed": true
+  },
+  {
+    "width": 430,
+    "name": "login",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "signup",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "dashboard",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "courses-pro",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "course-details",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "available-tests",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "custom-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "knowledge-base",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "my-results",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "my-payments",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "about",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "contact",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 430,
+    "name": "take-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 0,
+      "desktopLinks": "none"
+    },
+    "exam": {
+      "mainHeight": 844,
+      "viewport": 844,
+      "buttons": [
+        {
+          "id": "save-next",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "save-review",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "mark-review",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "clear-response",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        }
+      ],
+      "scrollable": true
+    },
+    "palette": {
+      "active": true,
+      "height": 740,
+      "top": 104,
+      "bottom": 844
+    },
+    "paletteClosed": true
+  },
+  {
+    "width": 768,
+    "name": "index",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    },
+    "menu": true,
+    "menuClosed": true
+  },
+  {
+    "width": 768,
+    "name": "login",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "signup",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "dashboard",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "courses-pro",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "course-details",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "available-tests",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "custom-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "knowledge-base",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "my-results",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "my-payments",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "about",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "contact",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 76.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 768,
+    "name": "take-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 0,
+      "desktopLinks": "none"
+    },
+    "exam": {
+      "mainHeight": 844,
+      "viewport": 844,
+      "buttons": [
+        {
+          "id": "save-next",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "save-review",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "mark-review",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "clear-response",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        }
+      ],
+      "scrollable": true
+    },
+    "palette": {
+      "active": true,
+      "height": 786,
+      "top": 58,
+      "bottom": 844
+    },
+    "paletteClosed": true
+  },
+  {
+    "width": 844,
+    "name": "index",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    },
+    "menu": true,
+    "menuClosed": true
+  },
+  {
+    "width": 844,
+    "name": "login",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "signup",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "dashboard",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "courses-pro",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "course-details",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "available-tests",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "custom-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "knowledge-base",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "my-results",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "my-payments",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "about",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "contact",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 92.5,
+      "desktopLinks": "none"
+    }
+  },
+  {
+    "width": 844,
+    "name": "take-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 0,
+      "desktopLinks": "none"
+    },
+    "exam": {
+      "mainHeight": 390,
+      "viewport": 390,
+      "buttons": [
+        {
+          "id": "save-next",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "save-review",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "mark-review",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        },
+        {
+          "id": "clear-response",
+          "visible": true,
+          "height": 44,
+          "unobstructed": true
+        }
+      ],
+      "scrollable": true
+    },
+    "palette": {
+      "active": true,
+      "height": 332,
+      "top": 58,
+      "bottom": 390
+    },
+    "paletteClosed": true
+  },
+  {
+    "width": 1280,
+    "name": "index",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 93,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "login",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 93,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "signup",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 93,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "dashboard",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 83,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "courses-pro",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 83,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "course-details",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 83,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "available-tests",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 83,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "custom-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 83,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "knowledge-base",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 83,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "my-results",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 83,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "my-payments",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 83,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "about",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 83,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "contact",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 83,
+      "desktopLinks": "flex"
+    }
+  },
+  {
+    "width": 1280,
+    "name": "take-test",
+    "overflow": [],
+    "errors": [],
+    "nav": {
+      "height": 0,
+      "desktopLinks": "flex"
+    },
+    "exam": {
+      "mainHeight": 764,
+      "viewport": 844,
+      "buttons": [
+        {
+          "id": "save-next",
+          "visible": true,
+          "height": 38,
+          "unobstructed": true
+        },
+        {
+          "id": "save-review",
+          "visible": true,
+          "height": 38,
+          "unobstructed": true
+        },
+        {
+          "id": "mark-review",
+          "visible": true,
+          "height": 40,
+          "unobstructed": true
+        },
+        {
+          "id": "clear-response",
+          "visible": true,
+          "height": 40,
+          "unobstructed": true
+        }
+      ],
+      "scrollable": true
+    }
+  }
+]

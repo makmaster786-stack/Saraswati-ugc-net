@@ -1,0 +1,174 @@
+<%/* FILE: views/dashboard.ejs — Student Dashboard */%>
+<%- include('partials/header-professional', {
+    title: 'My Dashboard - Saraswati UGC NET',
+    script: '/js/dashboard-pro.js'
+}) %>
+
+<main class="dashboard-pro" style="background:var(--gray-50);min-height:100vh;">
+    <div class="container" style="padding-top:2rem;padding-bottom:3rem;">
+
+        <!-- ── WELCOME BANNER ── -->
+        <section class="welcome-section">
+            <div class="welcome-content">
+                <h1>Welcome back, <span class="user-name"><%= user.fullname.split(' ')[0] %></span>! 👋</h1>
+                <p>Continue your UGC NET preparation journey</p>
+            </div>
+            <div class="welcome-stats">
+                <div class="last-active">
+                    <i class="fas fa-circle"></i>
+                    <span id="last-active-time">Just now</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── STATS GRID ── -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stats-tests-taken">
+                            <span class="spinner" style="width:20px;height:20px;border-width:2px;display:inline-block;vertical-align:middle;"></span>
+                        </h3>
+                        <p>Tests Taken</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stats-avg-score">—</h3>
+                        <p>Average Score</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stats-best-score">—</h3>
+                        <p>Best Score</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-book"></i></div>
+                    <div class="stat-info">
+                        <h3 id="stats-enrolled-courses">—</h3>
+                        <p>Enrolled Courses</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── QUICK ACTIONS ── -->
+        <section class="actions-section">
+            <h2>Quick Actions</h2>
+            <div class="actions-grid">
+                <a href="/available-tests" class="action-card">
+                    <div class="action-icon"><i class="fas fa-play-circle"></i></div>
+                    <span>Take a Test</span>
+                </a>
+                <a href="/courses" class="action-card">
+                    <div class="action-icon"><i class="fas fa-book-open"></i></div>
+                    <span>Browse Courses</span>
+                </a>
+                <a href="/knowledge-base" class="action-card">
+                    <div class="action-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <span>Study Materials</span>
+                </a>
+                <a href="/my-results" class="action-card">
+                    <div class="action-icon"><i class="fas fa-chart-bar"></i></div>
+                    <span>View Results</span>
+                </a>
+                <a href="/my-payments" class="action-card">
+                    <div class="action-icon"><i class="fas fa-wallet"></i></div>
+                    <span>My Payments</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ── TWO-COLUMN LAYOUT: Enrolled Courses + Recent Activity ── -->
+        <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:1.75rem;align-items:start;" class="dashboard-cols">
+
+            <!-- LEFT: Enrolled Courses -->
+            <section class="courses-section">
+                <div class="section-header">
+                    <h2>My Courses</h2>
+                    <a href="/courses" class="view-all">Browse All</a>
+                </div>
+                <div id="enrolled-courses">
+                    <!-- Loaded dynamically by dashboard-pro.js -->
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                        <p>Loading your courses...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT: Recent Activity -->
+            <section class="activity-section">
+                <div class="section-header">
+                    <h2>Recent Tests</h2>
+                    <a href="/my-results" class="view-all">View All</a>
+                </div>
+                <div class="activity-list" id="recent-activity">
+                    <!-- Loaded dynamically -->
+                    <div class="loading-state" style="padding:1.5rem;">
+                        <div class="spinner"></div>
+                        <p>Loading...</p>
+                    </div>
+                </div>
+
+                <!-- Progress Tip Card -->
+                <div style="background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(245,158,11,0.06));border:1px solid rgba(14,165,233,0.15);border-radius:14px;padding:1.25rem;margin-top:1rem;">
+                    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem;">
+                        <i class="fas fa-lightbulb" style="color:var(--brand-gold);font-size:1rem;"></i>
+                        <strong style="font-family:var(--font-heading);font-size:0.88rem;color:var(--gray-800);">Daily Tip</strong>
+                    </div>
+                    <p style="font-size:0.82rem;color:var(--gray-600);margin-bottom:0.75rem;line-height:1.55;">
+                        Consistency is key! Aim for at least 1 mock test per day. Review your wrong answers thoroughly for maximum improvement.
+                    </p>
+                    <a href="/available-tests" class="btn btn-primary btn-sm" style="font-size:0.78rem;">
+                        <i class="fas fa-play"></i> Take Today's Test
+                    </a>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</main>
+
+<style>
+/* ── DASHBOARD RESPONSIVE ── */
+
+/* Two-col layout: collapse at 1024px (covers tablets like iPad Mini, large Android) */
+@media (max-width: 1024px) {
+    .dashboard-cols { grid-template-columns: 1fr !important; }
+}
+
+/* Quick Actions: 5 items in 2 cols = orphan. Center the lone last card */
+@media (max-width: 768px) {
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    /* Last item spanning full width when count is odd */
+    .actions-grid .action-card:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        max-width: 180px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+/* Course progress ring row: stack vertically on very small phones */
+@media (max-width: 400px) {
+    .ccp-ring-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .ccp-ring-text h4 { font-size: 0.8rem; }
+    .ccp-ring-text p  { font-size: 0.72rem; }
+    .ccp-actions { flex-direction: column; }
+    .ccp-btn-continue { justify-content: center; }
+}
+</style>
+
+<%- include('partials/footer-professional') %>

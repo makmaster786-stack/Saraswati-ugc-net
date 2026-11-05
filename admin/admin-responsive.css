@@ -1,0 +1,62 @@
+/* Admin layouts shared by listings, editors and dialogs. */
+.admin-page .content-grid > *, .admin-page .content-block,
+.admin-page .input-group, .admin-page .main-header, .admin-page form > * { min-width: 0; }
+.admin-page .table-responsive { width: 100%; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+.admin-page .table-responsive table { min-width: 580px; }
+.admin-page .table-responsive:focus-visible { outline: 2px solid var(--primary-blue); outline-offset: 3px; }
+.admin-page .admin-toolbar, .admin-page .table-controls, .admin-page .header-actions,
+.admin-page .pagination-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.admin-page .admin-toolbar > *, .admin-page .table-controls > * { min-width: 0; max-width: 100%; }
+.admin-page input:not([type=checkbox]):not([type=radio]), .admin-page select,
+.admin-page textarea { min-width: 0; max-width: 100%; font: inherit; }
+.admin-page .menu-toggle-btn, .admin-page #admin-logout { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+.admin-page .sidebar { width: min(280px, 85vw); visibility: hidden; }
+.admin-page.sidebar-open { overflow: hidden; }
+.admin-page.sidebar-open .sidebar { visibility: visible; }
+.admin-page .modal-overlay { z-index: 3000; }
+.admin-page #toast-container { max-width: calc(100vw - 32px); pointer-events: none; }
+.admin-page .toast { overflow-wrap: anywhere; }
+.admin-page img { max-width: 100%; }
+@media (max-width: 768px) {
+  .admin-page .main-content { padding: 16px; }
+  .admin-page .admin-top-bar { padding-inline: 12px; }
+  .admin-page .admin-top-bar h3 { font-size: 1rem; }
+  .admin-page .content-block { padding: 16px; }
+  .admin-page .stat-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .admin-page .card { padding: 16px; flex-wrap: wrap; }
+  .admin-page .btn, .admin-page .action-btn, .admin-page .btn-magic,
+  .admin-page .close-modal, .admin-page .close-modal-btn { min-height: 44px; }
+  .admin-page input:not([type=checkbox]):not([type=radio]), .admin-page select,
+  .admin-page textarea { font-size: 16px; }
+  .admin-page .bilingual-grid, .admin-page .admin-form-grid, .admin-page .form-row,
+  .admin-page .info-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .admin-page .bilingual-options .option-row { grid-template-columns: 28px minmax(0, 1fr); }
+  .admin-page .bilingual-options .option-row input[type=radio] { grid-row: 1 / 3; }
+  .admin-page .bilingual-options .option-row input[type=text] { width: 100%; padding: 10px; }
+  .admin-page .modal-overlay { padding: 12px; }
+  .admin-page .modal-content { width: 100%; max-height: calc(100dvh - 24px); padding: 16px; }
+  .admin-page #fullEditModal .modal-content { padding: 0; }
+  .admin-page .modal-header, .admin-page .modal-body { padding: 16px; }
+  .admin-page .modal-header { gap: 12px; }
+  .admin-page .modal-header h2 { min-width: 0; overflow-wrap: anywhere; }
+  .admin-page .info-item { overflow-wrap: anywhere; }
+  .admin-page .admin-toolbar > input, .admin-page .table-controls > input { flex: 1 1 100%; width: 100% !important; }
+  .admin-page .tox-tinymce { max-width: 100%; }
+}
+@media (max-width: 400px) {
+  .admin-page .stat-cards { grid-template-columns: minmax(0, 1fr); }
+  .admin-page .filter-grid { grid-template-columns: minmax(0, 1fr) !important; }
+}
+.admin-page .admin-filter-actions { grid-column: 1 / -1; }
+.admin-page .file-selected > div { min-width: 0; overflow-wrap: anywhere; }
+.admin-page .file-selected .btn-remove { flex-shrink: 0; min-width: 44px; min-height: 44px; }
+@media (max-width: 768px) {
+  .admin-page #fullEditModal textarea, .admin-page #fullEditModal select { width: 100%; }
+  .admin-page #fullEditModal .option-row { display: grid; grid-template-columns: 28px minmax(0, 1fr); }
+  .admin-page #fullEditModal .option-row input[type=radio] { grid-row: 1 / 3; }
+  .admin-page #fullEditModal .option-row input[type=text] { width: 100%; padding: 10px; }
+  .admin-page .modal-footer { flex-wrap: wrap; }
+}
+.admin-page .modal-header { display: flex; align-items: flex-start; justify-content: space-between; }
+.admin-page .modal-header h2 { margin: 0; }
+.admin-page .close-modal-btn { min-width: 44px; flex-shrink: 0; border: 0; border-radius: 6px; background: #f1f5f9; font-size: 1.25rem; cursor: pointer; }

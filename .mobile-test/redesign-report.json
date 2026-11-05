@@ -1,0 +1,133 @@
+{
+  "checks": [
+    {
+      "width": 390,
+      "url": "/",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "url": "/courses",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "url": "/course/paper1",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "url": "/login",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "url": "/articles",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "url": "/article/build-a-study-routine",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "url": "/knowledge-base",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "url": "/about",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "url": "/contact",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "url": "/",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "url": "/courses",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "url": "/course/paper1",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "url": "/login",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "url": "/articles",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "url": "/article/build-a-study-routine",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "url": "/knowledge-base",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "url": "/about",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "url": "/contact",
+      "status": 200,
+      "overflow": false
+    },
+    {
+      "flow": "course search",
+      "cards": 1,
+      "text": "POLITICAL SCIENCE\nPolitical Science: Concepts to confidence\n\nConnect the ideas behind political theory, institutions and international relations.\n\n₹999 ₹1499\nView\nEnroll"
+    },
+    {
+      "flow": "test submission",
+      "resultCards": 1,
+      "url": "http://127.0.0.1:4175/my-results?view=e3ff59c64854ab17"
+    },
+    {
+      "flow": "dashboard after test",
+      "tests": "1",
+      "average": "100%"
+    }
+  ],
+  "issues": [
+    {
+      "url": "http://127.0.0.1:4175/my-results?view=e3ff59c64854ab17",
+      "message": "Chart is not defined"
+    }
+  ]
+}

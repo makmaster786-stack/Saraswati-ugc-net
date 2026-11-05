@@ -1,0 +1,35 @@
+[
+  {
+    "width": 320,
+    "saved": true,
+    "palette": true,
+    "overlay": true,
+    "answerRestored": true,
+    "submitConfirmation": true,
+    "submitCancelled": true,
+    "cleared": true,
+    "marked": true
+  },
+  {
+    "width": 390,
+    "saved": true,
+    "palette": true,
+    "overlay": true,
+    "answerRestored": true,
+    "submitConfirmation": true,
+    "submitCancelled": true,
+    "cleared": true,
+    "marked": true
+  },
+  {
+    "width": 844,
+    "saved": true,
+    "palette": true,
+    "overlay": true,
+    "answerRestored": true,
+    "submitConfirmation": true,
+    "submitCancelled": true,
+    "cleared": true,
+    "marked": true
+  }
+]
